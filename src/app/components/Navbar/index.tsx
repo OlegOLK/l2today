@@ -40,9 +40,7 @@ export const NavBar: FunctionComponent<CardProps> = ({ title, paragraph }) => {
         >
           <Menu />
         </IconButton>
-        <Typography variant="h6" className={classes.title}>
-          News
-        </Typography>
+        <Typography className={classes.title}>News</Typography>
         <Button color="inherit">Login</Button>
       </Toolbar>
     </AppBar>

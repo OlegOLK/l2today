@@ -1,17 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import {
-  Accordion,
-  AccordionSummary,
-  Typography,
-  Box,
-  Grid,
-  AccordionDetails,
-  Paper,
-} from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Box, Paper } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 
-import { ServerRowComponent } from '../ServerRow/index';
+import { ServerRowComponent, ServerItemProps } from '../ServerRow/index';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,23 +16,35 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-type ServerListProps = {};
+export type GrouppedServers = {
+  label: string;
+  servers: ServerItemProps[];
+};
 
-export const ServerList: FunctionComponent<ServerListProps> = ({}) => {
-  const classes = useStyles();
+export type ServerListProps = {
+  groupped: GrouppedServers;
+};
+
+export const ServerList: FunctionComponent<ServerListProps> = ({
+  groupped,
+}) => {
   return (
     <Paper>
       <Box textAlign="center">
-        <h4>СКОРО ОТКРОЮТСЯ VIP</h4>
+        <h4> {groupped.label} </h4>
+        {groupped.servers.map((server, i) => {
+          return (
+            <ServerRowComponent
+              chronicles={server.chronicles}
+              features={server.features}
+              key={server.name + i}
+              name={server.name}
+              openDate={server.openDate}
+              rates={server.rates}
+            />
+          );
+        })}
       </Box>
-      <ServerRowComponent
-        chronicles="HighFive"
-        features={['a', 'b']}
-        key="test"
-        name="GodWorld"
-        openDate="Today"
-        rates={[]}
-      />
     </Paper>
   );
 };

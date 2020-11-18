@@ -20,15 +20,56 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: theme.typography.pxToRem(15),
       fontWeight: theme.typography.fontWeightRegular,
     },
+    xp: {
+      '&::before': {
+        content: `''`,
+        width: '24px',
+        height: '24px',
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        backgroundImage: 'url(./assets/swords.svg)',
+      },
+    },
+    sp: {
+      '&::before': {
+        content: `''`,
+        width: '24px',
+        height: '24px',
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        backgroundImage: 'url(./assets/ancient-scroll.svg)',
+        alt: 'scroll',
+      },
+    },
+    drop: {
+      '&::before': {
+        content: `''`,
+        width: '24px',
+        height: '24px',
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        backgroundImage: 'url(./assets/loot.svg)',
+      },
+    },
+    adena: {
+      '&::before': {
+        content: `''`,
+        width: '24px',
+        height: '24px',
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        backgroundImage: 'url(./assets/dollar.svg)',
+      },
+    },
   }),
 );
 
-type ServerRates = {
+export type ServerRates = {
   name: string;
   amount: number;
 };
 
-type ServerItemProps = {
+export type ServerItemProps = {
   name: string;
   features: string[];
   openDate: string;
@@ -49,8 +90,8 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
     <Accordion>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
+        aria-controls={name + '-content'}
+        id={name + '-header'}
       >
         <Grid
           container
@@ -59,7 +100,13 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
           alignItems="stretch"
         >
           <a href="https://www.google.com/" target="blank">
-            <img src="./medal.svg" height="24px" width="24px" /> {name}
+            <img
+              src="./assets/medal.svg"
+              alt="vip"
+              height="24px"
+              width="24px"
+            />{' '}
+            {name}
           </a>
           <Typography className={classes.heading}>x300</Typography>
           <Typography className={classes.heading}>{chronicles}</Typography>
@@ -67,10 +114,23 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
         </Grid>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </Typography>
+        <Grid
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="stretch"
+        >
+          {rates.map((rate, i) => {
+            return (
+              <Box
+                key={rate.name + i}
+                className={classes[rate.name.toLowerCase()]}
+              >
+                <strong>{rate.name}</strong> :{rate.amount}
+              </Box>
+            );
+          })}
+        </Grid>
       </AccordionDetails>
     </Accordion>
   );

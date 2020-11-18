@@ -41,7 +41,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = ({}) => {
 
   return (
     <Grid item lg={2} xl={2}>
-      <Grid container>
+      <Grid item container>
         <Grid item md={12}>
           <Box textAlign="center">
             <h3>ХРОНИКИ LINEAGE 2</h3>
