@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Container } from '@material-ui/core';
+import { Grid, Container, Box } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Helmet } from 'react-helmet-async';
 import { NavbarComponent } from '../../components/Navbar/Loadable';
@@ -27,7 +27,9 @@ export function HomePage() {
       </Helmet>
       <CssBaseline />
       <BannerComponent />
-      <NavbarComponent title="hello" paragraph="test" />
+      <Box mb={1}>
+        <NavbarComponent title="hello" paragraph="test" />
+      </Box>
       <Container maxWidth="xl">
         <Grid container className={classes.root} spacing={2}>
           <LeftPanelComponent />
