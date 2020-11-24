@@ -4,6 +4,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 
 import { ServerRowComponent, ServerItemProps } from '../ServerRow/index';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import StarsIcon from '@material-ui/icons/Stars';
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -25,6 +26,15 @@ const useStyles = makeStyles((theme: Theme) =>
     disabledButton: {
       color: 'black !important',
     },
+    vipAlert: {
+      //background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+      backgroundColor: '#FBAB7E',
+      backgroundImage: 'linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)',
+    },
+    normalAlert: {
+      backgroundColor: '#D9AFD9',
+      backgroundImage: 'linear-gradient(90deg, #8BC6EC 0%, #9599E2 100%)',
+    },
   }),
 );
 
@@ -45,7 +55,15 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
     <Paper>
       <Typography component="div">
         {/* <Box className={classes.grouppedLable} fontWeight="fontWeightBold"> */}
-        <Alert icon={false} severity="success">
+        <Alert
+          severity="success"
+          className={
+            groupped.label === 'Already VIP'
+              ? classes.vipAlert
+              : classes.normalAlert
+          }
+          icon={<StarsIcon fontSize="inherit" />}
+        >
           {groupped.label}
         </Alert>
         {/* <Paper elevation={3}>{groupped.label}</Paper>

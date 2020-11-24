@@ -21,8 +21,8 @@ export const RightPanel: FunctionComponent<RightPanelProps> = ({}) => {
     <Grid container item lg={10} xl={10} spacing={2}>
       {SERVERS.map((server, i) => {
         return (
-          <Grid item lg={6} md={12}>
-            <ServerList groupped={server} />
+          <Grid key={'grid' + server + i} item lg={6} md={12}>
+            <ServerList key={'serverlist' + server + i} groupped={server} />
           </Grid>
         );
       })}

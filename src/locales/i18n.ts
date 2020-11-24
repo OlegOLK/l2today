@@ -4,11 +4,15 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import en from './en/translation.json';
+import ru from './ru/translation.json';
 import { ConvertedToObjectType } from './types';
 
 const translationsJson = {
   en: {
     translation: en,
+  },
+  ru: {
+    translation: ru,
   },
 };
 
@@ -25,6 +29,7 @@ export const translations: ConvertedToObjectType<TranslationResource> = {} as an
  */
 const convertLanguageJsonToObject = (obj: any, dict: {}, current?: string) => {
   Object.keys(obj).forEach(key => {
+    console.log(key);
     const currentLookupKey = current ? `${current}.${key}` : key;
     if (typeof obj[key] === 'object') {
       dict[key] = {};
@@ -45,7 +50,6 @@ export const i18n = i18next
   .init(
     {
       resources: translationsJson,
-
       fallbackLng: 'en',
       debug:
         process.env.NODE_ENV !== 'production' &&
@@ -56,6 +60,6 @@ export const i18n = i18next
       },
     },
     () => {
-      convertLanguageJsonToObject(en, translations);
+      convertLanguageJsonToObject({ en, ru }, translations);
     },
   );
