@@ -18,6 +18,7 @@ import { CHRONICLES, RATES } from '../../mocks/chronicles';
 import { RatesRow } from '../Complexfilter/RatesRow';
 import { SelectedRatesRow } from '../Complexfilter/SelectedRatesRow';
 import { useTranslation } from 'react-i18next';
+import { createPostfixIncrement } from 'typescript';
 
 const useStyles = makeStyles(theme => ({
   uppercase: {
@@ -66,11 +67,10 @@ export const ComplexSearchDialog: FunctionComponent<ComplexSearchDialogProps> = 
     if (exit) {
       close(exit, null);
     }
-    const chronicles = stateChronicles.map(ch => {
-      if (ch.selected === true) {
-        return ch;
-      }
-    });
+    const chronicles = stateChronicles
+      .filter(ch => ch.selected === true)
+      .map(chronic => chronic);
+
     const copyRows = [...rows];
     const name = filterName;
     close(exit, { rates: copyRows, chronicles: chronicles, name: name });

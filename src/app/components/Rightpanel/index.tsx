@@ -6,7 +6,7 @@ import { SERVERS } from '../../mocks/servers';
 
 type RightPanelProps = {};
 
-export const RightPanel: FunctionComponent<RightPanelProps> = ({}) => {
+export const RightPanel: FunctionComponent<RightPanelProps> = () => {
   return (
     <Grid container item lg={10} xl={10} spacing={2}>
       {SERVERS.map((server, i) => {

@@ -7,7 +7,6 @@ import {
   Grid,
   AccordionDetails,
 } from '@material-ui/core';
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 
