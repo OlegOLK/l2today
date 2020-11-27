@@ -27,7 +27,7 @@ import React from 'react';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 2,
+    flexGrow: 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -110,61 +110,63 @@ export const NavBar: FunctionComponent<CardProps> = ({}) => {
           <Grid
             container
             direction="row"
-            justify="flex-start"
+            justify="space-between"
             alignItems="center"
             className={classes.root}
           >
-            <Button>{t('nav.home')}</Button>
-            <Button>{t('nav.addserver')}</Button>
+            <Grid item></Grid>
+            <Grid item>
+              <Button>{t('nav.home')}</Button>
+              <Button>{t('nav.addserver')}</Button>
 
-            <Button
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-              endIcon={<ArrowDropDownIcon />}
-            >
-              {t('nav.discuss')}
-            </Button>
-            <Menu
-              id="simple-menu"
-              anchorEl={discussAnchorEl}
-              keepMounted
-              open={Boolean(discussAnchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Discord</MenuItem>
-              <MenuItem onClick={handleClose}>{t('nav.forum')}</MenuItem>
-            </Menu>
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+                endIcon={<ArrowDropDownIcon />}
+              >
+                {t('nav.discuss')}
+              </Button>
+              <Menu
+                id="simple-menu"
+                anchorEl={discussAnchorEl}
+                keepMounted
+                open={Boolean(discussAnchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Discord</MenuItem>
+                <MenuItem onClick={handleClose}>{t('nav.forum')}</MenuItem>
+              </Menu>
 
-            <Button>{t('nav.knowledgebase')}</Button>
-            <Button>{t('nav.addfeature')}</Button>
-          </Grid>
-          <Grid container direction="row" justify="flex-end" spacing={1}>
-            <Button color="inherit">{t('nav.login')}</Button>
+              <Button>{t('nav.knowledgebase')}</Button>
+              <Button>{t('nav.addfeature')}</Button>
+            </Grid>
+            <Grid item>
+              <Button color="inherit">{t('nav.login')}</Button>
 
-            <Button
-              aria-controls="language-selector"
-              aria-haspopup="true"
-              onClick={handleSelectLanguage}
-              endIcon={<ArrowDropDownIcon />}
-            >
-              {i18n.language}
-            </Button>
-            <Menu
-              id="language-selector"
-              anchorEl={languageAnchorEl}
-              keepMounted
-              open={Boolean(languageAnchorEl)}
-              onClose={e => handleSelectLanguageClose('')}
-            >
-              <MenuItem onClick={e => handleSelectLanguageClose('en')}>
-                EN
-              </MenuItem>
-              <MenuItem onClick={e => handleSelectLanguageClose('ru')}>
-                RU
-              </MenuItem>
-            </Menu>
-            {/* <img
+              <Button
+                aria-controls="language-selector"
+                aria-haspopup="true"
+                onClick={handleSelectLanguage}
+                endIcon={<ArrowDropDownIcon />}
+              >
+                {i18n.language}
+              </Button>
+              <Menu
+                id="language-selector"
+                anchorEl={languageAnchorEl}
+                keepMounted
+                open={Boolean(languageAnchorEl)}
+                onClose={e => handleSelectLanguageClose('')}
+              >
+                <MenuItem onClick={e => handleSelectLanguageClose('en')}>
+                  EN
+                </MenuItem>
+                <MenuItem onClick={e => handleSelectLanguageClose('ru')}>
+                  RU
+                </MenuItem>
+              </Menu>
+              {/* <img
             src="./assets/united-kingdom.svg"
             height="36px"
             width="auto"
@@ -172,6 +174,7 @@ export const NavBar: FunctionComponent<CardProps> = ({}) => {
           />{' '}
           &nbsp;
           <img src="./assets/russia.svg" height="36px" width="auto" alt="RU" /> */}
+            </Grid>
           </Grid>
         </Hidden>
         <Hidden lgUp>

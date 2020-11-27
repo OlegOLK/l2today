@@ -1,25 +1,46 @@
 import { FunctionComponent } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import { Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Box, Grid } from '@material-ui/core';
 import React from 'react';
+import { SampleCard } from './sample';
 
-const useStyles = makeStyles(Theme => ({
+const useStyles = makeStyles(() => ({
   header: {
-    height: '200px',
-    width: '100%',
-    backgroundColor: 'black',
-    color: 'white',
+    top: 0,
   },
 }));
 
 type BannerProps = {};
 
-export const Banner: FunctionComponent<BannerProps> = ({}) => {
+export const Banner: FunctionComponent<BannerProps> = () => {
   const classes = useStyles();
+
   return (
     <header>
-      <Box textAlign="center" className={classes.header}>
-        <h1>AD HERE</h1>
+      <Box textAlign="center" my={2} className={classes.header}>
+        <Grid container justify="space-around" alignItems="center" spacing={3}>
+          <Grid item>
+            <SampleCard />
+          </Grid>
+
+          <Grid item>
+            <SampleCard />
+          </Grid>
+
+          <Grid item>
+            <SampleCard />
+          </Grid>
+
+          <Grid item>
+            <SampleCard />
+          </Grid>
+          <Grid item>
+            <SampleCard />
+          </Grid>
+          <Grid item>
+            <SampleCard />
+          </Grid>
+        </Grid>
       </Box>
     </header>
   );
