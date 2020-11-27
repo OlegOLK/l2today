@@ -42,7 +42,7 @@ function getCustomFilters() {
   return JSON.parse(localStorage.getItem('filter') ?? '{}');
 }
 
-export const LeftPanel: FunctionComponent<LeftPanelProps> = ({}) => {
+export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
   const classes = useStyles();
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);

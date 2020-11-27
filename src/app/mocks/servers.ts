@@ -1,4 +1,4 @@
-import { GrouppedServers, ServerList } from '../components/ServerList/index';
+import { GrouppedServers } from '../components/ServerList/index';
 
 export const SERVERS: GrouppedServers[] = [
   {

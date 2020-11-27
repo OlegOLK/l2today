@@ -85,7 +85,7 @@ function a11yProps(index: any) {
 
 type Props = {};
 
-export const SampleCard: FunctionComponent<Props> = ({}) => {
+export const SampleCard: FunctionComponent<Props> = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -117,6 +117,7 @@ export const SampleCard: FunctionComponent<Props> = ({}) => {
             <iframe
               width="100%"
               height="100%"
+              title="server-promo"
               allowFullScreen
               src="https://www.youtube.com/embed/tgbNymZ7vqY"
             ></iframe>

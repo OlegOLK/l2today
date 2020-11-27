@@ -78,9 +78,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-function Alert(props: AlertProps) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 export type ServerRates = {
   name: string;
   amount: number;
@@ -96,8 +93,6 @@ export type ServerItemProps = {
 
 export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
   name,
-  features,
-  openDate,
   rates,
   chronicles,
 }) => {

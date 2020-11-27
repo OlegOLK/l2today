@@ -18,11 +18,6 @@ type SelectedRatesRowProps = {
   selectedRate: string;
 };
 
-interface Rate {
-  min: number;
-  max: number;
-}
-
 export const SelectedRatesRow: FunctionComponent<SelectedRatesRowProps> = ({
   removeRove,
   rowNumber,

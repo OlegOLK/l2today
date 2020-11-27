@@ -16,7 +16,6 @@ import {
 } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import InboxIcon from '@material-ui/icons/Inbox';
-import StarBorder from '@material-ui/icons/StarBorder';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import DraftsIcon from '@material-ui/icons/Drafts';
@@ -54,7 +53,7 @@ type CardProps = {
   paragraph: string;
 };
 
-export const NavBar: FunctionComponent<CardProps> = ({}) => {
+export const NavBar: FunctionComponent<CardProps> = () => {
   const { t, i18n } = useTranslation();
   const [
     discussAnchorEl,
@@ -80,7 +79,6 @@ export const NavBar: FunctionComponent<CardProps> = ({}) => {
     languageAnchorEl,
     setLanguageAnchorEl,
   ] = React.useState<null | HTMLElement>(null);
-  const [] = React.useState<string>('RU');
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setDiscussAnchorEl(event.currentTarget);

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactFragment } from 'react';
+import React, { FunctionComponent } from 'react';
 import {
   Grid,
   FormControl,
@@ -8,7 +8,6 @@ import {
   IconButton,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
 
 type LeftPanelProps = {
   addNewRow(name: string, min: number, max: number);
@@ -20,12 +19,6 @@ type LeftPanelProps = {
   selectedRate?: string;
 };
 
-export type RatesRow = {
-  name: string;
-  min: number;
-  max: number;
-};
-
 interface Rate {
   min: number;
   max: number;
@@ -33,12 +26,8 @@ interface Rate {
 
 export const RatesRow: FunctionComponent<LeftPanelProps> = ({
   addNewRow,
-  removeRove,
   rates,
   rowNumber,
-  min,
-  max,
-  selectedRate,
 }) => {
   const [rate, setRate] = React.useState(rates[0]);
   const [values, setValues] = React.useState<Rate>({
@@ -60,7 +49,7 @@ export const RatesRow: FunctionComponent<LeftPanelProps> = ({
   const apply = () => {
     setValues({ min: 1, max: 1 });
     addNewRow(rate, values.min, values.max);
-    const newRate = rates.find(r => r != rate);
+    const newRate = rates.find(r => r !== rate);
     setRate(newRate ?? '');
   };
 
@@ -76,7 +65,11 @@ export const RatesRow: FunctionComponent<LeftPanelProps> = ({
           >
             {rates.map((rate, i) => {
               return (
-                <MenuItem key={rowNumber + rate} value={rate} selected={i == 0}>
+                <MenuItem
+                  key={rowNumber + rate}
+                  value={rate}
+                  selected={i === 0}
+                >
                   {rate}
                 </MenuItem>
               );

@@ -55,9 +55,9 @@ export const ComplexSearchDialog: FunctionComponent<ComplexSearchDialogProps> = 
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setFilterName(event.target.value);
-    if (event.target.value.length == 0 && !filterNameError) {
+    if (event.target.value.length === 0 && !filterNameError) {
       setFilterNameError(true);
-    } else if (event.target.value.length != 0 && filterNameError) {
+    } else if (event.target.value.length !== 0 && filterNameError) {
       setFilterNameError(false);
     }
   };
@@ -66,8 +66,8 @@ export const ComplexSearchDialog: FunctionComponent<ComplexSearchDialogProps> = 
     if (exit) {
       close(exit, null);
     }
-    const chronicles = stateChronicles.filter(ch => {
-      if (ch.selected == true) {
+    const chronicles = stateChronicles.map(ch => {
+      if (ch.selected === true) {
         return ch;
       }
     });
@@ -91,7 +91,7 @@ export const ComplexSearchDialog: FunctionComponent<ComplexSearchDialogProps> = 
   };
 
   const handleBlur = () => {
-    if (filterName.length == 0 && !filterNameError) {
+    if (filterName.length === 0 && !filterNameError) {
       setFilterNameError(true);
     }
   };
@@ -184,7 +184,7 @@ export const ComplexSearchDialog: FunctionComponent<ComplexSearchDialogProps> = 
         </Button>
         <Button
           autoFocus
-          disabled={filterName.length == 0}
+          disabled={filterName.length === 0}
           onClick={() => handleClose(false)}
           color="primary"
         >
