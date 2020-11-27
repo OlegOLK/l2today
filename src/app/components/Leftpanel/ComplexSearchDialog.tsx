@@ -18,9 +18,8 @@ import { CHRONICLES, RATES } from '../../mocks/chronicles';
 import { RatesRow } from '../Complexfilter/RatesRow';
 import { SelectedRatesRow } from '../Complexfilter/SelectedRatesRow';
 import { useTranslation } from 'react-i18next';
-import { createPostfixIncrement } from 'typescript';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   uppercase: {
     textTransform: 'uppercase',
   },
