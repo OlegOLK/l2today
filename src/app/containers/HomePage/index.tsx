@@ -1,24 +1,13 @@
 import React from 'react';
-import { Grid, Container, Box } from '@material-ui/core';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { Grid, Container, Box, Hidden } from '@material-ui/core';
 import { Helmet } from 'react-helmet-async';
-import { NavbarComponent } from '../../components/Navbar/Loadable';
-import { BannerComponent } from '../../components/Banner/Loadable';
-import { LeftPanelComponent } from '../../components/Leftpanel/Loadable';
-import { RightPanelComponent } from '../../components/Rightpanel/Loadable';
-
+import { NavBar } from '../../components/Navbar/index';
+import { Banner } from '../../components/Banner/index';
+import { LeftPanel } from '../../components/Leftpanel/index';
+import { RightPanel } from '../../components/Rightpanel/index';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-  }),
-);
-
 export function HomePage() {
-  const classes = useStyles();
   return (
     <>
       <Helmet>
@@ -26,14 +15,18 @@ export function HomePage() {
         <meta name="description" content="A Boilerplate application homepage" />
       </Helmet>
       <CssBaseline />
-      <BannerComponent />
+      <Hidden mdDown>
+        <Banner />
+      </Hidden>
       <Box mb={1}>
-        <NavbarComponent title="hello" paragraph="test" />
+        <NavBar title="hello" paragraph="test" />
       </Box>
       <Container maxWidth="xl">
-        <Grid container className={classes.root} spacing={2}>
-          <LeftPanelComponent />
-          <RightPanelComponent />
+        <Grid container direction="row" justify="space-between" spacing={2}>
+          <Hidden mdDown>
+            <LeftPanel />
+          </Hidden>
+          <RightPanel />
         </Grid>
       </Container>
     </>
