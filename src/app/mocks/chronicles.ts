@@ -8,7 +8,7 @@ export const CHRONICLES = [
   'Gracia',
   'Interlude',
   'Interlude+',
-  'HighFive',
+  'High Five',
   'Freya',
   'Epilogue',
   'G.Crusade',

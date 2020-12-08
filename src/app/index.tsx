@@ -12,7 +12,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
 // import { GlobalStyle } from 'styles/global-styles';
 
-import { HomePage } from './containers/HomePage/Loadable';
+import { HomePage } from './containers/HomePage/index';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 
 export function App() {
@@ -24,9 +24,9 @@ export function App() {
       >
         <meta name="description" content="A React Boilerplate application" />
       </Helmet>
-
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route path="/:filterType/:filterValue" component={HomePage} />
         <Route component={NotFoundPage} />
       </Switch>
       {/* <GlobalStyle /> */}

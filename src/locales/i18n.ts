@@ -29,7 +29,6 @@ export const translations: ConvertedToObjectType<TranslationResource> = {} as an
  */
 const convertLanguageJsonToObject = (obj: any, dict: {}, current?: string) => {
   Object.keys(obj).forEach(key => {
-    console.log(key);
     const currentLookupKey = current ? `${current}.${key}` : key;
     if (typeof obj[key] === 'object') {
       dict[key] = {};

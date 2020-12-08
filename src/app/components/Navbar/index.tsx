@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
@@ -13,26 +14,37 @@ import {
   List,
   ListItemText,
   Collapse,
+  IconButton,
 } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
-import InboxIcon from '@material-ui/icons/Inbox';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { useTranslation } from 'react-i18next';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import { LeftSlider } from '../Leftpanel/LeftSlider';
 import React from 'react';
+import BuildIcon from '@material-ui/icons/Build';
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+import HomeIcon from '@material-ui/icons/Home';
+import AddToQueueIcon from '@material-ui/icons/AddToQueue';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import InfoIcon from '@material-ui/icons/Info';
+import GTranslateIcon from '@material-ui/icons/GTranslate';
+import MemoryIcon from '@material-ui/icons/Memory';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    textTransform: 'uppercase',
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
+    textTransform: 'uppercase',
   },
   toolbar: {
     display: 'flex',
@@ -45,6 +57,9 @@ const useStyles = makeStyles(theme => ({
   },
   nested: {
     paddingLeft: theme.spacing(4),
+  },
+  list: {
+    textTransform: 'uppercase',
   },
 }));
 
@@ -60,6 +75,8 @@ export const NavBar: FunctionComponent<CardProps> = () => {
     setDiscussAnchorEl,
   ] = React.useState<null | HTMLElement>(null);
   const [drawerOpen, setDrawerOpenState] = React.useState(false);
+  const [filtersOpen, setFiltersOpenState] = React.useState<boolean>(false);
+
   const toggleDrawer = (open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent,
   ) => {
@@ -73,6 +90,21 @@ export const NavBar: FunctionComponent<CardProps> = () => {
     }
 
     setDrawerOpenState(open);
+  };
+
+  const toggleFiltersDrawer = (open: boolean) => (
+    event: React.KeyboardEvent | React.MouseEvent,
+  ) => {
+    if (
+      event &&
+      event.type === 'keydown' &&
+      ((event as React.KeyboardEvent).key === 'Tab' ||
+        (event as React.KeyboardEvent).key === 'Shift')
+    ) {
+      return;
+    }
+
+    setFiltersOpenState(open);
   };
 
   const [
@@ -114,14 +146,27 @@ export const NavBar: FunctionComponent<CardProps> = () => {
           >
             <Grid item></Grid>
             <Grid item>
-              <Button>{t('nav.home')}</Button>
-              <Button>{t('nav.addserver')}</Button>
+              <Button
+                component={Link}
+                to={`/`}
+                startIcon={<HomeIcon color="primary" />}
+              >
+                {t('nav.home')}
+              </Button>
+              <Button
+                color="primary"
+                startIcon={<AddToQueueIcon color="primary" />}
+              >
+                {t('nav.addserver')}
+              </Button>
 
               <Button
                 aria-controls="simple-menu"
                 aria-haspopup="true"
+                color="primary"
                 onClick={handleClick}
-                endIcon={<ArrowDropDownIcon />}
+                startIcon={<QuestionAnswerIcon color="primary" />}
+                endIcon={<ArrowDropDownIcon color="primary" />}
               >
                 {t('nav.discuss')}
               </Button>
@@ -136,16 +181,27 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 <MenuItem onClick={handleClose}>{t('nav.forum')}</MenuItem>
               </Menu>
 
-              <Button>{t('nav.knowledgebase')}</Button>
-              <Button>{t('nav.addfeature')}</Button>
+              <Button startIcon={<InfoIcon color="primary" />}>
+                {t('nav.knowledgebase')}
+              </Button>
+              <Button startIcon={<MemoryIcon color="primary" />}>
+                {t('nav.addfeature')}
+              </Button>
             </Grid>
             <Grid item>
-              <Button color="inherit">{t('nav.login')}</Button>
+              <Button
+                color="primary"
+                startIcon={<LockOpenIcon color="primary" />}
+              >
+                {t('nav.login')}
+              </Button>
 
               <Button
                 aria-controls="language-selector"
                 aria-haspopup="true"
+                color="primary"
                 onClick={handleSelectLanguage}
+                startIcon={<GTranslateIcon />}
                 endIcon={<ArrowDropDownIcon />}
               >
                 {i18n.language}
@@ -155,73 +211,93 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 anchorEl={languageAnchorEl}
                 keepMounted
                 open={Boolean(languageAnchorEl)}
-                onClose={e => handleSelectLanguageClose('')}
+                onClose={() => handleSelectLanguageClose('')}
               >
-                <MenuItem onClick={e => handleSelectLanguageClose('en')}>
+                <MenuItem onClick={() => handleSelectLanguageClose('en')}>
                   EN
                 </MenuItem>
-                <MenuItem onClick={e => handleSelectLanguageClose('ru')}>
+                <MenuItem onClick={() => handleSelectLanguageClose('ru')}>
                   RU
                 </MenuItem>
               </Menu>
-              {/* <img
-            src="./assets/united-kingdom.svg"
-            height="36px"
-            width="auto"
-            alt="EN"
-          />{' '}
-          &nbsp;
-          <img src="./assets/russia.svg" height="36px" width="auto" alt="RU" /> */}
             </Grid>
           </Grid>
         </Hidden>
         <Hidden lgUp>
-          <Button onClick={toggleDrawer(true)}>Open</Button>
+          <IconButton onClick={toggleDrawer(true)}>
+            <MenuOpenIcon />
+          </IconButton>
+          <Divider orientation="vertical" flexItem />
+
+          <Button startIcon={<BuildIcon />} onClick={toggleFiltersDrawer(true)}>
+            Filters
+          </Button>
+          <LeftSlider
+            openned={filtersOpen}
+            toggleDrawer={toggleFiltersDrawer}
+          />
           <SwipeableDrawer
             anchor={'left'}
             open={drawerOpen}
             onClose={toggleDrawer(false)}
             onOpen={toggleDrawer(true)}
           >
-            <List component="nav" aria-label="main mailbox folders">
+            <List
+              className={classes.list}
+              component="nav"
+              aria-label="main mailbox folders"
+            >
               <ListItem button>
                 <ListItemIcon>
-                  <InboxIcon />
+                  <HomeIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText primary={t('nav.home')} />
+                <ListItemText color="primary" primary={t('nav.home')} />
               </ListItem>
               <ListItem button>
                 <ListItemIcon>
-                  <DraftsIcon />
+                  <AddToQueueIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText primary={t('nav.addserver')} />
+                <ListItemText color="primary" primary={t('nav.addserver')} />
               </ListItem>
               <ListItem button>
                 <ListItemIcon>
-                  <DraftsIcon />
+                  <QuestionAnswerIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText primary={t('nav.discuss')} />
+                <ListItemText color="primary" primary={t('nav.discuss')} />
               </ListItem>
               <ListItem button>
                 <ListItemIcon>
-                  <DraftsIcon />
+                  <InfoIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText primary={t('nav.knowledgebase')} />
+                <ListItemText
+                  color="primary"
+                  primary={t('nav.knowledgebase')}
+                />
               </ListItem>
               <ListItem button>
                 <ListItemIcon>
-                  <DraftsIcon />
+                  <MemoryIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText primary={t('nav.addfeature')} />
+                <ListItemText color="primary" primary={t('nav.addfeature')} />
               </ListItem>
             </List>
             <Divider />
-            <List component="nav" aria-label="secondary mailbox folders">
+            <List
+              component="nav"
+              className={classes.list}
+              aria-label="secondary mailbox folders"
+            >
               <ListItem button>
-                <ListItemText primary={t('nav.login')} />
+                <ListItemIcon>
+                  <LockOpenIcon color="primary" />
+                </ListItemIcon>
+                <ListItemText color="primary" primary={t('nav.login')} />
               </ListItem>
               <ListItem button onClick={toggleSwipeableDrawer}>
-                <ListItemText primary={i18n.language} />
+                <ListItemIcon>
+                  <GTranslateIcon color="primary" />
+                </ListItemIcon>
+                <ListItemText color="primary" primary={i18n.language} />
                 {open ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
               <Collapse in={open} timeout="auto" unmountOnExit>

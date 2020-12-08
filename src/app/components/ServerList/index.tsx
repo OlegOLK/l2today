@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { Paper, Typography } from '@material-ui/core';
+import { Paper, Typography, List } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 
-import { ServerRowComponent, ServerItemProps } from '../ServerRow/index';
+import { ServerRowComponent } from '../ServerRow/index';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import StarsIcon from '@material-ui/icons/Stars';
-
+import { ServersList } from 'types/Server';
+import { useTranslation } from 'react-i18next';
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -38,58 +39,43 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export type GrouppedServers = {
-  label: string;
-  servers: ServerItemProps[];
-};
-
 export type ServerListProps = {
-  groupped: GrouppedServers;
+  groupped: ServersList;
 };
 
 export const ServerList: FunctionComponent<ServerListProps> = ({
   groupped,
 }) => {
+  const isPremiumPanel = () => {
+    if (groupped.sortOrder === 1 || groupped.sortOrder === 0) {
+      return true;
+    }
+
+    return false;
+  };
   const classes = useStyles();
+  const { t } = useTranslation();
   return (
     <Paper>
       <Typography component="div">
-        {/* <Box className={classes.grouppedLable} fontWeight="fontWeightBold"> */}
         <Alert
           severity="success"
-          className={
-            groupped.label === 'Already VIP'
-              ? classes.vipAlert
-              : classes.normalAlert
-          }
+          className={isPremiumPanel() ? classes.vipAlert : classes.normalAlert}
           icon={<StarsIcon fontSize="inherit" />}
         >
-          {groupped.label}
+          {t(`serverPanel.${groupped.label}`)}
         </Alert>
-        {/* <Paper elevation={3}>{groupped.label}</Paper>
-        </Box> */}
       </Typography>
-      {/* <Button
-              className={classes.disabledButton}
-              fullWidth
-              disabled
-              variant="outlined"
-              color="primary"
-            >
-              {groupped.label}
-            </Button> */}
-      {groupped.servers.map((server, i) => {
-        return (
-          <ServerRowComponent
-            chronicles={server.chronicles}
-            features={server.features}
-            key={server.name + i}
-            name={server.name}
-            openDate={server.openDate}
-            rates={server.rates}
-          />
-        );
-      })}
+      <List component="nav" aria-label={'list-' + groupped.sortOrder}>
+        {groupped.servers.map((server, i) => {
+          return (
+            <ServerRowComponent
+              key={'row-' + server.name + i}
+              server={server}
+            />
+          );
+        })}
+      </List>
     </Paper>
   );
 };

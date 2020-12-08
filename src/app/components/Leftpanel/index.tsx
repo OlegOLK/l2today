@@ -1,9 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
-import { Grid, Box, Button, Chip } from '@material-ui/core';
+import { Grid, Box, Button, Chip, Badge } from '@material-ui/core';
 import { CHRONICLES, TYPES } from '../../mocks/chronicles';
 import { ComplexSearchDialog } from './ComplexSearchDialog';
 import { useTranslation } from 'react-i18next';
+import { Link, useRouteMatch } from 'react-router-dom';
+
 const useStyles = makeStyles(theme => ({
   panel: {
     backgroundColor: 'gray',
@@ -48,7 +50,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
   const [open, setOpen] = React.useState(false);
   const [customFilters, setCustomFilters] = React.useState(getCustomFilters());
   const [dialogKey, setDialogKey] = React.useState(0);
-
+  let match = useRouteMatch();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -119,9 +121,6 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
                     onDelete={() => handleDeleteFilter(i)}
                     onClick={handleClickFilter}
                   />
-                  {/* <Button key={'button' + i + filter.name} color="primary">
-                      {filter.name}
-                    </Button> */}
                 </Box>
               </Grid>
             );
@@ -144,11 +143,12 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
         {CHRONICLES.map((chronic, i) => {
           return (
             <Grid key={'grid' + i + chronic} item md={6} sm={6} xs={6}>
-              <Box key={'box' + i + chronic} textAlign="left">
+              <Box key={'box' + i + chronic} textAlign="center">
                 <Button
                   key={'button' + i + chronic}
-                  href="#text-buttons"
                   color="primary"
+                  component={Link}
+                  to={`/chronicles/${chronic}`}
                 >
                   {chronic}
                 </Button>
@@ -180,8 +180,9 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
                 <Button
                   key={'button' + i + type}
                   fullWidth
-                  href="#text-buttons"
                   color="primary"
+                  component={Link}
+                  to={`/types/${type}`}
                 >
                   {type}
                 </Button>
@@ -209,42 +210,82 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
         <Grid item md={12}>
           <Grid container spacing={2}>
             <Grid item sm={3}>
-              <Button fullWidth color="primary">
+              <Button
+                fullWidth
+                color="primary"
+                component={Link}
+                to={`/rates/x1`}
+              >
                 x1
               </Button>
             </Grid>
             <Grid item sm={3}>
-              <Button fullWidth color="primary">
+              <Button
+                fullWidth
+                color="primary"
+                component={Link}
+                to={`/rates/x3`}
+              >
                 x3
               </Button>
             </Grid>
             <Grid item sm={3}>
-              <Button fullWidth color="primary">
+              <Button
+                fullWidth
+                color="primary"
+                component={Link}
+                to={`/rates/x5`}
+              >
                 x5
               </Button>
             </Grid>
             <Grid item sm={3}>
-              <Button fullWidth color="primary">
+              <Button
+                fullWidth
+                color="primary"
+                component={Link}
+                to={`/rates/x10`}
+              >
                 x10
               </Button>
             </Grid>
             <Grid item sm={3}>
-              <Button fullWidth color="primary">
+              <Button
+                fullWidth
+                color="primary"
+                component={Link}
+                to={`/rates/x100`}
+              >
                 x100
               </Button>
             </Grid>
             <Grid item sm={3}>
-              <Button fullWidth color="primary">
+              <Button
+                fullWidth
+                color="primary"
+                component={Link}
+                to={`/rates/x200`}
+              >
                 x200
               </Button>
             </Grid>
             <Grid item sm={3}>
-              <Button fullWidth color="primary">
+              <Button
+                fullWidth
+                color="primary"
+                component={Link}
+                to={`/rates/x1000`}
+              >
                 x1000
               </Button>
             </Grid>
             <Grid item sm={3}>
-              <Button fullWidth color="primary">
+              <Button
+                fullWidth
+                color="primary"
+                component={Link}
+                to={`/rates/x9999`}
+              >
                 x9999
               </Button>
             </Grid>

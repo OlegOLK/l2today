@@ -34,5 +34,17 @@
     "recently": "open recently",
     "recentlyweek": "previous 7 days",
     "recentlymorewekk": "more then a week ago"
+  },
+  "serverPanel": {
+    "soonVip": "OPEN SOON VIP SERVERS",
+    "alreadyVip": "ALREADY OPEN VIP SERVERS",
+    "БЛИЖАЙШИЕ 7 ДНЕЙ": "NEAR 7 DAYS",
+    "ВЧЕРА": "YESTERDAY",
+    "ПРЕДЫДУЩИЕ 7 ДНЕЙ": "PREVIOUS 7 DAYS",
+    "НЕДЕЛЮ НАЗАД И БОЛЕЕ": "WEEK AGO AND MORE",
+    "СЕГОДНЯ": "TODAY"
+  },
+  "banner": {
+    "description": "Here you can set full server description with rates, online etc."
   }
 }
