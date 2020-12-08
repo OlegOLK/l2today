@@ -1,18 +1,13 @@
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid } from '@material-ui/core';
 import React from 'react';
 import { SampleCard } from './sample';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { sliceKey, reducer, actions } from '../Rightpanel/slice';
+import { sliceKey, reducer } from '../Rightpanel/slice';
 import { serversListFormSaga } from '../Rightpanel/saga';
-import {
-  selectServersData,
-  selectDataInitialized,
-} from '../Rightpanel/selectors';
-import { useParams } from 'react-router-dom';
-import Skeleton from '@material-ui/lab/Skeleton';
+import { selectDataInitialized } from '../Rightpanel/selectors';
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -28,9 +23,6 @@ export const Banner: FunctionComponent<BannerProps> = () => {
   useInjectSaga({ key: sliceKey, saga: serversListFormSaga });
 
   let isLoading = useSelector(selectDataInitialized);
-  const useEffectOnMount = (effect: React.EffectCallback) => {
-    useEffect(effect, []);
-  };
 
   return (
     <header>

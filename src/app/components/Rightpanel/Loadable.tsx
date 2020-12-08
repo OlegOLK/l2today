@@ -4,7 +4,6 @@
 
 import { lazyLoad } from 'utils/loadable';
 // import Skeleton from '@material-ui/lab/Skeleton';
-import React from 'react';
 
 export const RightPanelComponent = lazyLoad(
   () => import('./index'),

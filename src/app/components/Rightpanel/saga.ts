@@ -102,6 +102,7 @@ function sort(servers: Server[], filter: string) {
         break;
       }
     }
+    return s;
   });
 
   groupped.push({
@@ -141,9 +142,7 @@ function sort(servers: Server[], filter: string) {
   groupped.push({
     servers: soon.filter(x => {
       var open = dfn.parseISO(x.openDate);
-      if (dfn.compareAsc(open, sevenPlus) === -1) {
-        return x;
-      }
+      return dfn.compareAsc(open, sevenPlus) === -1;
     }),
     sortOrder: 4,
     label: 'БЛИЖАЙШИЕ 7 ДНЕЙ',
@@ -153,9 +152,10 @@ function sort(servers: Server[], filter: string) {
   groupped.push({
     servers: already.filter(x => {
       var open = dfn.parseISO(x.openDate);
-      if (dfn.compareAsc(open, sevenMinus) === -1) {
-        return x;
-      }
+      return dfn.compareAsc(open, sevenMinus) === -1;
+      // if (dfn.compareAsc(open, sevenMinus) === -1) {
+      //   return x;
+      // }
     }),
     sortOrder: 5,
     label: 'ПРЕДЫДУЩИЕ 7 ДНЕЙ',
@@ -165,9 +165,10 @@ function sort(servers: Server[], filter: string) {
   groupped.push({
     servers: already.filter(x => {
       var open = dfn.parseISO(x.openDate);
-      if (dfn.compareAsc(open, sevenMinus) === 1) {
-        return x;
-      }
+      return dfn.compareAsc(open, sevenMinus) === 1;
+      // if (dfn.compareAsc(open, sevenMinus) === 1) {
+      //   return x;
+      // }
     }),
     sortOrder: 7,
     label: 'НЕДЕЛЮ НАЗАД И БОЛЕЕ',
@@ -177,9 +178,11 @@ function sort(servers: Server[], filter: string) {
   groupped.push({
     servers: already.filter(x => {
       var open = dfn.parseISO(x.openDate);
-      if (dfn.compareAsc(open, sevenPlus) === 1) {
-        return x;
-      }
+      return dfn.compareAsc(open, sevenPlus) === 1;
+
+      // if (dfn.compareAsc(open, sevenPlus) === 1) {
+      //   return x;
+      // }
     }),
     sortOrder: 6,
     label: 'ЧЕРЕЗ НЕДЕЛЮ И БОЛЕЕ',

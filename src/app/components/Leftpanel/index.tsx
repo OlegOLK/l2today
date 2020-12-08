@@ -1,10 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
-import { Grid, Box, Button, Chip, Badge } from '@material-ui/core';
+import { Grid, Box, Button, Chip } from '@material-ui/core';
 import { CHRONICLES, TYPES } from '../../mocks/chronicles';
 import { ComplexSearchDialog } from './ComplexSearchDialog';
 import { useTranslation } from 'react-i18next';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   panel: {
@@ -50,7 +50,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
   const [open, setOpen] = React.useState(false);
   const [customFilters, setCustomFilters] = React.useState(getCustomFilters());
   const [dialogKey, setDialogKey] = React.useState(0);
-  let match = useRouteMatch();
+
   const handleClickOpen = () => {
     setOpen(true);
   };
