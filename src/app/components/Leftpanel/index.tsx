@@ -5,7 +5,8 @@ import { CHRONICLES, TYPES } from '../../mocks/chronicles';
 import { ComplexSearchDialog } from './ComplexSearchDialog';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-
+import { useHistory } from 'react-router-dom';
+import { ComplexFilter } from 'types/ComplexFilter';
 const useStyles = makeStyles(theme => ({
   panel: {
     backgroundColor: 'gray',
@@ -55,7 +56,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
     setOpen(true);
   };
 
-  const handleClose = (exit: boolean, modalFilter: any) => {
+  const handleClose = (exit: boolean, modalFilter: ComplexFilter) => {
     if (exit) {
       setOpen(false);
       return;
@@ -79,8 +80,10 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
     let kk = dialogKey + 1;
     setDialogKey(kk);
   };
-
-  const handleClickFilter = () => {};
+  const history = useHistory();
+  const handleClickFilter = (name: string) => {
+    history.push(`/custom/${name}`);
+  };
   const handleDeleteFilter = (index: number) => {
     const jsonFilter = localStorage.getItem('filter');
     if (!jsonFilter) {
@@ -119,7 +122,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
                     color="primary"
                     variant="outlined"
                     onDelete={() => handleDeleteFilter(i)}
-                    onClick={handleClickFilter}
+                    onClick={e => handleClickFilter(filter.name)}
                   />
                 </Box>
               </Grid>
@@ -214,7 +217,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
                 fullWidth
                 color="primary"
                 component={Link}
-                to={`/rates/x1`}
+                to={`/rates/1`}
               >
                 x1
               </Button>
@@ -224,7 +227,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
                 fullWidth
                 color="primary"
                 component={Link}
-                to={`/rates/x3`}
+                to={`/rates/3`}
               >
                 x3
               </Button>
@@ -234,7 +237,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
                 fullWidth
                 color="primary"
                 component={Link}
-                to={`/rates/x5`}
+                to={`/rates/5`}
               >
                 x5
               </Button>
@@ -244,7 +247,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
                 fullWidth
                 color="primary"
                 component={Link}
-                to={`/rates/x10`}
+                to={`/rates/10`}
               >
                 x10
               </Button>
@@ -254,7 +257,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
                 fullWidth
                 color="primary"
                 component={Link}
-                to={`/rates/x100`}
+                to={`/rates/100`}
               >
                 x100
               </Button>
@@ -264,7 +267,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
                 fullWidth
                 color="primary"
                 component={Link}
-                to={`/rates/x200`}
+                to={`/rates/200`}
               >
                 x200
               </Button>
@@ -274,7 +277,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
                 fullWidth
                 color="primary"
                 component={Link}
-                to={`/rates/x1000`}
+                to={`/rates/1000`}
               >
                 x1000
               </Button>
@@ -284,7 +287,7 @@ export const LeftPanel: FunctionComponent<LeftPanelProps> = () => {
                 fullWidth
                 color="primary"
                 component={Link}
-                to={`/rates/x9999`}
+                to={`/rates/9999`}
               >
                 x9999
               </Button>

@@ -63,10 +63,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-type CardProps = {
-  title: string;
-  paragraph: string;
-};
+type CardProps = {};
 
 export const NavBar: FunctionComponent<CardProps> = () => {
   const { t, i18n } = useTranslation();
@@ -155,6 +152,8 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               </Button>
               <Button
                 color="primary"
+                component={Link}
+                to={'/addserver'}
                 startIcon={<AddToQueueIcon color="primary" />}
               >
                 {t('nav.addserver')}

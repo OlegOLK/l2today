@@ -20,9 +20,9 @@ export const CHRONICLES = [
 
 export const TYPES = [
   'PvP',
-  'Multiprof',
+  'Multiproff',
   'Multicraft',
-  'RvR',
+  'GvE',
   'Custom',
   'Lowrate',
 ];

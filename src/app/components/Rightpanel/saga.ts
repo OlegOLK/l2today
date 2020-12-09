@@ -7,7 +7,11 @@ import {
   Server,
   ServersList,
   Premium,
+  Rate,
 } from 'types/Server';
+
+import { ComplexFilter, Rates } from 'types/ComplexFilter';
+
 import * as dfn from 'date-fns';
 
 /**
@@ -17,7 +21,8 @@ export function* getRepos() {
   const filter: string = yield select(selectFilter);
   // const requestURL = `https://localhost:44372/api/search?${filter}`;
   const requestURL =
-    'https://raw.githubusercontent.com/OlegOLK/l2today/master/servers.json';
+    'https://raw.githubusercontent.com/OlegOLK/l2today/master/test.json';
+  //'https://raw.githubusercontent.com/OlegOLK/l2today/master/servers.json';
   try {
     // Call our request helper (see 'utils/request')
     const serversList: Server[] = yield call(request, requestURL); //yield test(); //.flatMap(d => d);
@@ -59,21 +64,78 @@ export function* serversListFormSaga() {
   // It will be cancelled automatically on component unmount
   yield takeLatest(actions.loadServers.type, getRepos);
 }
+function getFilterFromLocalStorage(filterName): ComplexFilter | null {
+  const jsonFilter = localStorage.getItem('filter');
+  let filter;
 
-function complexFilter(s: Server, type: string, value: string) {
-  const lowerVal = value.toLowerCase();
+  if (!jsonFilter) {
+    return null;
+  }
+  filter = JSON.parse(jsonFilter);
+  const complexFitlers: ComplexFilter[] = filter.userFilters;
+  const complexFilter = complexFitlers.find(x => x.name === filterName);
+  return complexFilter ? complexFilter : null;
+}
+
+function complexFilter(
+  s: Server,
+  type: string,
+  lowerVal: string,
+  complexFilters: ComplexFilter | null,
+) {
   switch (type) {
     case 'chronicles':
       return s.chronicles.toLowerCase() === lowerVal;
     case 'types': {
-      return s.features.includes(lowerVal);
+      return s.features.some(x => x.toLowerCase() === lowerVal);
     }
     case 'rates': {
-      return s.rates.some(x => x.amount.toLowerCase() === lowerVal);
+      return s.rates.some(
+        x =>
+          x.type.toLowerCase() === 'xp' &&
+          x.amount === Number.parseInt(lowerVal),
+      );
+    }
+    case 'custom': {
+      var com = complex(s, complexFilters);
+      return com;
     }
     default:
       return true;
   }
+}
+
+function predicate(r: Rate, f: Rates) {
+  return (
+    f.name.toLowerCase() === r.type.toLowerCase() &&
+    f.max >= r.amount &&
+    f.min <= r.amount
+  );
+}
+
+function complex(s: Server, f: ComplexFilter | null) {
+  if (!f) {
+    return true;
+  }
+
+  let ok: boolean = true;
+  if (f.chronicles.length !== 0) {
+    ok = f.chronicles.some(
+      x => x.selected === true && x.label === s.chronicles,
+    );
+  }
+  if (!ok) {
+    return ok;
+  }
+  if (f.rates.length !== 0) {
+    ok = s.rates.some(x =>
+      f.rates.some(frate => {
+        return predicate(x, frate);
+      }),
+    );
+  }
+
+  return ok;
 }
 
 function sort(servers: Server[], filter: string) {
@@ -85,7 +147,10 @@ function sort(servers: Server[], filter: string) {
   const sevenMinus = dfn.addDays(todayDate, -7);
   const sevenPlus = dfn.addDays(todayDate, 7);
   const type = filter.split('='); //${filterType}=${value}
-  servers = servers.filter(x => complexFilter(x, type[0], type[1]));
+  const lowerVal = type[1].toLowerCase();
+  const filters = getFilterFromLocalStorage(lowerVal);
+
+  servers = servers.filter(x => complexFilter(x, type[0], lowerVal, filters));
   servers.map(s => {
     let res = dfn.compareAsc(dfn.parseISO(s.openDate), todayDate);
     switch (res) {

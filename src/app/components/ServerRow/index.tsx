@@ -116,7 +116,9 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
 
             <Grid item md={2} xs={3}>
               <Typography noWrap={true} className={classes.heading}>
-                {server.rates[0].amount}
+                {server.rates[0].amount !== -1
+                  ? 'x' + server.rates[0].amount
+                  : ''}
               </Typography>
             </Grid>
             <Grid item md={2} xs={4}>

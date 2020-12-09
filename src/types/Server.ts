@@ -1,6 +1,6 @@
 export interface Rate {
   type: string;
-  amount: string;
+  amount: number;
 }
 
 export enum Premium {
