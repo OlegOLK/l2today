@@ -1,0 +1,697 @@
+[
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 100
+      }
+    ],
+    "name": "ketrawars.net",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-11",
+    "uri": "https://ketrawars.net",
+    "premium": 2
+  },
+  {
+    "features": [
+      "Lowrate"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 10
+      }
+    ],
+    "name": "aden.land",
+    "chronicles": "Classic",
+    "openDate": "2020-12-11",
+    "uri": "https://aden.land",
+    "premium": 2
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 100
+      }
+    ],
+    "name": "genesis.ms",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-18",
+    "uri": "https://genesis.ms",
+    "premium": 2
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 100
+      }
+    ],
+    "name": "rampage.pw",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-25",
+    "uri": "https://rampage.pw",
+    "premium": 2
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 100
+      }
+    ],
+    "name": "fange.ws",
+    "chronicles": "Interlude",
+    "openDate": "2021-01-02",
+    "uri": "https://fange.ws",
+    "premium": 2
+  },
+  {
+    "features": [
+      "pts",
+      "Lowrate"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 3
+      }
+    ],
+    "name": "e-global",
+    "chronicles": "Interlude+",
+    "openDate": "2020-11-20",
+    "uri": "https://e-global",
+    "premium": 2
+  },
+  {
+    "features": [
+      "Lowrate"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 1
+      }
+    ],
+    "name": "rpg-club.com",
+    "chronicles": "High Five",
+    "openDate": "2020-11-16",
+    "uri": "https://rpg-club.com",
+    "premium": 2
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 100
+      }
+    ],
+    "name": "euro-pvp.com",
+    "chronicles": "Interlude",
+    "openDate": "2020-11-13",
+    "uri": "https://euro-pvp.com",
+    "premium": 2
+  },
+  {
+    "features": [
+      "pts",
+      "Lowrate"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 3
+      }
+    ],
+    "name": "beyond",
+    "chronicles": "Classic",
+    "openDate": "2020-10-16",
+    "uri": "https://beyond",
+    "premium": 2
+  },
+  {
+    "features": [
+      "pts",
+      "Lowrate"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 3
+      }
+    ],
+    "name": "valhalla",
+    "chronicles": "Interlude+",
+    "openDate": "2020-08-28",
+    "uri": "https://valhalla",
+    "premium": 2
+  },
+  {
+    "features": [
+      "pts",
+      "Lowrate"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 7
+      }
+    ],
+    "name": "SHOCK-WORLD",
+    "chronicles": "Interlude+",
+    "openDate": "2020-05-23",
+    "uri": "https://SHOCK-WORLD",
+    "premium": 2
+  },
+  {
+    "features": [
+      "Lowrate"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 5
+      }
+    ],
+    "name": "gamecoast.net",
+    "chronicles": "Classic",
+    "openDate": "2019-12-20",
+    "uri": "https://gamecoast.net",
+    "premium": 2
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 50
+      }
+    ],
+    "name": "scryde.ru",
+    "chronicles": "High Five",
+    "openDate": "2018-11-26",
+    "uri": "https://scryde.ru",
+    "premium": 2
+  },
+  {
+    "features": [
+      "pts",
+      "Lowrate"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 3
+      }
+    ],
+    "name": "shock-world",
+    "chronicles": "Interlude+",
+    "openDate": "2020-12-05",
+    "uri": "https://shock-world",
+    "premium": 0
+  },
+  {
+    "features": [
+      "pts",
+      "Lowrate"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 3
+      }
+    ],
+    "name": "l2realm",
+    "chronicles": "Interlude+",
+    "openDate": "2020-12-05",
+    "uri": "https://l2realm",
+    "premium": 0
+  },
+  {
+    "features": [
+      "PvP"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 50000
+      }
+    ],
+    "name": "l2creed.ru",
+    "chronicles": "Interlude+",
+    "openDate": "2020-12-05",
+    "uri": "https://l2creed.ru",
+    "premium": 0
+  },
+  {
+    "features": [
+      "GVE"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": -1
+      }
+    ],
+    "name": "interlude-online",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-06",
+    "uri": "https://interlude-online",
+    "premium": 0
+  },
+  {
+    "features": [
+      "multiproff"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 35
+      }
+    ],
+    "name": "l2exe.com",
+    "chronicles": "Interlude+",
+    "openDate": "2020-12-07",
+    "uri": "https://l2exe.com",
+    "premium": 0
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 55
+      }
+    ],
+    "name": "thebattle.club",
+    "chronicles": "High Five",
+    "openDate": "2020-12-11",
+    "uri": "https://thebattle.club",
+    "premium": 0
+  },
+  {
+    "features": [
+      "PvP"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 1200
+      }
+    ],
+    "name": "lineagers.ru",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-12",
+    "uri": "https://lineagers.ru",
+    "premium": 0
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 100
+      }
+    ],
+    "name": "ketrawars.net",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-08",
+    "uri": "https://ketrawars.net",
+    "premium": 0
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 100
+      }
+    ],
+    "name": "highfive.pw",
+    "chronicles": "High Five",
+    "openDate": "2020-12-18",
+    "uri": "https://highfive.pw",
+    "premium": 0
+  },
+  {
+    "features": [
+      "PvP"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 100000
+      }
+    ],
+    "name": "destorus.ru",
+    "chronicles": "Interlude+",
+    "openDate": "2020-12-18",
+    "uri": "https://destorus.ru",
+    "premium": 0
+  },
+  {
+    "features": [
+      "PvP"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 1200
+      }
+    ],
+    "name": "interlude.su",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-19",
+    "uri": "https://interlude.su",
+    "premium": 0
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 300
+      }
+    ],
+    "name": "scryde.ru",
+    "chronicles": "High Five",
+    "openDate": "2021-01-04",
+    "uri": "https://scryde.ru",
+    "premium": 0
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 100
+      }
+    ],
+    "name": "genesis.ms",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-15",
+    "uri": "https://genesis.ms",
+    "premium": 0
+  },
+  {
+    "features": [
+      "LOWRATE",
+      "Lowrate"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 10
+      }
+    ],
+    "name": "titanwars.world",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-04",
+    "uri": "https://titanwars.world",
+    "premium": 0
+  },
+  {
+    "features": [
+      "PvP"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 1200
+      }
+    ],
+    "name": "lineage777.com",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-04",
+    "uri": "https://lineage777.com",
+    "premium": 0
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 25
+      }
+    ],
+    "name": "l2mars.com",
+    "chronicles": "Classic",
+    "openDate": "2020-12-04",
+    "uri": "https://l2mars.com",
+    "premium": 0
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 50
+      }
+    ],
+    "name": "interlude.ru",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-04",
+    "uri": "https://interlude.ru",
+    "premium": 0
+  },
+  {
+    "features": [
+      "Lowrate"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 3
+      }
+    ],
+    "name": "multiworld.ws",
+    "chronicles": "High Five",
+    "openDate": "2020-12-04",
+    "uri": "https://multiworld.ws",
+    "premium": 0
+  },
+  {
+    "features": [
+      "PvP"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 10000
+      }
+    ],
+    "name": "l2hot.net",
+    "chronicles": "Interlude+",
+    "openDate": "2020-12-04",
+    "uri": "https://l2hot.net",
+    "premium": 0
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 50
+      }
+    ],
+    "name": "messa.ms",
+    "chronicles": "High Five",
+    "openDate": "2020-12-04",
+    "uri": "https://messa.ms",
+    "premium": 0
+  },
+  {
+    "features": [
+      "PvP"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 1200
+      }
+    ],
+    "name": "valakas.su",
+    "chronicles": "Interlude",
+    "openDate": "2020-11-28",
+    "uri": "https://valakas.su",
+    "premium": 0
+  },
+  {
+    "features": [
+      "PvP"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 50000
+      }
+    ],
+    "name": "agecold.ru",
+    "chronicles": "Interlude+",
+    "openDate": "2020-11-28",
+    "uri": "https://agecold.ru",
+    "premium": 0
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 100
+      }
+    ],
+    "name": "l2mad.net",
+    "chronicles": "Interlude",
+    "openDate": "2020-11-27",
+    "uri": "https://l2mad.net",
+    "premium": 0
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 500
+      }
+    ],
+    "name": "l2massacre.ru",
+    "chronicles": "Interlude",
+    "openDate": "2020-11-27",
+    "uri": "https://l2massacre.ru",
+    "premium": 0
+  },
+  {
+    "features": [
+      "GVE"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": -1
+      }
+    ],
+    "name": "evilax.net",
+    "chronicles": "Interlude",
+    "openDate": "2020-11-27",
+    "uri": "https://evilax.net",
+    "premium": 0
+  },
+  {
+    "features": [
+      "multiproff"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 30
+      }
+    ],
+    "name": "la2lords",
+    "chronicles": "Interlude+",
+    "openDate": "2020-11-27",
+    "uri": "https://la2lords",
+    "premium": 0
+  },
+  {
+    "features": [
+      "PvP"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 1200
+      }
+    ],
+    "name": "l2day.ru",
+    "chronicles": "Interlude",
+    "openDate": "2020-11-25",
+    "uri": "https://l2day.ru",
+    "premium": 0
+  },
+  {
+    "features": [
+      "MULTIPROFF"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 999
+      }
+    ],
+    "name": "L2KOT",
+    "chronicles": "Interlude",
+    "openDate": "2020-11-20",
+    "uri": "https://L2KOT",
+    "premium": 0
+  },
+  {
+    "features": [
+      "PvP"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 999999
+      }
+    ],
+    "name": "destorus.ru",
+    "chronicles": "Interlude+",
+    "openDate": "2020-11-14",
+    "uri": "https://destorus.ru",
+    "premium": 0
+  },
+  {
+    "features": [
+      "pts",
+      "Lowrate"
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 3
+      }
+    ],
+    "name": "innadril",
+    "chronicles": "Classic+",
+    "openDate": "2020-11-07",
+    "uri": "https://innadril",
+    "premium": 0
+  },
+  {
+    "features": [
+    ],
+    "rates": [
+      {
+        "type": "XP",
+        "amount": 100
+      }
+    ],
+    "name": "scryde.ru",
+    "chronicles": "High Five",
+    "openDate": "2020-09-18",
+    "uri": "https://scryde.ru",
+    "premium": 0
+  }
+]
