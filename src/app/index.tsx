@@ -23,7 +23,7 @@ import ReactGA from 'react-ga';
 
 const DEFAULT_CONFIG = {
   trackingId: 'G-N4DL6EN813',
-  debug: true,
+  debug: false,
   gaOptions: {
     cookieDomain: 'none',
   },
