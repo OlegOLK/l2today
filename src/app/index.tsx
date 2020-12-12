@@ -6,8 +6,7 @@
  * contain code that should be seen on all pages. (e.g. navigation bar)
  */
 
-import * as React from 'react';
-import { Helmet } from 'react-helmet-async';
+import React, { useEffect } from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
 // import { GlobalStyle } from 'styles/global-styles';
@@ -20,16 +19,31 @@ import { Container, Box, Hidden } from '@material-ui/core';
 import { NavBar } from './components/Navbar/index';
 import { Banner } from './components/Banner/index';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import ReactGA from 'react-ga';
+
+const DEFAULT_CONFIG = {
+  trackingId: 'G-N4DL6EN813',
+  debug: true,
+  gaOptions: {
+    cookieDomain: 'none',
+  },
+};
 
 export function App() {
+  const initReactGA = () => {
+    ReactGA.initialize('G-N4DL6EN813', DEFAULT_CONFIG);
+  };
+
+  const useEffectOnMount = (effect: React.EffectCallback) => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(effect, []);
+  };
+  useEffectOnMount(() => {
+    initReactGA();
+  });
+
   return (
     <BrowserRouter>
-      <Helmet
-        titleTemplate="%s - React Boilerplate"
-        defaultTitle="React Boilerplate"
-      >
-        <meta name="description" content="A React Boilerplate application" />
-      </Helmet>
       <CssBaseline />
       <Hidden mdDown>
         <Banner />

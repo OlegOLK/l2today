@@ -6,6 +6,7 @@ import {
   IconButton,
   Collapse,
   Divider,
+  Button,
 } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
@@ -15,10 +16,10 @@ import { ReactComponent as sp } from './svg/ancient-scroll.svg';
 import { ReactComponent as adena } from './svg/dollar.svg';
 import { ReactComponent as drop } from './svg/loot.svg';
 import { ReactComponent as vip } from './svg/medal.svg';
-import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import CachedIcon from '@material-ui/icons/Cached';
 import { Premium, Server } from 'types/Server';
 import { ServerFeature } from '../ServerFeatures/index';
+import ReactGA from 'react-ga';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,11 +71,29 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = () => {
+    viewServerDetails();
     setChecked(prev => !prev);
+  };
+
+  const handleNavigateToServer = () => {
+    ReactGA.event({
+      category: 'Open',
+      action: 'Navigation to server ' + server.name,
+      label: 'Open server link',
+    });
+    window.open(server.uri, '__blank', 'noopener noreferrer');
   };
 
   const isPremium = () => {
     return server.premium !== Premium.none;
+  };
+
+  const viewServerDetails = () => {
+    ReactGA.event({
+      category: 'Details',
+      action: 'View server info for' + server.name,
+      label: 'Server row details',
+    });
   };
 
   return (
@@ -92,17 +111,12 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
               xs={12}
             >
               <Box className={classes.serverName}>
-                <a
-                  href={server.uri}
-                  className={classes.serverLinkName}
-                  target="_blank"
-                  rel="noopener nofollow noreferrer"
-                >
+                <Button onClick={handleNavigateToServer} color="primary">
                   {isPremium() ? (
                     <SvgIcon component={vip} viewBox="0 0 512 512" />
                   ) : null}
                   {server.name}
-                </a>
+                </Button>
               </Box>
               <Box className={classes.serverFeatures}>
                 <ServerFeature
@@ -137,7 +151,7 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
                 onClick={handleChange}
                 aria-label="expand-server-info"
               >
-                <ArrowLeftIcon />
+                <CachedIcon />
               </IconButton>
             </Grid>
           </Grid>
@@ -189,7 +203,7 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
                 onClick={handleChange}
                 aria-label="hide-server-info"
               >
-                <ArrowRightIcon />
+                <CachedIcon />
               </IconButton>
             </Grid>
           </Grid>
