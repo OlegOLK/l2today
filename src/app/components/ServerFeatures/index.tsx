@@ -34,7 +34,7 @@ export const ServerFeature: FunctionComponent<FeaturesProps> = ({
               // component={Link}
               // to={`/types/${feature}`}
               color={'primary'}
-              aria-label={feature}
+              aria-label={feature ?? 'feature'}
               size="small"
             >
               {isTextVariant ? (
