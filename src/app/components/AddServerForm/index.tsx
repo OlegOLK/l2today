@@ -63,7 +63,7 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
   const handlePlatformChange = event => {
     setServerPlaftorm(event.target.value);
     setPlatformAndTypeValidationError(
-      event.target.value.length == 0 || servertype.length == 0
+      event.target.value.length === 0 || servertype.length === 0
         ? Tristate.Error
         : Tristate.Success,
     );
@@ -73,7 +73,7 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
   const handleTypeChange = event => {
     setServertype(event.target.value);
     setPlatformAndTypeValidationError(
-      serverPlaftorm.length == 0 || event.target.value.length == 0
+      serverPlaftorm.length === 0 || event.target.value.length === 0
         ? Tristate.Error
         : Tristate.Success,
     );
@@ -89,12 +89,11 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
   };
 
   const onChroniclesAndRatesBlur = () => {
-    let isOk = true;
-    if (chronicle.length == 0) {
+    if (chronicle.length === 0) {
       setChronicleAndRatesValidationError(Tristate.Error);
       return;
     }
-    if (!rates.some(x => x.amount != 0)) {
+    if (!rates.some(x => x.amount !== 0)) {
       setChronicleAndRatesValidationError(Tristate.Error);
       return;
     }
@@ -133,19 +132,19 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
   };
 
   const getSeverity = (state: Tristate) => {
-    return state == Tristate.Error
+    return state === Tristate.Error
       ? 'error'
-      : state == Tristate.NotInitialized
+      : state === Tristate.NotInitialized
       ? 'info'
       : 'success';
   };
 
   const canAddServer = () => {
     return (
-      isServerNameValidationError == Tristate.Success &&
+      isServerNameValidationError === Tristate.Success &&
       rulseAccepted &&
-      isChronicleAndRatesValidationError == Tristate.Success &&
-      isPlatformAndTypeValidationError == Tristate.Success
+      isChronicleAndRatesValidationError === Tristate.Success &&
+      isPlatformAndTypeValidationError === Tristate.Success
     );
   };
 
@@ -166,12 +165,12 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
             <TextField
               onBlur={() =>
                 setServerNameValidationError(
-                  serverName.length == 0 ? Tristate.Error : Tristate.Success,
+                  serverName.length === 0 ? Tristate.Error : Tristate.Success,
                 )
               }
               fullWidth
               id="server-name"
-              error={isServerNameValidationError == Tristate.Error}
+              error={isServerNameValidationError === Tristate.Error}
               value={serverName}
               onChange={handleServerNameChange}
               label="Server name"
@@ -181,12 +180,12 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
             <TextField
               onBlur={() =>
                 setServerNameValidationError(
-                  serverUri.length == 0 ? Tristate.Error : Tristate.Success,
+                  serverUri.length === 0 ? Tristate.Error : Tristate.Success,
                 )
               }
               fullWidth
               id="server-uri"
-              error={isServerNameValidationError == Tristate.Error}
+              error={isServerNameValidationError === Tristate.Error}
               value={serverUri}
               onChange={handleServerUriChange}
               label="Server website"
@@ -214,7 +213,7 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
             severity={getSeverity(isPlatformAndTypeValidationError)}
           >
             <AlertTitle>Server platform and type</AlertTitle>
-            {isPlatformAndTypeValidationError == Tristate.Error
+            {isPlatformAndTypeValidationError === Tristate.Error
               ? 'Please set platform and type'
               : ''}
           </Alert>
@@ -287,7 +286,7 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
             severity={getSeverity(isChronicleAndRatesValidationError)}
           >
             <AlertTitle>Server chronicle and rates</AlertTitle>
-            {isChronicleAndRatesValidationError == Tristate.Error
+            {isChronicleAndRatesValidationError === Tristate.Error
               ? 'Please set chronicles and rates'
               : ''}
           </Alert>
@@ -348,11 +347,11 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
                 <TextField
-                  //onBlur={() => setServerNameValidationError(serverName.length == 0 ? Tristate.Error : Tristate.Success)}
+                  //onBlur={() => setServerNameValidationError(serverName.length === 0 ? Tristate.Error : Tristate.Success)}
                   type="number"
                   fullWidth
                   id="server-login-ip"
-                  //error={isServerNameValidationError == Tristate.Error}
+                  //error={isServerNameValidationError === Tristate.Error}
                   //value={serverName}
                   //onChange={handleServerNameChange}
                   label="Login server IP"
@@ -361,11 +360,11 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <TextField
-                  //onBlur={() => setServerNameValidationError(serverName.length == 0 ? Tristate.Error : Tristate.Success)}
+                  //onBlur={() => setServerNameValidationError(serverName.length === 0 ? Tristate.Error : Tristate.Success)}
                   type="number"
                   fullWidth
                   id="server-login-port"
-                  //error={isServerNameValidationError == Tristate.Error}
+                  //error={isServerNameValidationError === Tristate.Error}
                   //value={serverName}
                   //onChange={handleServerNameChange}
                   label="Login server PORT"
@@ -375,11 +374,11 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
 
               <Grid item xs={12} md={6}>
                 <TextField
-                  //onBlur={() => setServerNameValidationError(serverName.length == 0 ? Tristate.Error : Tristate.Success)}
+                  //onBlur={() => setServerNameValidationError(serverName.length === 0 ? Tristate.Error : Tristate.Success)}
                   type="number"
                   fullWidth
                   id="server-login-ip"
-                  //error={isServerNameValidationError == Tristate.Error}
+                  //error={isServerNameValidationError === Tristate.Error}
                   //value={serverName}
                   //onChange={handleServerNameChange}
                   label="Game server IP"
@@ -388,11 +387,11 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <TextField
-                  //onBlur={() => setServerNameValidationError(serverName.length == 0 ? Tristate.Error : Tristate.Success)}
+                  //onBlur={() => setServerNameValidationError(serverName.length === 0 ? Tristate.Error : Tristate.Success)}
                   type="number"
                   fullWidth
                   id="server-game-port"
-                  //error={isServerNameValidationError == Tristate.Error}
+                  //error={isServerNameValidationError === Tristate.Error}
                   //value={serverName}
                   //onChange={handleServerNameChange}
                   label="Game server PORT"
