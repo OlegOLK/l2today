@@ -15,6 +15,7 @@ import {
   ListItemText,
   Collapse,
   IconButton,
+  Link as MaterialLink,
 } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -113,7 +114,9 @@ export const NavBar: FunctionComponent<CardProps> = () => {
     setDiscussAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (name: string) => {
+    //https://discord.gg/kdsrYj4xj2
+    //window.open('https://discord.gg/kdsrYj4xj2', '__blank', 'noopener noreferrer');
     setDiscussAnchorEl(null);
   };
 
@@ -176,15 +179,33 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 open={Boolean(discussAnchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Discord</MenuItem>
-                <MenuItem onClick={handleClose}>{t('nav.forum')}</MenuItem>
+                <MenuItem onClick={e => handleClose('discord')}>
+                  <MaterialLink
+                    href="https://discord.gg/kdsrYj4xj2"
+                    target="__blank"
+                    rel="noreferrer noopener"
+                    color="primary"
+                  >
+                    Discord
+                  </MaterialLink>
+                </MenuItem>
+                <MenuItem disabled onClick={e => handleClose('forum')}>
+                  {t('nav.forum')}
+                </MenuItem>
               </Menu>
 
-              <Button startIcon={<InfoIcon color="primary" />}>
+              <Button disabled startIcon={<InfoIcon color="primary" />}>
                 {t('nav.knowledgebase')}
               </Button>
               <Button startIcon={<MemoryIcon color="primary" />}>
-                {t('nav.addfeature')}
+                <MaterialLink
+                  href="https://discord.gg/GEgCbHkWb4"
+                  target="__blank"
+                  rel="noreferrer noopener"
+                  color="primary"
+                >
+                  {t('nav.addfeature')}
+                </MaterialLink>
               </Button>
             </Grid>
             <Grid item>
