@@ -32,7 +32,7 @@ declare global {
 export function App() {
   let { pathname } = useLocation();
   const useEffectOnRouteChange = (effect: React.EffectCallback) => {
-    useEffect(effect, [pathname]);
+    useEffect(effect, [effect, pathname]);
   };
   useEffectOnRouteChange(() => {
     if (!pathname) return;

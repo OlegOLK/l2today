@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { sliceKey, reducer, actions } from './slice';
 import { userFromSaga } from './saga';
-import { selectEmail, selectIsAuthenticated, selectToken } from './selectors';
-
-type User = {
-  email: string;
-};
+import { selectEmail, selectIsAuthenticated } from './selectors';
 
 export function LoginPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
