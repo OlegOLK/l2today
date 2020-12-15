@@ -1016,5 +1016,247 @@
       { "type": "SP", "amount": 1200 },
       { "type": "Adena", "amount": 900 }
     ]
+  },
+  {
+    "id": "5fd65f1996122a7fb2637522",
+    "name": "lineage2-free.tk",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-20",
+    "uri": "https://lineage2-free.tk/",
+    "premium": 0,
+    "features": ["Craft-PvP"],
+    "rates": [
+      { "type": "XP", "amount": 25 },
+      { "type": "SP", "amount": 25 },
+      { "type": "Drop", "amount": 20 },
+      { "type": "Adena", "amount": 10 },
+      { "type": "Spoil", "amount": 20 }
+    ]
+  },
+  {
+    "id": "5fd65f1996122a7fb2637521",
+    "name": "l2wish.com",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-20",
+    "uri": "https://l2wish.com/",
+    "premium": 0,
+    "features": ["Craft-PvP"],
+    "rates": [
+      { "type": "XP", "amount": 75 },
+      { "type": "SP", "amount": 75 },
+      { "type": "Drop", "amount": 10 },
+      { "type": "Adena", "amount": 10 },
+      { "type": "Spoil", "amount": 15 }
+    ]
+  },
+  {
+    "id": "5fd65f2396122a7fb2637523",
+    "name": "l2day.ru",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-23",
+    "uri": "https://l2day.ru/",
+    "premium": 0,
+    "features": ["Craft-PvP"],
+    "rates": [
+      { "type": "XP", "amount": 10 },
+      { "type": "SP", "amount": 10 },
+      { "type": "Drop", "amount": 10 },
+      { "type": "Adena", "amount": 5 },
+      { "type": "Spoil", "amount": 10 }
+    ]
+  },
+  {
+    "id": "5fd6602596122a7fb2637524",
+    "name": "frozen-world.ru",
+    "chronicles": "Interlude+",
+    "openDate": "2020-12-24",
+    "uri": "https://frozen-world.ru/",
+    "premium": 0,
+    "features": ["Mega PvP"],
+    "rates": [
+      { "type": "XP", "amount": 100000 },
+      { "type": "SP", "amount": 100000 }
+    ]
+  },
+  {
+    "id": "5fd6602896122a7fb2637525",
+    "name": "l2gl.ru",
+    "chronicles": "High Five",
+    "openDate": "2020-12-25",
+    "uri": "https://l2gl.ru/",
+    "premium": 0,
+    "features": [""],
+    "rates": [
+      { "type": "XP", "amount": 20 },
+      { "type": "SP", "amount": 20 },
+      { "type": "Drop", "amount": 20 },
+      { "type": "Adena", "amount": 20 },
+      { "type": "Spoil", "amount": 20 }
+    ]
+  },
+  {
+    "id": "5fd6602996122a7fb2637526",
+    "name": "la2-game.ru",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-25",
+    "uri": "https://la2-game.ru/",
+    "premium": 0,
+    "features": ["PvP"],
+    "rates": [
+      { "type": "XP", "amount": 1200 },
+      { "type": "SP", "amount": 1200 }
+    ]
+  },
+  {
+    "id": "5fd6602a96122a7fb2637527",
+    "name": "tarbar.online",
+    "chronicles": "High Five",
+    "openDate": "2020-12-25",
+    "uri": "https://tarbar.online/",
+    "premium": 0,
+    "features": ["Lowrate"],
+    "rates": [
+      { "type": "XP", "amount": 1 },
+      { "type": "SP", "amount": 1 },
+      { "type": "Drop", "amount": 30 },
+      { "type": "Adena", "amount": 1 },
+      { "type": "Spoil", "amount": 30 }
+    ]
+  },
+  {
+    "id": "5fd6602b96122a7fb2637528",
+    "name": "eraze.ru",
+    "chronicles": "High Five",
+    "openDate": "2020-12-25",
+    "uri": "https://eraze.ru/",
+    "premium": 0,
+    "features": ["Lowrate"],
+    "rates": [
+      { "type": "XP", "amount": 3 },
+      { "type": "SP", "amount": 3 },
+      { "type": "Drop", "amount": 5 },
+      { "type": "Adena", "amount": 2 },
+      { "type": "Spoil", "amount": 3 }
+    ]
+  },
+  {
+    "id": "5fd6602c96122a7fb2637529",
+    "name": "overworld.pro",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-26",
+    "uri": "http://overworld.pro/",
+    "premium": 0,
+    "features": ["Lowrate"],
+    "rates": [
+      { "type": "XP", "amount": 7 },
+      { "type": "SP", "amount": 7 },
+      { "type": "Drop", "amount": 5 },
+      { "type": "Adena", "amount": 3 },
+      { "type": "Spoil", "amount": 5 }
+    ]
+  },
+  {
+    "id": "5fd6602e96122a7fb263752a",
+    "name": "l2neo.com",
+    "chronicles": "Interlude",
+    "openDate": "2020-12-27",
+    "uri": "https://l2neo.com/",
+    "premium": 0,
+    "features": ["Craft-PvP"],
+    "rates": [
+      { "type": "XP", "amount": 100 },
+      { "type": "SP", "amount": 100 }
+    ]
+  },
+  {
+    "id": "5fd6631a96122a7fb263752b",
+    "name": "l2time-machine.ru",
+    "chronicles": "Epilogue",
+    "openDate": "202-01-01",
+    "uri": "https://l2time-machine.ru/",
+    "premium": 0,
+    "features": ["Craft-PvP"],
+    "rates": [
+      { "type": "XP", "amount": 50 },
+      { "type": "SP", "amount": 50 },
+      { "type": "Drop", "amount": 15 },
+      { "type": "Adena", "amount": 50 },
+      { "type": "Spoil", "amount": 25 }
+    ]
+  },
+  {
+    "id": "5fd6631c96122a7fb263752c",
+    "name": "zmega.com",
+    "chronicles": "Interlude",
+    "openDate": "2021-01-04",
+    "uri": "https://zmega.com/",
+    "premium": 0,
+    "features": ["Craft-PvP"],
+    "rates": [
+      { "type": "XP", "amount": 20 },
+      { "type": "SP", "amount": 20 },
+      { "type": "Drop", "amount": 10 },
+      { "type": "Adena", "amount": 15 },
+      { "type": "Spoil", "amount": 7 }
+    ]
+  },
+  {
+    "id": "5fd6631d96122a7fb263752d",
+    "name": "euro-pvp.com",
+    "chronicles": "Interlude",
+    "openDate": "2021-01-08",
+    "uri": "https://euro-pvp.com/",
+    "premium": 2,
+    "features": ["PvP"],
+    "rates": [
+      { "type": "XP", "amount": 1200 },
+      { "type": "SP", "amount": 1200 },
+      { "type": "Adena", "amount": 3000 }
+    ]
+  },
+  {
+    "id": "5fd6631e96122a7fb263752e",
+    "name": "la2dream.com",
+    "chronicles": "Interlude",
+    "openDate": "202-01-09",
+    "uri": "https://la2dream.com/",
+    "premium": 0,
+    "features": ["Craft-PvP"],
+    "rates": [
+      { "type": "XP", "amount": 50 },
+      { "type": "SP", "amount": 50 },
+      { "type": "Drop", "amount": 30 },
+      { "type": "Adena", "amount": 10 },
+      { "type": "Spoil", "amount": 15 }
+    ]
+  },
+  {
+    "id": "5fd6631f96122a7fb263752f",
+    "name": "beyond.lt",
+    "chronicles": "High Five",
+    "openDate": "2021-01-15",
+    "uri": "https://beyond.lt/",
+    "premium": 0,
+    "features": ["Lowrate"],
+    "rates": [
+      { "type": "XP", "amount": 5 },
+      { "type": "SP", "amount": 5 },
+      { "type": "Drop", "amount": 3 },
+      { "type": "Adena", "amount": 5 },
+      { "type": "Spoil", "amount": 3 }
+    ]
+  },
+  {
+    "id": "5fd6632096122a7fb2637530",
+    "name": "tirael.ru",
+    "chronicles": "Interlude",
+    "openDate": "2021-01-16",
+    "uri": "https://tirael.ru/ru",
+    "premium": 0,
+    "features": [""],
+    "rates": [
+      { "type": "XP", "amount": 100 },
+      { "type": "SP", "amount": 100 }
+    ]
   }
 ]
