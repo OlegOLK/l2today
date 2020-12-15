@@ -191,6 +191,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               <Button
                 color="primary"
                 startIcon={<LockOpenIcon color="primary" />}
+                href={'/auth'}
               >
                 {t('nav.login')}
               </Button>

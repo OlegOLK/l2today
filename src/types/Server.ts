@@ -36,6 +36,7 @@ export interface ServersList {
 }
 
 export interface ServersDataState {
+  jsonData: Server[];
   serversList: ServersList[];
   loading: boolean;
   error?: ServerResponseErrorType | null;

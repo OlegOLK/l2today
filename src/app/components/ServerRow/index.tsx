@@ -19,7 +19,6 @@ import { ReactComponent as vip } from './svg/medal.svg';
 import CachedIcon from '@material-ui/icons/Cached';
 import { Premium, Server } from 'types/Server';
 import { ServerFeature } from '../ServerFeatures/index';
-import ReactGA from 'react-ga';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -76,11 +75,9 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
   };
 
   const handleNavigateToServer = () => {
-    ReactGA.event({
-      category: 'Open',
-      action: 'Navigation to server ' + server.name,
-      label: 'Open server link',
-    });
+    if (window.gtag) {
+      window.gtag('event', 'server_navigation', { name: server.name });
+    }
     window.open(server.uri, '__blank', 'noopener noreferrer');
   };
 
@@ -89,11 +86,8 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
   };
 
   const viewServerDetails = () => {
-    ReactGA.event({
-      category: 'Details',
-      action: 'View server info for' + server.name,
-      label: 'Server row details',
-    });
+    if (!window.gtag) return;
+    window.gtag('event', 'server_details', { name: server.name });
   };
 
   return (

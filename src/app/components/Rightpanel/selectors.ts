@@ -11,6 +11,11 @@ export const selectServersData = createSelector(
   serversDataState => serversDataState.serversList,
 );
 
+export const selectJsonData = createSelector(
+  [selectData],
+  serversDataState => serversDataState.jsonData,
+);
+
 export const selectLoading = createSelector(
   [selectData],
   serversDataState => serversDataState.loading,

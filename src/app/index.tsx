@@ -7,43 +7,40 @@
  */
 
 import React, { useEffect } from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 // import { GlobalStyle } from 'styles/global-styles';
 
 import { HomePage } from './containers/HomePage/index';
 import { AddServerPage } from './containers/AddServerPage/index';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
+import { LoginPage } from './containers/LoginPage/Loadable';
 
 import { Container, Box, Hidden } from '@material-ui/core';
 import { NavBar } from './components/Navbar/index';
 import { Banner } from './components/Banner/index';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import ReactGA from 'react-ga';
+import { useLocation } from 'react-router-dom';
 
-const DEFAULT_CONFIG = {
-  trackingId: 'G-N4DL6EN813',
-  debug: false,
-  gaOptions: {
-    cookieDomain: 'none',
-  },
-};
+declare global {
+  interface Window {
+    gtag: any;
+    ga: any;
+  }
+}
 
 export function App() {
-  const initReactGA = () => {
-    ReactGA.initialize('G-N4DL6EN813', DEFAULT_CONFIG);
+  let { pathname } = useLocation();
+  const useEffectOnRouteChange = (effect: React.EffectCallback) => {
+    useEffect(effect, [pathname]);
   };
-
-  const useEffectOnMount = (effect: React.EffectCallback) => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(effect, []);
-  };
-  useEffectOnMount(() => {
-    initReactGA();
+  useEffectOnRouteChange(() => {
+    if (!pathname) return;
+    if (!window.ga) return;
+    window.ga('send', 'pageview', pathname);
   });
-
   return (
-    <BrowserRouter>
+    <>
       <CssBaseline />
       <Hidden mdDown>
         <Banner />
@@ -56,11 +53,10 @@ export function App() {
           <Route exact path="/" component={HomePage} />
           <Route path="/:filterType/:filterValue" component={HomePage} />
           <Route path="/addserver" component={AddServerPage} />
+          <Route path="/auth" component={LoginPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Container>
-
-      {/* <GlobalStyle /> */}
-    </BrowserRouter>
+    </>
   );
 }

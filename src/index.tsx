@@ -20,7 +20,7 @@ import { App } from 'app';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { configureAppStore } from 'store/configureStore';
-
+import { BrowserRouter } from 'react-router-dom';
 // Initialize languages
 import './locales/i18n';
 
@@ -34,7 +34,9 @@ const ConnectedApp = ({ Component }: Props) => (
   <Provider store={store}>
     <HelmetProvider>
       <React.StrictMode>
-        <Component />
+        <BrowserRouter>
+          <Component />
+        </BrowserRouter>
       </React.StrictMode>
     </HelmetProvider>
   </Provider>

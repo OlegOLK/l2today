@@ -4,11 +4,13 @@ import {
   ServersDataState,
   ServersList,
   ServerResponseErrorType,
+  Server,
 } from 'types/Server';
 // import { Repo } from 'types/Repo';
 
 // The initial state of the GithubRepoForm container
 export const initialState: ServersDataState = {
+  jsonData: [],
   serversList: [],
   loading: true,
   error: null,
@@ -27,6 +29,9 @@ const serversDataSlice = createSlice({
       state.loading = true;
       state.error = null;
       state.serversList = [];
+    },
+    dataLoaded(state, action: PayloadAction<Server[]>) {
+      state.jsonData = action.payload;
     },
     serversLoaded(state, action: PayloadAction<ServersList[]>) {
       const servers = action.payload;

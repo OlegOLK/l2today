@@ -1,7 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { request } from 'utils/request';
 import { actions } from './slice';
-import { selectFilter } from './selectors';
+import { selectFilter, selectJsonData } from './selectors';
 import {
   ServerResponseErrorType,
   Server,
@@ -19,15 +19,18 @@ import * as dfn from 'date-fns';
  */
 export function* getRepos() {
   const filter: string = yield select(selectFilter);
-  // const requestURL = `https://localhost:44372/api/search?${filter}`;
+
   const requestURL =
     'https://raw.githubusercontent.com/OlegOLK/l2today/master/test.json';
   //'https://raw.githubusercontent.com/OlegOLK/l2today/master/servers.json';
   try {
     // Call our request helper (see 'utils/request')
-    const serversList: Server[] = yield call(request, requestURL); //yield test(); //.flatMap(d => d);
+    let serversList: Server[] = yield select(selectJsonData);
+    if (serversList.length === 0) {
+      serversList = yield call(request, requestURL);
+      yield put(actions.dataLoaded(serversList));
+    }
 
-    //yield call(request, requestURL);
     if (serversList?.length > 0) {
       yield put(actions.serversLoaded(sort(serversList, filter)));
     } else {
