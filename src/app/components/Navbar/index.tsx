@@ -34,6 +34,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import GTranslateIcon from '@material-ui/icons/GTranslate';
 import MemoryIcon from '@material-ui/icons/Memory';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import { RegisterDialog } from '../RegisterDialog/register';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -132,6 +133,16 @@ export const NavBar: FunctionComponent<CardProps> = () => {
   const toggleSwipeableDrawer = () => {
     setOpen(!open);
   };
+
+  const [authDialogOpen, setAuthDialogOpen] = React.useState(false);
+  const openDialog = () => {
+    setAuthDialogOpen(true);
+  };
+
+  const closeDialog = () => {
+    setAuthDialogOpen(false);
+  };
+
   const classes = useStyles();
   return (
     <AppBar position="static" color="transparent">
@@ -212,7 +223,8 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               <Button
                 color="primary"
                 startIcon={<LockOpenIcon color="primary" />}
-                href={'/auth'}
+                onClick={openDialog}
+                //href={'/auth'}
               >
                 {t('nav.login')}
               </Button>
@@ -334,6 +346,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
             </List>
           </SwipeableDrawer>
         </Hidden>
+        <RegisterDialog open={authDialogOpen} close={closeDialog} />
       </Toolbar>
     </AppBar>
   );
