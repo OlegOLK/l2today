@@ -9,6 +9,11 @@ export interface GoogleAuthResponse {
   accessToken: string;
 }
 
+export interface PasswordAuth {
+  email: string;
+  password: string;
+}
+
 export interface UserDataState {
   user: User;
 }

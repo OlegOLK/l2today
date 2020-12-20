@@ -1,4 +1,8 @@
 import { FunctionComponent } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
+import { sliceKey, reducer, actions } from '../RegisterDialog/slice';
+import { userFromSaga } from '../RegisterDialog/saga';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -34,8 +38,9 @@ import InfoIcon from '@material-ui/icons/Info';
 import GTranslateIcon from '@material-ui/icons/GTranslate';
 import MemoryIcon from '@material-ui/icons/Memory';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { RegisterDialog } from '../RegisterDialog/register';
-
+import { selectName, selectIsAuthenticated } from '../RegisterDialog/selectors';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -68,6 +73,10 @@ const useStyles = makeStyles(theme => ({
 type CardProps = {};
 
 export const NavBar: FunctionComponent<CardProps> = () => {
+  useInjectReducer({ key: sliceKey, reducer: reducer });
+  useInjectSaga({ key: sliceKey, saga: userFromSaga });
+  const isAuthenticaed = useSelector(selectIsAuthenticated);
+  const userName = useSelector(selectName);
   const { t, i18n } = useTranslation();
   const [
     discussAnchorEl,
@@ -115,7 +124,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
     setDiscussAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (name: string) => {
+  const handleClose = () => {
     //https://discord.gg/kdsrYj4xj2
     //window.open('https://discord.gg/kdsrYj4xj2', '__blank', 'noopener noreferrer');
     setDiscussAnchorEl(null);
@@ -137,6 +146,10 @@ export const NavBar: FunctionComponent<CardProps> = () => {
   const [authDialogOpen, setAuthDialogOpen] = React.useState(false);
   const openDialog = () => {
     setAuthDialogOpen(true);
+  };
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(actions.logout());
   };
 
   const closeDialog = () => {
@@ -164,14 +177,24 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               >
                 {t('nav.home')}
               </Button>
-              <Button
-                color="primary"
-                component={Link}
-                to={'/addserver'}
-                startIcon={<AddToQueueIcon color="primary" />}
-              >
-                {t('nav.addserver')}
-              </Button>
+              {isAuthenticaed ? (
+                <Button
+                  color="primary"
+                  component={Link}
+                  to={'/addserver'}
+                  startIcon={<AddToQueueIcon color="primary" />}
+                >
+                  {t('nav.addserver')}
+                </Button>
+              ) : (
+                <Button
+                  color="primary"
+                  onClick={openDialog}
+                  startIcon={<AddToQueueIcon color="primary" />}
+                >
+                  {t('nav.addserver')}
+                </Button>
+              )}
 
               <Button
                 aria-controls="simple-menu"
@@ -190,7 +213,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 open={Boolean(discussAnchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={e => handleClose('discord')}>
+                <MenuItem onClick={handleClose}>
                   <MaterialLink
                     href="https://discord.gg/kdsrYj4xj2"
                     target="__blank"
@@ -200,7 +223,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                     Discord
                   </MaterialLink>
                 </MenuItem>
-                <MenuItem disabled onClick={e => handleClose('forum')}>
+                <MenuItem disabled onClick={handleClose}>
                   {t('nav.forum')}
                 </MenuItem>
               </Menu>
@@ -220,14 +243,23 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               </Button>
             </Grid>
             <Grid item>
-              <Button
-                color="primary"
-                startIcon={<LockOpenIcon color="primary" />}
-                onClick={openDialog}
-                //href={'/auth'}
-              >
-                {t('nav.login')}
-              </Button>
+              {isAuthenticaed ? (
+                <Button
+                  color="primary"
+                  startIcon={<AccountCircleIcon color="primary" />}
+                  onClick={logout}
+                >
+                  {userName}
+                </Button>
+              ) : (
+                <Button
+                  color="primary"
+                  startIcon={<LockOpenIcon color="primary" />}
+                  onClick={openDialog}
+                >
+                  {t('nav.login')}
+                </Button>
+              )}
 
               <Button
                 aria-controls="language-selector"

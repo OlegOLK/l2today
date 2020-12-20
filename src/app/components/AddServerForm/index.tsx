@@ -109,7 +109,6 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
 
   const [rates, setRates] = useState<Rate[]>(rr);
   const handleRateChange = (event, index: number) => {
-    console.log(event.target.value);
     const val = Number.parseInt(event.target.value);
     if (val <= 0) {
       return;

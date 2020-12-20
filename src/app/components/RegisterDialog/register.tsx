@@ -1,30 +1,26 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import {
   Typography,
   Box,
   Grid,
   Dialog,
-  DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   Button,
-  TextField,
   FormControlLabel,
   Checkbox,
   IconButton,
   Fade,
 } from '@material-ui/core';
+import { PasswordInput } from './passwordInput';
+import { EmaildInput } from './emailInput';
 import CloseIcon from '@material-ui/icons/Close';
 import { GoogleLogin } from 'react-google-login';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { sliceKey, reducer, actions } from '../../containers/LoginPage/slice';
-import { userFromSaga } from '../../containers/LoginPage/saga';
-import {
-  selectEmail,
-  selectIsAuthenticated,
-} from '../../containers/LoginPage/selectors';
+import { sliceKey, reducer, actions } from './slice';
+import { userFromSaga } from './saga';
+import { selectIsAuthenticated } from './selectors';
 
 interface RegisterDialogProps {
   open: boolean;
@@ -32,10 +28,6 @@ interface RegisterDialogProps {
 }
 
 type dialogTypes = 'reset' | 'register' | 'login';
-type dialogActions =
-  | 'Forgot password?'
-  | 'Already have an account? Login'
-  | "Don't have an account yet? Register";
 
 const getDialogActions = (dialogType: dialogTypes, changeDialog: any) => {
   switch (dialogType) {
@@ -102,25 +94,35 @@ const getDialogActions = (dialogType: dialogTypes, changeDialog: any) => {
   }
 };
 
-const getDialogContent = (dialogType: dialogTypes) => {
+interface TextInputData {
+  value: any;
+  onChange(event);
+}
+
+const getDialogContent = (
+  dialogType: dialogTypes,
+  email: TextInputData,
+  password: TextInputData,
+  confirmPassword: TextInputData,
+) => {
   switch (dialogType) {
     case 'register': {
       return (
         <React.Fragment>
           <Grid item xs={12} style={{ marginBottom: '15px' }}>
-            <TextField
-              fullWidth
-              id="outlined-basic"
-              label="Email"
-              variant="outlined"
+            <EmaildInput value={email.value} onChange={email.onChange} />
+          </Grid>
+          <Grid item xs={12} style={{ marginTop: '20px' }}>
+            <PasswordInput
+              onChange={password.onChange}
+              value={password.value}
             />
           </Grid>
           <Grid item xs={12} style={{ marginTop: '20px' }}>
-            <TextField
-              fullWidth
-              id="outlined-basic"
-              label="Password"
-              variant="outlined"
+            <PasswordInput
+              onChange={confirmPassword.onChange}
+              value={confirmPassword.value}
+              primaryValue={password.value}
             />
           </Grid>
           <Grid item xs={12} style={{ marginTop: '20px' }}>
@@ -136,19 +138,12 @@ const getDialogContent = (dialogType: dialogTypes) => {
       return (
         <React.Fragment>
           <Grid item xs={12} style={{ marginBottom: '15px' }}>
-            <TextField
-              fullWidth
-              id="outlined-basic"
-              label="Email"
-              variant="outlined"
-            />
+            <EmaildInput value={email.value} onChange={email.onChange} />
           </Grid>
           <Grid item xs={12} style={{ marginTop: '20px' }}>
-            <TextField
-              fullWidth
-              id="outlined-basic"
-              label="Password"
-              variant="outlined"
+            <PasswordInput
+              onChange={password.onChange}
+              value={password.value}
             />
           </Grid>
         </React.Fragment>
@@ -158,12 +153,7 @@ const getDialogContent = (dialogType: dialogTypes) => {
       return (
         <React.Fragment>
           <Grid item xs={12} style={{ marginBottom: '15px' }}>
-            <TextField
-              fullWidth
-              id="outlined-basic"
-              label="Email"
-              variant="outlined"
-            />
+            <EmaildInput value={email.value} onChange={email.onChange} />
           </Grid>
         </React.Fragment>
       );
@@ -181,22 +171,26 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
   useInjectSaga({ key: sliceKey, saga: userFromSaga });
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
-  const email = useSelector(selectEmail);
-
+  // const email = useSelector(selectEmail);
   const googleResponse = response => {
-    console.log(response);
     dispatch(
-      actions.login({ accessToken: response.getAuthResponse().id_token }),
+      actions.loginGoogle({ accessToken: response.getAuthResponse().id_token }),
     );
   };
 
-  const logout = () => {};
   const [grow, setGrow] = React.useState(true);
   const [dialogType, setDialogType] = React.useState<dialogTypes>('register');
 
-  const handleClickOpen = () => {
-    close();
+  const useEffectOnAuthenticated = (effect: React.EffectCallback) => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(effect, [isAuthenticated]);
   };
+
+  useEffectOnAuthenticated(() => {
+    if (isAuthenticated) {
+      close();
+    }
+  });
 
   const handleClose = () => {
     close();
@@ -205,13 +199,51 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
   const changeDialog = (e: Event, type: dialogTypes) => {
     e.preventDefault();
     setGrow(false);
-    setTimeout(e => hz(type), 150);
+    setTimeout(() => hz(type), 150);
   };
 
   const hz = (type: dialogTypes) => {
     setDialogType(type);
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
     setGrow(true);
   };
+
+  const [email, setEmail] = React.useState<string>('');
+  const [password, setPassword] = React.useState<string>('');
+  const [confirmPassword, setConfirmPassword] = React.useState<string>('');
+  const handleEmailChange = event => {
+    event.preventDefault();
+    setEmail(event.target.value);
+  };
+
+  const handleConfirmPasswordChange = event => {
+    event.preventDefault();
+    setConfirmPassword(event.target.value);
+  };
+
+  const handlePasswordChange = event => {
+    event.preventDefault();
+    setPassword(event.target.value);
+  };
+
+  const handleDialogAction = event => {
+    event.preventDefault();
+    switch (dialogType) {
+      case 'login': {
+        dispatch(actions.login({ email: email, password: password }));
+        return;
+      }
+      case 'register': {
+        dispatch(actions.register({ email: email, password: password }));
+        return;
+      }
+      default:
+        return;
+    }
+  };
+
   return (
     <Dialog
       open={open}
@@ -255,13 +287,22 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
 
           <DialogContent>
             <Grid container>
-              {getDialogContent(dialogType)}
+              {getDialogContent(
+                dialogType,
+                { value: email, onChange: handleEmailChange },
+                { value: password, onChange: handlePasswordChange },
+                {
+                  value: confirmPassword,
+                  onChange: handleConfirmPasswordChange,
+                },
+              )}
               <Grid item xs={12} style={{ marginTop: '20px' }}>
                 <Button
                   fullWidth
                   color="primary"
                   variant="contained"
                   style={{ height: '56px', color: 'white' }}
+                  onClick={handleDialogAction}
                 >
                   {dialogType}
                 </Button>

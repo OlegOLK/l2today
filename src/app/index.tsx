@@ -14,7 +14,6 @@ import { Switch, Route } from 'react-router-dom';
 import { HomePage } from './containers/HomePage/index';
 import { AddServerPage } from './containers/AddServerPage/index';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
-import { LoginPage } from './containers/LoginPage/Loadable';
 
 import { Container, Box, Hidden } from '@material-ui/core';
 import { NavBar } from './components/Navbar/index';
@@ -53,7 +52,6 @@ export function App() {
           <Route exact path="/" component={HomePage} />
           <Route path="/:filterType/:filterValue" component={HomePage} />
           <Route path="/addserver" component={AddServerPage} />
-          <Route path="/auth" component={LoginPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Container>
