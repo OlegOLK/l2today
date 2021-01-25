@@ -12,7 +12,7 @@ interface TextInputData {
 export const PasswordInput: FunctionComponent<TextInputData> = ({
   value,
   onChange,
-  primaryValue,
+  primaryValue = undefined,
 }) => {
   const [isError, setIsError] = useState<boolean>(false);
   const handleOnBlur = e => {
@@ -44,7 +44,7 @@ export const PasswordInput: FunctionComponent<TextInputData> = ({
     <TextField
       fullWidth
       error={isError}
-      label={primaryValue ? 'Confirm password' : 'Password'}
+      label={primaryValue != undefined ? 'Confirm password' : 'Password'}
       variant="outlined"
       type="password"
       required

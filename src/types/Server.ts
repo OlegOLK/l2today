@@ -28,6 +28,16 @@ export interface Server {
   uri: string;
 }
 
+export interface NewServer {
+  Chronicles: string;
+  OpenDate: string;
+  Name: string;
+  Platform: string;
+  Uri: string;
+  Type: string;
+  Rates: Rate[];
+}
+
 export interface ServersList {
   label: string;
   panel: number;

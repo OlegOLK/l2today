@@ -6,6 +6,16 @@ import { initialState } from './slice';
 // First select the relevant part from the state
 const selectData = (state: RootState) => state.userDataState || initialState;
 
+export const selectIsLoading = createSelector(
+  [selectData],
+  userDataState => userDataState.loading,
+);
+
+export const selectError = createSelector(
+  [selectData],
+  userDataState => userDataState.error,
+);
+
 export const selectName = createSelector(
   [selectData],
   userDataState => userDataState.user.name,

@@ -4,6 +4,12 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { sliceKey, reducer, actions } from './slice';
+import { useSelector, useDispatch } from 'react-redux';
+import { userFromSaga } from './saga';
+
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
+import * as dfn from 'date-fns';
 import {
   Grid,
   Paper,
@@ -41,9 +47,11 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
   const [isServerNameValidationError, setServerNameValidationError] = useState<
     Tristate
   >(Tristate.NotInitialized);
-  const [serverName, setServerName] = useState<string>('');
-  const [serverUri, setServerUri] = useState<string>('');
+  const [serverName, setServerName] = useState<string>('hello');
+  const [serverUri, setServerUri] = useState<string>('https://hello.com');
   const [selectedDate, setSelectedDate] = React.useState(Date.now());
+  useInjectReducer({ key: sliceKey, reducer: reducer });
+  useInjectSaga({ key: sliceKey, saga: userFromSaga });
 
   const handleServerNameChange = event => {
     setServerName(event.target.value);
@@ -146,6 +154,33 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
       isPlatformAndTypeValidationError === Tristate.Success
     );
   };
+  const dispatch = useDispatch();
+
+  const handleAddServer = () => {
+    //fetch('https://localhost:44362/api/server', { headers})
+
+    console.log(dfn.format(selectedDate, 'MM/dd/yyyy'));
+    dispatch(
+      actions.createServer({
+        Rates: rates,
+        Chronicles: chronicle,
+        Type: servertype,
+        Platform: serverPlaftorm,
+        Name: serverName,
+        Uri: serverUri,
+        OpenDate: dfn.format(selectedDate, 'MM/dd/yyyy'),
+      }),
+    );
+    // console.log(JSON.stringify({
+    //   rates: rates,
+    //   chronicles: chronicle,
+    //   servertype: servertype,
+    //   serverPlaftorm: serverPlaftorm,
+    //   serverName: serverName,
+    //   serverUri: serverUri,
+    //   selectedDate: selectedDate
+    // }));
+  };
 
   return (
     <Grid container item justify="center">
@@ -174,6 +209,8 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
               onChange={handleServerNameChange}
               label="Server name"
               variant="outlined"
+              style={{ marginBottom: '5px' }}
+              required
             />
 
             <TextField
@@ -189,6 +226,8 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
               onChange={handleServerUriChange}
               label="Server website"
               variant="outlined"
+              style={{ marginBottom: '5px' }}
+              required
             />
 
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -501,6 +540,7 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
               variant="contained"
               color="primary"
               disabled={!canAddServer()}
+              onClick={handleAddServer}
             >
               Add server
             </Button>

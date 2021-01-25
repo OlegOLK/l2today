@@ -16,4 +16,6 @@ export interface PasswordAuth {
 
 export interface UserDataState {
   user: User;
+  loading: boolean;
+  error: string[];
 }

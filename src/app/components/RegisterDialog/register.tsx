@@ -11,7 +11,9 @@ import {
   Checkbox,
   IconButton,
   Fade,
+  CircularProgress,
 } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import { PasswordInput } from './passwordInput';
 import { EmaildInput } from './emailInput';
 import CloseIcon from '@material-ui/icons/Close';
@@ -20,7 +22,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { sliceKey, reducer, actions } from './slice';
 import { userFromSaga } from './saga';
-import { selectIsAuthenticated } from './selectors';
+import {
+  selectIsAuthenticated,
+  selectIsLoading,
+  selectError,
+} from './selectors';
 
 interface RegisterDialogProps {
   open: boolean;
@@ -125,12 +131,12 @@ const getDialogContent = (
               primaryValue={password.value}
             />
           </Grid>
-          <Grid item xs={12} style={{ marginTop: '20px' }}>
+          {/* <Grid item xs={12} style={{ marginTop: '20px' }}>
             <FormControlLabel
               control={<Checkbox name="checkedC" />}
               label="I agree with the Privacy Policy"
             />
-          </Grid>
+          </Grid> */}
         </React.Fragment>
       );
     }
@@ -171,6 +177,8 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
   useInjectSaga({ key: sliceKey, saga: userFromSaga });
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  const isLoading = useSelector(selectIsLoading);
+  const serverErrors = useSelector(selectError);
   // const email = useSelector(selectEmail);
   const googleResponse = response => {
     dispatch(
@@ -199,6 +207,7 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
   const changeDialog = (e: Event, type: dialogTypes) => {
     e.preventDefault();
     setGrow(false);
+    dispatch(actions.prune());
     setTimeout(() => hz(type), 150);
   };
 
@@ -243,7 +252,16 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
         return;
     }
   };
-
+  const getErrors = () => {
+    serverErrors.map(err => {
+      return (
+        <span>
+          {err}
+          <br />
+        </span>
+      );
+    });
+  };
   return (
     <Dialog
       open={open}
@@ -296,6 +314,28 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
                   onChange: handleConfirmPasswordChange,
                 },
               )}
+              {isLoading ? (
+                <Grid
+                  item
+                  xs={12}
+                  container
+                  alignItems="center"
+                  justify="center"
+                >
+                  <CircularProgress />
+                </Grid>
+              ) : serverErrors.length != 0 ? (
+                serverErrors.map(err => {
+                  return (
+                    <Grid item xs={12} style={{ marginBottom: '5px' }}>
+                      <Alert variant="filled" severity="error">
+                        {err}
+                      </Alert>
+                    </Grid>
+                  );
+                })
+              ) : null}
+
               <Grid item xs={12} style={{ marginTop: '20px' }}>
                 <Button
                   fullWidth
@@ -303,6 +343,7 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
                   variant="contained"
                   style={{ height: '56px', color: 'white' }}
                   onClick={handleDialogAction}
+                  disabled={isLoading}
                 >
                   {dialogType}
                 </Button>

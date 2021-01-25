@@ -14,6 +14,8 @@ export const initialState: UserDataState = {
     name: '',
     token: '',
   },
+  loading: false,
+  error: [],
 };
 
 const userDataSlice = createSlice({
@@ -22,26 +24,39 @@ const userDataSlice = createSlice({
   reducers: {
     login(state, action: PayloadAction<PasswordAuth>) {
       state.user.authenticated = false;
-      // state.user = action.payload;
-      // state.user.authenticated = true;
+      state.loading = true;
     },
     loginGoogle(state, action: PayloadAction<GoogleAuthResponse>) {
       state.user.authenticated = false;
-      // state.user = action.payload;
-      // state.user.authenticated = true;
+      state.loading = true;
     },
     register(state, action: PayloadAction<PasswordAuth>) {
       state.user.authenticated = false;
+      state.loading = true;
     },
     setUser(state, action: PayloadAction<User>) {
       state.user = action.payload;
       state.user.authenticated = true;
+      state.loading = false;
     },
     logout(state, action: PayloadAction) {
       state.user.token = '';
       state.user.authenticated = false;
       state.user.email = '';
       state.user.name = '';
+      state.loading = false;
+    },
+    setError(state, action: PayloadAction<string[]>) {
+      state.error = action.payload;
+      state.loading = false;
+      state.user.authenticated = false;
+    },
+    prune(state, action: PayloadAction) {
+      state.error = [];
+      state.loading = false;
+    },
+    finishLoad(state, action: PayloadAction) {
+      state.loading = false;
     },
   },
 });

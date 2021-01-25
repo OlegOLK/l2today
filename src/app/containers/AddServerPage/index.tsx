@@ -7,7 +7,7 @@ import { selectIsAuthenticated } from '../../components/RegisterDialog/selectors
 import { userFromSaga } from '../../components/RegisterDialog/saga';
 
 import { Grid } from '@material-ui/core';
-//import { Helmet } from 'react-helmet-async';
+
 import { AddServerForm } from '../../components/AddServerForm/index';
 
 export function AddServerPage() {

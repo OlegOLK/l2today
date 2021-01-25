@@ -4,6 +4,7 @@ import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { sliceKey, reducer, actions } from '../RegisterDialog/slice';
 import { userFromSaga } from '../RegisterDialog/saga';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
@@ -41,6 +42,8 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { RegisterDialog } from '../RegisterDialog/register';
 import { selectName, selectIsAuthenticated } from '../RegisterDialog/selectors';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -77,6 +80,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
   useInjectSaga({ key: sliceKey, saga: userFromSaga });
   const isAuthenticaed = useSelector(selectIsAuthenticated);
   const userName = useSelector(selectName);
+  const history = useHistory();
   const { t, i18n } = useTranslation();
   const [
     discussAnchorEl,
@@ -147,9 +151,11 @@ export const NavBar: FunctionComponent<CardProps> = () => {
   const openDialog = () => {
     setAuthDialogOpen(true);
   };
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const logout = () => {
-    dispatch(actions.logout());
+    history.push('/dashboard');
+    // OPen LC
+    // dispatch(actions.logout());
   };
 
   const closeDialog = () => {
@@ -171,6 +177,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
             <Grid item></Grid>
             <Grid item>
               <Button
+                color="primary"
                 component={Link}
                 to={`/`}
                 startIcon={<HomeIcon color="primary" />}
@@ -240,6 +247,14 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 >
                   {t('nav.addfeature')}
                 </MaterialLink>
+              </Button>
+              <Button
+                color="primary"
+                component={Link}
+                to={`/events`}
+                startIcon={<AttachMoneyIcon color="primary" />}
+              >
+                {'Earn money'}
               </Button>
             </Grid>
             <Grid item>

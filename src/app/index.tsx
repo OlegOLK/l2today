@@ -18,8 +18,12 @@ import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { Container, Box, Hidden } from '@material-ui/core';
 import { NavBar } from './components/Navbar/index';
 import { Banner } from './components/Banner/index';
+import { UserDashboardPage } from './containers/UserDashboard/Loadable';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useLocation } from 'react-router-dom';
+import { Dashboard } from '@material-ui/icons';
+import { EventsPage } from './containers/EventsPage/Loadable';
+import { Footer } from './components/Footer';
 
 declare global {
   interface Window {
@@ -52,9 +56,14 @@ export function App() {
           <Route exact path="/" component={HomePage} />
           <Route path="/:filterType/:filterValue" component={HomePage} />
           <Route path="/addserver" component={AddServerPage} />
+          <Route path="/dashboard" component={UserDashboardPage} />
+          <Route path="/events" component={EventsPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Container>
+      <Box mb={1}>
+        <Footer />
+      </Box>
     </>
   );
 }

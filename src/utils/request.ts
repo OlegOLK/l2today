@@ -1,8 +1,10 @@
+import { closestIndexTo } from 'date-fns';
+
 export class ResponseError extends Error {
   public response: Response;
 
-  constructor(response: Response) {
-    super(response.statusText);
+  constructor(response: Response, body: string) {
+    super(body);
     this.response = response;
   }
 }
@@ -27,13 +29,25 @@ function parseJSON(response: Response) {
  *
  * @return {object|undefined} Returns either the response, or throws an error
  */
-function checkStatus(response: Response) {
+async function checkStatus(response: Response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-  const error = new ResponseError(response);
-  error.response = response;
-  throw error;
+  const cloned = response.clone();
+  if (cloned.statusText.length !== 0) {
+    throw new ResponseError(response, cloned.statusText);
+  } else {
+    const json = await cloned.json();
+    throw new ResponseError(response, JSON.stringify(json.messages));
+  }
+  // try{
+  //   const json = await cloned.json();
+  //   const body = cloned.statusText.length !== 0 ? cloned.statusText : JSON.stringify(json.messages);
+  //   const error = new ResponseError(response, body);
+  //   throw error;
+  // }catch(err){
+  //   throw new ResponseError(response, cloned.statusText);
+  // }
 }
 
 /**
@@ -49,6 +63,6 @@ export async function request(
   options?: RequestInit,
 ): Promise<{} | { err: ResponseError }> {
   const fetchResponse = await fetch(url, options);
-  const response = checkStatus(fetchResponse);
+  const response = await checkStatus(fetchResponse);
   return parseJSON(response);
 }
