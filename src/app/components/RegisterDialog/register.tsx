@@ -194,7 +194,7 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
   };
 
   useEffectOnAuthenticated(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && open) {
       close();
       history.push('/dashboard');
     }

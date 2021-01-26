@@ -35,3 +35,8 @@ export const selectEmail = createSelector(
   [selectData],
   userDataState => userDataState.user.email,
 );
+
+export const selectUser = createSelector(
+  [selectData],
+  userDataState => userDataState.user,
+);

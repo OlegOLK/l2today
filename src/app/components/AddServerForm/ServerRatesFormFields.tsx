@@ -8,9 +8,8 @@ import {
   Select,
   TextField,
 } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
 import React, { FunctionComponent, useState } from 'react';
-import { Rate } from 'types/Server';
+import { Rate, UserServer } from 'types/Server';
 import { CHRONICLES } from '../../mocks/chronicles';
 
 enum Tristate {
@@ -19,29 +18,23 @@ enum Tristate {
   NotInitialized,
 }
 
-interface Props {}
+interface Props {
+  server: UserServer;
+}
 
-export const ServerRatesFormFields: FunctionComponent<Props> = () => {
+export const ServerRatesFormFields: FunctionComponent<Props> = ({ server }) => {
   const rr: Rate[] = [];
   rr.push({ amount: 0, type: 'XP' });
   rr.push({ amount: 0, type: 'SP' });
   rr.push({ amount: 0, type: 'DROP' });
   rr.push({ amount: 0, type: 'ADENA' });
   rr.push({ amount: 0, type: 'SPOIL' });
-  const [chronicle, setChronicle] = useState<string>('');
+  const [chronicle, setChronicle] = useState<string>(server.chronicles || '');
   const handleChronicleChange = event => {
     setChronicle(event.target.value);
   };
 
-  const getSeverity = (state: Tristate) => {
-    return state === Tristate.Error
-      ? 'error'
-      : state === Tristate.NotInitialized
-      ? 'info'
-      : 'success';
-  };
-
-  const [rates, setRates] = useState<Rate[]>(rr);
+  const [rates, setRates] = useState<Rate[]>(server.rates || rr);
   const handleRateChange = (event, index: number) => {
     const val = Number.parseInt(event.target.value);
     if (val <= 0) {
@@ -58,10 +51,9 @@ export const ServerRatesFormFields: FunctionComponent<Props> = () => {
     setRates(tempRates);
   };
 
-  const [
-    isChronicleAndRatesValidationError,
-    setChronicleAndRatesValidationError,
-  ] = useState<Tristate>(Tristate.NotInitialized);
+  const [, setChronicleAndRatesValidationError] = useState<Tristate>(
+    Tristate.NotInitialized,
+  );
 
   const onChroniclesAndRatesBlur = () => {
     if (!rates.some(x => x.amount !== 0)) {
@@ -74,9 +66,9 @@ export const ServerRatesFormFields: FunctionComponent<Props> = () => {
   return (
     <Grid container direction="row">
       <Box m={1}>
-        <Alert
+        {/* <Alert
           severity={getSeverity(isChronicleAndRatesValidationError)}
-        ></Alert>
+        ></Alert> */}
         <FormControl fullWidth variant="outlined">
           <InputLabel id="server-chronicle">Chronicle</InputLabel>
           <Select

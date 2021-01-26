@@ -153,7 +153,7 @@ export const ServerPremiumStats: FunctionComponent = () => {
                 style={{ backgroundColor: 'white', marginBottom: '10px' }}
               />
             </Grid>
-            <Grid item md={10}>
+            {/* <Grid item md={10}>
               <Typography
                 align="left"
                 component="div"
@@ -179,7 +179,7 @@ export const ServerPremiumStats: FunctionComponent = () => {
               >
                 Status: <em>UNDER MODERATION</em>
               </Typography>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
       </Grid>

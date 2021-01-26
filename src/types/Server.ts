@@ -26,6 +26,20 @@ export interface Server {
   features: string[];
   premium: Premium;
   uri: string;
+  id: string;
+}
+
+export interface UserServer {
+  id: string;
+  chronicles: string;
+  openDate: string;
+  name: string;
+  platform: string;
+  rates: Rate[];
+  type: string;
+  uri: string;
+  premium: number;
+  approved: boolean;
 }
 
 export interface NewServer {

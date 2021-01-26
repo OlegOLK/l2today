@@ -21,3 +21,13 @@ export const selectCreatedServerId = createSelector(
   [selectData],
   userDataState => userDataState.createdServerId,
 );
+
+export const selectServers = createSelector(
+  [selectData],
+  userDataState => userDataState.servers,
+);
+
+export const selectServerById = (id: string) =>
+  createSelector([selectData], userDataState =>
+    userDataState.servers.find(x => x.id === id),
+  );

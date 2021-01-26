@@ -52,11 +52,11 @@ export function App() {
       </Box>
       <Container maxWidth="xl">
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/:filterType/:filterValue" component={HomePage} />
           <Route path="/addserver" component={AddServerPage} />
           <Route path="/dashboard" component={UserDashboardPage} />
           <Route path="/events" component={EventsPage} />
+          <Route path="/:filterType/:filterValue" component={HomePage} />
+          <Route path="/" component={HomePage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Container>

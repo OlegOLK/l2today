@@ -10,10 +10,10 @@ import {
   Paper,
   TextField,
 } from '@material-ui/core';
-import { Server } from 'types/Server';
+import { UserServer } from 'types/Server';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { ServerRatesFormFields } from '../AddServerForm/ServerRatesFormFields';
-import { ServerPlatformAndTypeFormFields } from '../AddServerForm/ServerPlatformAndTypeFormFields';
+import { ServerRatesFormFields } from '../../AddServerForm/ServerRatesFormFields';
+import { ServerPlatformAndTypeFormFields } from '../../AddServerForm/ServerPlatformAndTypeFormFields';
 const useStyles = makeStyles(theme => ({
   root: {
     minHeight: 250,
@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface SimpleCardProps {
-  server: Server;
+  server: UserServer;
 }
 
 export const SimpleCard: FunctionComponent<SimpleCardProps> = ({ server }) => {
@@ -55,13 +55,18 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({ server }) => {
   const [expanded, setExpanded] = React.useState('');
 
   const handleChange = panel => (event, isExpanded) => {
+    event.preventDefault();
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [serverName, setServerName] = React.useState('l2new');
+  const [stateServer, setStateServer] = React.useState(server);
   const handleServerNameChange = event => {
     event.preventDefault();
-    setServerName(event.target.value);
+    let copy = { ...stateServer };
+    copy.uri = event.target.value;
+    setStateServer(copy);
+    //server.uri = event.target.value;
+    // setServerName(event.target.value);
   };
 
   return (
@@ -85,18 +90,16 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({ server }) => {
               variant="caption"
               style={{ fontSize: '25px', fontWeight: 700 }}
             >
-              Configuration section l2New
+              Configuration section for server: {stateServer.name}
             </Typography>
           </Grid>
           <Grid item>
             <Button disableRipple variant="outlined" color="secondary">
-              {' '}
-              under moderation
+              {stateServer.approved ? 'approved' : 'under moderation'}
             </Button>
           </Grid>
           <Grid item>
             <Button variant="contained" color="secondary">
-              {' '}
               Delete
             </Button>
           </Grid>
@@ -133,8 +136,8 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({ server }) => {
                   id="outlined-full-width"
                   label="Server website"
                   style={{ margin: 8 }}
-                  placeholder="Server website"
-                  value={server.name}
+                  placeholder="Server name"
+                  value={stateServer.name}
                   disabled
                   fullWidth
                   margin="normal"
@@ -148,7 +151,7 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({ server }) => {
                   label="Server website"
                   style={{ margin: 8 }}
                   placeholder="Server website"
-                  value={serverName}
+                  value={stateServer.uri}
                   onChange={handleServerNameChange}
                   fullWidth
                   margin="normal"
@@ -180,7 +183,7 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({ server }) => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <ServerPlatformAndTypeFormFields />
+              <ServerPlatformAndTypeFormFields server={server} />
             </AccordionDetails>
           </Accordion>
           <Accordion
@@ -203,7 +206,7 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({ server }) => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <ServerRatesFormFields />
+              <ServerRatesFormFields server={server} />
             </AccordionDetails>
           </Accordion>
           <Accordion

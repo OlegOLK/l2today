@@ -1,12 +1,13 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { UserServerDataState } from 'types/UserServer';
-import { NewServer } from 'types/Server';
+import { NewServer, UserServer } from 'types/Server';
 
 export const initialState: UserServerDataState = {
   createdServerId: '',
   loading: false,
   error: [],
+  servers: [],
 };
 
 const userServerDataSlice = createSlice({
@@ -16,6 +17,13 @@ const userServerDataSlice = createSlice({
     createServer(state, action: PayloadAction<NewServer>) {
       state.loading = true;
     },
+    getServers(state) {
+      state.loading = true;
+    },
+    setServersState(state, action: PayloadAction<UserServer[]>) {
+      state.loading = false;
+      state.servers = action.payload;
+    },
     setCreatedServerId(state, action: PayloadAction<string>) {
       state.createdServerId = action.payload;
     },
@@ -23,11 +31,11 @@ const userServerDataSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
-    prune(state, action: PayloadAction) {
+    prune(state) {
       state.error = [];
       state.loading = false;
     },
-    finishLoad(state, action: PayloadAction) {
+    finishLoad(state) {
       state.loading = false;
     },
   },

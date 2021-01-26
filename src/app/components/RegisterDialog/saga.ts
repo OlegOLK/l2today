@@ -3,7 +3,7 @@ import { request } from 'utils/request';
 import { actions } from './slice';
 
 export function* loginGoogle(response) {
-  const requestURL = 'https://localhost:44362/user/google/login'; //'https://l2newfrontserver.herokuapp.com/user/google/login'; //
+  const requestURL = `${process.env.REACT_APP_SERVERURL}/user/google/login`; //'https://l2newfrontserver.herokuapp.com/user/google/login'; //
   try {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -32,7 +32,7 @@ export function* loginGoogle(response) {
 }
 
 export function* login(response) {
-  const requestURL = 'https://localhost:44362/user/login'; //'https://l2newfrontserver.herokuapp.com/user/login'; //'https://localhost:44362/user/login';
+  const requestURL = `${process.env.REACT_APP_SERVERURL}/user/login`; //'https://l2newfrontserver.herokuapp.com/user/login'; //'https://localhost:44362/user/login';
   try {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -65,7 +65,7 @@ export function* login(response) {
 
 export function* register(reg) {
   const { email, password } = reg.payload;
-  const requestURL = 'https://localhost:44362/user/register'; //'https://l2newfrontserver.herokuapp.com/user/register'; //'https://localhost:44362/user/register';
+  const requestURL = `${process.env.REACT_APP_SERVERURL}/user/register`; //'https://l2newfrontserver.herokuapp.com/user/register'; //'https://localhost:44362/user/register';
   try {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');

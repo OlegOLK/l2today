@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { sliceKey, reducer } from '../RegisterDialog/slice';
 import { userFromSaga } from '../RegisterDialog/saga';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -151,15 +151,14 @@ export const NavBar: FunctionComponent<CardProps> = () => {
   const openDialog = () => {
     setAuthDialogOpen(true);
   };
-  // const dispatch = useDispatch();
-  const logout = () => {
-    history.push('/dashboard');
-    // OPen LC
-    // dispatch(actions.logout());
-  };
 
   const closeDialog = () => {
     setAuthDialogOpen(false);
+  };
+
+  const navigateTo = (e, route: string) => {
+    e.stopPropagation();
+    history.push(route);
   };
 
   const classes = useStyles();
@@ -178,8 +177,8 @@ export const NavBar: FunctionComponent<CardProps> = () => {
             <Grid item>
               <Button
                 color="primary"
-                component={Link}
-                to={`/`}
+                // component={Link}
+                onClick={e => navigateTo(e, '/')}
                 startIcon={<HomeIcon color="primary" />}
               >
                 {t('nav.home')}
@@ -187,8 +186,9 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               {isAuthenticaed ? (
                 <Button
                   color="primary"
-                  component={Link}
-                  to={'/addserver'}
+                  // component={Link}
+                  // to={'/addserver'}
+                  onClick={e => navigateTo(e, '/addserver')}
                   startIcon={<AddToQueueIcon color="primary" />}
                 >
                   {t('nav.addserver')}
@@ -250,8 +250,9 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               </Button>
               <Button
                 color="primary"
-                component={Link}
-                to={`/events`}
+                // component={Link}
+                // to={`/events`}
+                onClick={e => navigateTo(e, '/events')}
                 startIcon={<AttachMoneyIcon color="primary" />}
               >
                 {'Earn money'}
@@ -262,7 +263,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 <Button
                   color="primary"
                   startIcon={<AccountCircleIcon color="primary" />}
-                  onClick={logout}
+                  onClick={e => navigateTo(e, '/dashboard')}
                 >
                   {userName}
                 </Button>

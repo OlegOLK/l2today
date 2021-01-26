@@ -6,8 +6,9 @@ import {
   Radio,
   RadioGroup,
 } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+// import { Alert } from '@material-ui/lab';
 import React, { FunctionComponent, useState } from 'react';
+import { UserServer } from 'types/Server';
 
 enum Tristate {
   Error,
@@ -15,14 +16,23 @@ enum Tristate {
   NotInitialized,
 }
 
-export const ServerPlatformAndTypeFormFields: FunctionComponent = () => {
+interface Props {
+  server: UserServer;
+}
+
+export const ServerPlatformAndTypeFormFields: FunctionComponent<Props> = ({
+  server,
+}) => {
+  console.log(server);
   const [
     isPlatformAndTypeValidationError,
     setPlatformAndTypeValidationError,
   ] = useState<Tristate>(Tristate.NotInitialized);
-  const [serverPlaftorm, setServerPlaftorm] = React.useState<string>('');
-  const handlePlatformChange = event => {
-    setServerPlaftorm(event.target.value);
+  const [serverPlaftorm, setServerPlaftorm] = React.useState<string>(
+    server.platform || '',
+  );
+  const handlePlatformChange = (event, value) => {
+    setServerPlaftorm(value);
     setPlatformAndTypeValidationError(
       event.target.value.length === 0 || servertype.length === 0
         ? Tristate.Error
@@ -30,7 +40,7 @@ export const ServerPlatformAndTypeFormFields: FunctionComponent = () => {
     );
   };
 
-  const [servertype, setServertype] = React.useState<string>('');
+  const [servertype, setServertype] = React.useState<string>(server.type || '');
   const handleTypeChange = event => {
     setServertype(event.target.value);
     setPlatformAndTypeValidationError(
@@ -40,10 +50,13 @@ export const ServerPlatformAndTypeFormFields: FunctionComponent = () => {
     );
   };
   return (
-    <>
-      {isPlatformAndTypeValidationError ? (
-        <Alert severity="error"></Alert>
-      ) : null}
+    <Grid container>
+      {isPlatformAndTypeValidationError
+        ? // <Grid item xs={12} md={12}>
+          //   <Alert severity="error"></Alert>
+          // </Grid>
+          null
+        : null}
       <Grid item xs={6} md={6}>
         <FormControl component="fieldset">
           <FormLabel component="legend">Server platform</FormLabel>
@@ -91,6 +104,6 @@ export const ServerPlatformAndTypeFormFields: FunctionComponent = () => {
           </RadioGroup>
         </FormControl>
       </Grid>
-    </>
+    </Grid>
   );
 };

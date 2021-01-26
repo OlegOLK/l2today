@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Grid, makeStyles, Typography, Paper } from '@material-ui/core';
+import { Grid, makeStyles, Paper } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -20,13 +20,21 @@ import {
   reducer,
   actions,
 } from '../../components/RegisterDialog/slice';
+
+import {
+  reducer as serverReducer,
+  sliceKey as serverSliceKey,
+  actions as serverActions,
+} from 'app/components/AddServerForm/slice';
+import { selectServers } from 'app/components/AddServerForm/selectors';
 import { selectIsAuthenticated } from '../../components/RegisterDialog/selectors';
 import { userFromSaga } from '../../components/RegisterDialog/saga';
-
-import { SimpleCard } from '../../components/UserDashboard/ServerInfo';
-import { ServerViewCharts } from '../../components/UserDashboard/ServerViewCharts';
-import { ServerPremiumStats } from '../../components/UserDashboard/ServerPremiumStats';
-import { CHRONICLES } from 'app/mocks/chronicles';
+import { serversFromSaga } from 'app/components/AddServerForm/saga';
+import { Route, useRouteMatch } from 'react-router-dom';
+import { ServerRegion } from 'app/components/UserDashboard/Servers/ServerRegion';
+import { UserInformation } from 'app/components/UserDashboard/UserData/UserInformation';
+import { Donate } from 'app/components/UserDashboard/Donate/Donate';
+import { Notification } from 'app/components/UserDashboard/Notifications/Notification';
 
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
@@ -71,11 +79,14 @@ const useStyles = makeStyles(theme => ({
 
 export function UserDashboardPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
+  useInjectReducer({ key: serverSliceKey, reducer: serverReducer });
   useInjectSaga({ key: sliceKey, saga: userFromSaga });
+  useInjectSaga({ key: sliceKey, saga: serversFromSaga });
   const dispatch = useDispatch();
   const history = useHistory();
-
+  let { path } = useRouteMatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  const servers = useSelector(selectServers);
 
   const useEffectOnAuthenticated = (effect: React.EffectCallback) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -86,6 +97,8 @@ export function UserDashboardPage() {
     if (!isAuthenticated) {
       history.push('/');
     }
+
+    dispatch(serverActions.getServers());
   });
 
   const classes = useStyles();
@@ -96,10 +109,11 @@ export function UserDashboardPage() {
     setOpen(!open);
   };
 
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  const handleListItemClick = (event, index) => {
+  const handleListItemClick = (event, index, subRoute: string) => {
     setSelectedIndex(index);
+    history.push(`${path}${subRoute}`);
   };
 
   const handleLogout = () => {
@@ -131,7 +145,7 @@ export function UserDashboardPage() {
             <ListItem
               button
               selected={selectedIndex === 0}
-              onClick={event => handleListItemClick(event, 0)}
+              onClick={event => handleListItemClick(event, 0, '/')}
             >
               <ListItemIcon>
                 <SendIcon color="primary" />
@@ -142,7 +156,7 @@ export function UserDashboardPage() {
             <ListItem
               button
               selected={selectedIndex === 1}
-              onClick={event => handleListItemClick(event, 1)}
+              onClick={event => handleListItemClick(event, 1, '/donate')}
             >
               <ListItemIcon>
                 <DraftsIcon color="primary" />
@@ -162,35 +176,31 @@ export function UserDashboardPage() {
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItem
-                  button
-                  selected={selectedIndex === 2}
-                  onClick={event => handleListItemClick(event, 2)}
-                  className={classes.nested}
-                >
-                  <ListItemIcon>
-                    <StarBorder color="primary" />
-                  </ListItemIcon>
-                  <ListItemText primary="l2Hello" />
-                </ListItem>
-                <ListItem
-                  button
-                  selected={selectedIndex === 5}
-                  onClick={event => handleListItemClick(event, 5)}
-                  className={classes.nested}
-                >
-                  <ListItemIcon>
-                    <StarBorder color="primary" />
-                  </ListItemIcon>
-                  <ListItemText primary="l2Today" />
-                </ListItem>
+                {servers.map((s, i) => {
+                  return (
+                    <ListItem
+                      button
+                      selected={selectedIndex === 50 + i}
+                      onClick={event =>
+                        handleListItemClick(event, 50 + i, `/server/${s.id}`)
+                      }
+                      className={classes.nested}
+                      key={`server-${s.id}`}
+                    >
+                      <ListItemIcon>
+                        <StarBorder color="primary" />
+                      </ListItemIcon>
+                      <ListItemText primary={s.name} />
+                    </ListItem>
+                  );
+                })}
               </List>
             </Collapse>
 
             <ListItem
               button
               selected={selectedIndex === 3}
-              onClick={event => handleListItemClick(event, 3)}
+              onClick={event => handleListItemClick(event, 3, '/notifications')}
             >
               <ListItemIcon>
                 <DraftsIcon color="primary" />
@@ -224,155 +234,12 @@ export function UserDashboardPage() {
         spacing={1}
         lg
       >
-        <Grid item md={4}>
-          <Paper
-            elevation={3}
-            style={{
-              height: '75px',
-              padding: '16px',
-              backgroundColor: '#F4D03F',
-              backgroundImage:
-                'linear-gradient(132deg, #F4D03F 0%, #16A085 100%)',
-            }}
-          >
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="stretch"
-            >
-              <Grid item>
-                <Typography
-                  style={{ fontSize: '14px', fontWeight: 700, color: 'white' }}
-                >
-                  Server View
-                </Typography>
-                <Typography
-                  style={{ fontSize: '14px', fontWeight: 400, color: 'gray' }}
-                >
-                  Total server views
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography
-                  style={{ fontSize: '28px', fontWeight: 700, color: 'white' }}
-                >
-                  2380
-                </Typography>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-
-        <Grid item md={4}>
-          <Paper
-            elevation={3}
-            style={{
-              height: '75px',
-              padding: '16px',
-              backgroundColor: '#D9AFD9',
-              backgroundImage:
-                'linear-gradient(90deg, #8BC6EC 0%, #9599E2 100%)',
-            }}
-          >
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="stretch"
-            >
-              <Grid item>
-                <Typography
-                  style={{ fontSize: '14px', fontWeight: 700, color: 'white' }}
-                >
-                  Server View
-                </Typography>
-                <Typography
-                  style={{ fontSize: '14px', fontWeight: 400, color: 'gray' }}
-                >
-                  Today server views
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography
-                  style={{ fontSize: '28px', fontWeight: 700, color: 'white' }}
-                >
-                  +231
-                </Typography>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-
-        <Grid item md={4}>
-          <Paper
-            elevation={3}
-            style={{
-              height: '75px',
-              padding: '16px',
-              backgroundColor: '#FBAB7E',
-              backgroundImage:
-                'linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)',
-            }}
-          >
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="stretch"
-            >
-              <Grid item>
-                <Typography
-                  style={{ fontSize: '14px', fontWeight: 700, color: 'white' }}
-                >
-                  Server quiz starts
-                </Typography>
-                <Typography
-                  style={{ fontSize: '14px', fontWeight: 400, color: 'gray' }}
-                >
-                  All time quiz starts
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography
-                  style={{ fontSize: '28px', fontWeight: 700, color: 'white' }}
-                >
-                  480
-                </Typography>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-
-        <Grid
-          item
-          container
-          direction="row"
-          justify="space-between"
-          alignItems="stretch"
-          spacing={1}
-        >
-          <Grid item md={8}>
-            <ServerViewCharts />
-          </Grid>
-          <Grid item md={4}>
-            <ServerPremiumStats />
-          </Grid>
-        </Grid>
-
-        <Grid item md={12}>
-          <SimpleCard
-            server={{
-              name: 'l2Hello',
-              chronicles: CHRONICLES[0],
-              features: [],
-              openDate: '02/20/2021',
-              premium: 1,
-              rates: [],
-              uri: 'https://l2hello.com',
-            }}
-          />
-        </Grid>
+        <Suspense fallback={null}>
+          <Route path={`${path}/donate`} component={Donate} />
+          <Route path={`${path}/notifications`} component={Notification} />
+          <Route path={`${path}/server/:serverId`} component={ServerRegion} />
+          <Route exact path={`${path}`} component={UserInformation} />
+        </Suspense>
       </Grid>
     </Grid>
   );

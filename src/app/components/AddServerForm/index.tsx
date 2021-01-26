@@ -7,7 +7,7 @@ import {
 import { sliceKey, reducer, actions } from './slice';
 import { selectIsLoading } from './selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { userFromSaga } from './saga';
+import { serversFromSaga } from './saga';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import * as dfn from 'date-fns';
@@ -53,7 +53,7 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
   const [serverUri, setServerUri] = useState<string>('https://hello.com');
   const [selectedDate, setSelectedDate] = React.useState(Date.now());
   useInjectReducer({ key: sliceKey, reducer: reducer });
-  useInjectSaga({ key: sliceKey, saga: userFromSaga });
+  useInjectSaga({ key: sliceKey, saga: serversFromSaga });
   const isLoading = useSelector(selectIsLoading);
   const handleServerNameChange = event => {
     setServerName(event.target.value);
