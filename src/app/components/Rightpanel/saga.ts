@@ -19,8 +19,10 @@ import * as dfn from 'date-fns';
 export function* getRepos() {
   const filter: string = yield select(selectFilter);
 
-  const requestURL = `${process.env.REACT_APP_SERVERSFILE}`;
-  //'https://raw.githubusercontent.com/OlegOLK/l2today/master/test.json';
+  const requestURL = `${
+    process.env.REACT_APP_SERVERSFILE ||
+    'https://raw.githubusercontent.com/OlegOLK/l2today/master/test.json'
+  }`;
   //'https://raw.githubusercontent.com/OlegOLK/l2today/master/servers.json';
   try {
     // Call our request helper (see 'utils/request')

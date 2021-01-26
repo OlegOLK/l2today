@@ -5,7 +5,9 @@ import { selectToken } from '../RegisterDialog/selectors';
 import { UserServer } from 'types/Server';
 
 export function* createServer(server) {
-  const requestUrl = `${process.env.REACT_APP_SERVERURL}/api/server`;
+  const requestUrl = `${
+    process.env.REACT_APP_SERVERURL || 'https://l2newfrontserver.herokuapp.com'
+  }/api/server`;
   try {
     const token = yield select(selectToken);
     var headers = new Headers();
@@ -30,7 +32,9 @@ export function* createServer(server) {
 }
 
 export function* getServers() {
-  const requestUrl = `${process.env.REACT_APP_SERVERURL}/api/server`;
+  const requestUrl = `${
+    process.env.REACT_APP_SERVERURL || 'https://l2newfrontserver.herokuapp.com'
+  }/api/server`;
   try {
     const token = yield select(selectToken);
     var headers = new Headers();

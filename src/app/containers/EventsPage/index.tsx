@@ -54,6 +54,10 @@ export const EventsPage: FunctionComponent = () => {
         </li>
       </ol>
       <Button>Go to quiz</Button>
+      <div>
+        {process.env.REACT_APP_SERVERURL}
+        {process.env.REACT_APP_SERVERSFILE}
+      </div>
     </Container>
   );
 };
