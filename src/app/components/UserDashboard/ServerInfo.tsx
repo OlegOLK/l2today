@@ -1,18 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Chip,
-  Divider,
   Grid,
-  Grow,
   Paper,
   TextField,
 } from '@material-ui/core';
@@ -20,7 +14,6 @@ import { Server } from 'types/Server';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ServerRatesFormFields } from '../AddServerForm/ServerRatesFormFields';
 import { ServerPlatformAndTypeFormFields } from '../AddServerForm/ServerPlatformAndTypeFormFields';
-import SettingsIcon from '@material-ui/icons/Settings';
 const useStyles = makeStyles(theme => ({
   root: {
     minHeight: 250,
@@ -72,12 +65,6 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({ server }) => {
   };
 
   return (
-    // <Grow
-    //     in={true}
-    //     style={{ transformOrigin: '0 0 0' }}
-    //     {...({ timeout: 1000 })}
-    // >
-
     <Paper elevation={3} className={classes.root}>
       <Grid
         container
@@ -288,116 +275,7 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({ server }) => {
             </Button>
           </Grid>
         </Grid>
-        {/* 
-                <Grid item md={5}>
-                    <Typography variant="h6" component="span">
-                        Open date: 2021-01-19
-                </Typography>
-
-                </Grid>
-                <Grid item md={5}>
-                    <Typography variant="h6" component="span">
-                        Website: https://google.com
-                </Typography>
-
-                </Grid>
-                <Grid item md={12}>
-                    <Divider />
-                </Grid>
-
-
-                <Grid item md={5}>
-                    <Typography variant="h6" component="span">
-                        Chronicles: Interlude
-                </Typography>
-
-                </Grid>
-                <Grid item md={5}>
-                    <Typography variant="h6" component="span">
-                        Platform: JAVA
-                </Typography>
-
-                </Grid>
-                <Grid item md={12}>
-                    <Divider />
-                </Grid>
-
-
-                <Grid item md={5}>
-                    <Typography variant="h6" component="span">
-                        Type: Multicraft
-                </Typography>
-
-                </Grid>
-                <Grid item md={5}>
-                    {/* <Typography variant="h6" component="span">
-                        Date added: 2021-01-19 00:36:11
-                </Typography> */}
-
-        {/* </Grid>
-                <Grid item md={12}>
-                    <Divider />
-                </Grid>
-
-                <Grid item md={11}>
-                    <Typography variant="h6" component="div">
-                        Rates:
-                    </Typography>
-                </Grid>
-                <Grid item md={5}>
-                    <Typography variant="h6" component="span">
-                        Adena: x100
-                    </Typography>
-                </Grid>
-                <Grid item md={5}>
-                    <Typography variant="h6" component="span">
-                        Adena: x100
-                    </Typography>
-                </Grid>
-                <Grid item md={5}>
-                <Typography variant="h6" component="span">
-                        Adena: x100
-                    </Typography>
-                </Grid>
-                <Grid item md={5}>
-                <Typography variant="h6" component="span">
-                        Adena: x100
-                    </Typography>
-                </Grid>
-                <Grid item md={5}>
-                <Typography variant="h6" component="span">
-                        Adena: x100
-                    </Typography>
-                </Grid>
-                <Grid item md={5}>
-                <Typography variant="h6" component="span">
-                     
-                    </Typography>
-                </Grid> */}
       </Grid>
     </Paper>
-    // </Grow>
   );
 };
-
-{
-  /* <Card className={classes.root}>
-                <CardContent>
-                    <Typography variant="h5" component="h2">
-                        l2Hello
-        </Typography>
-                    <Typography>
-                        uri: 01/01/2021
-                </Typography>
-                    <Typography>
-                        Open date: 01/01/2021
-                </Typography>
-                    <Typography>
-                        Open date: 01/01/2021
-                </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Update</Button>
-                </CardActions>
-            </Card> */
-}

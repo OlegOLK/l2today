@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { sliceKey, reducer } from '../Rightpanel/slice';
 import { serversListFormSaga } from '../Rightpanel/saga';
-import { selectDataInitialized } from '../Rightpanel/selectors';
+import { selectServersData } from '../Rightpanel/selectors';
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -22,29 +22,29 @@ export const Banner: FunctionComponent<BannerProps> = () => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: serversListFormSaga });
 
-  let isLoading = useSelector(selectDataInitialized);
+  let isLoading = useSelector(selectServersData);
 
   return (
     <header>
       <Box textAlign="center" my={2} className={classes.header}>
         <Grid container justify="space-around" alignItems="center" spacing={0}>
           <Grid item>
-            <SampleCard a11yIndex={0} isLoading={!isLoading} />
+            <SampleCard a11yIndex={0} isLoading={isLoading.length === 0} />
           </Grid>
 
           <Grid item>
-            <SampleCard a11yIndex={1} isLoading={!isLoading} />
+            <SampleCard a11yIndex={1} isLoading={isLoading.length === 0} />
           </Grid>
 
           <Grid item>
-            <SampleCard a11yIndex={2} isLoading={!isLoading} />
+            <SampleCard a11yIndex={2} isLoading={isLoading.length === 0} />
           </Grid>
 
           <Grid item>
-            <SampleCard a11yIndex={3} isLoading={!isLoading} />
+            <SampleCard a11yIndex={3} isLoading={isLoading.length === 0} />
           </Grid>
           <Grid item>
-            <SampleCard a11yIndex={4} isLoading={!isLoading} />
+            <SampleCard a11yIndex={4} isLoading={isLoading.length === 0} />
           </Grid>
         </Grid>
       </Box>

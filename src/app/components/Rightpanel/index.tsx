@@ -17,11 +17,11 @@ type RouteParams = {
 export const RightPanel: FunctionComponent<RightPanelProps> = () => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: serversListFormSaga });
+  const dispatch = useDispatch();
   const servers = useSelector(selectServersData);
   let isLoading = useSelector(selectLoading);
   let { filterType, filterValue } = useParams<RouteParams>();
 
-  const dispatch = useDispatch();
   const useEffectOnRouteChange = (effect: React.EffectCallback) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(effect, [filterValue]);
@@ -30,7 +30,7 @@ export const RightPanel: FunctionComponent<RightPanelProps> = () => {
   useEffectOnRouteChange(() => {
     let value = filterValue;
     dispatch(actions.changeServerFilters(`${filterType}=${value}`));
-    dispatch(actions.loadServers());
+    dispatch(actions.loadServers(true));
   });
 
   const useEffectOnMount = (effect: React.EffectCallback) => {
@@ -38,7 +38,7 @@ export const RightPanel: FunctionComponent<RightPanelProps> = () => {
     useEffect(effect, []);
   };
   useEffectOnMount(() => {
-    dispatch(actions.loadServers());
+    dispatch(actions.loadServers(false));
   });
 
   const any = () => {
@@ -100,14 +100,7 @@ export const RightPanel: FunctionComponent<RightPanelProps> = () => {
           >
             {soon().map(server => {
               return (
-                <Grid
-                  key={'grid' + server.sortOrder}
-                  item
-                  lg={12}
-                  md={12}
-                  sm={12}
-                  xs={12}
-                >
+                <Grid key={'grid' + server.sortOrder} item xs={12}>
                   <ServerList
                     key={'serverlist' + server.sortOrder}
                     groupped={server}
@@ -127,14 +120,7 @@ export const RightPanel: FunctionComponent<RightPanelProps> = () => {
           >
             {already().map(server => {
               return (
-                <Grid
-                  key={'grid' + server.sortOrder}
-                  item
-                  lg={12}
-                  md={12}
-                  sm={12}
-                  xs={12}
-                >
+                <Grid key={'grid' + server.sortOrder} item xs={12}>
                   <ServerList
                     key={'serverlist' + server.sortOrder}
                     groupped={server}

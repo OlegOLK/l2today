@@ -5,7 +5,8 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { sliceKey, reducer, actions } from './slice';
-import { useSelector, useDispatch } from 'react-redux';
+import { selectIsLoading } from './selectors';
+import { useDispatch, useSelector } from 'react-redux';
 import { userFromSaga } from './saga';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
@@ -29,6 +30,7 @@ import {
   FormGroup,
   FormHelperText,
   Button,
+  CircularProgress,
 } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
@@ -52,7 +54,7 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
   const [selectedDate, setSelectedDate] = React.useState(Date.now());
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: userFromSaga });
-
+  const isLoading = useSelector(selectIsLoading);
   const handleServerNameChange = event => {
     setServerName(event.target.value);
   };
@@ -151,7 +153,8 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
       isServerNameValidationError === Tristate.Success &&
       rulseAccepted &&
       isChronicleAndRatesValidationError === Tristate.Success &&
-      isPlatformAndTypeValidationError === Tristate.Success
+      isPlatformAndTypeValidationError === Tristate.Success &&
+      !isLoading
     );
   };
   const dispatch = useDispatch();
@@ -536,6 +539,11 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
               ''
             )}
 
+            {isLoading ? (
+              <Grid item xs={12} container alignItems="center" justify="center">
+                <CircularProgress />
+              </Grid>
+            ) : null}
             <Button
               variant="contained"
               color="primary"

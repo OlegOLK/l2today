@@ -48,6 +48,7 @@ export interface ServersList {
 export interface ServersDataState {
   jsonData: Server[];
   serversList: ServersList[];
+  rawServerList: ServersList[];
   loading: boolean;
   error?: ServerResponseErrorType | null;
   serverFilter?: string | null;

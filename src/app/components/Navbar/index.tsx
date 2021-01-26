@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { sliceKey, reducer, actions } from '../RegisterDialog/slice';
+import { sliceKey, reducer } from '../RegisterDialog/slice';
 import { userFromSaga } from '../RegisterDialog/saga';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';

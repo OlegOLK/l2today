@@ -1,59 +1,9 @@
-import {
-  Divider,
-  Grid,
-  Paper,
-  Typography,
-  CircularProgress,
-  Box,
-} from '@material-ui/core';
+import { Divider, Grid, Paper, Typography } from '@material-ui/core';
 import React, { FunctionComponent } from 'react';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import EventBusyIcon from '@material-ui/icons/EventBusy';
 
-function CircularProgressWithLabel(props) {
-  return (
-    <Box position="relative" display="inline-flex">
-      <CircularProgress variant="determinate" {...props} size="300px" />
-      <Box
-        top={0}
-        left={0}
-        bottom={0}
-        right={0}
-        position="absolute"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Typography variant="h5" component="div" color="textSecondary">
-          {`${Math.round(props.value)}%`}
-        </Typography>
-      </Box>
-    </Box>
-  );
-}
 export const ServerPremiumStats: FunctionComponent = () => {
-  const data = {
-    series: [44, 55, 41, 17, 15],
-    options: {
-      chart: {
-        type: 'donut',
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: '350px',
-            },
-            legend: {
-              position: 'bottom',
-            },
-          },
-        },
-      ],
-    },
-  };
-
   return (
     <Paper style={{ height: '483px' }}>
       <Grid item container style={{ padding: '10px' }}>

@@ -6,6 +6,7 @@ import {
   Radio,
   RadioGroup,
 } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import React, { FunctionComponent, useState } from 'react';
 
 enum Tristate {
@@ -40,6 +41,9 @@ export const ServerPlatformAndTypeFormFields: FunctionComponent = () => {
   };
   return (
     <>
+      {isPlatformAndTypeValidationError ? (
+        <Alert severity="error"></Alert>
+      ) : null}
       <Grid item xs={6} md={6}>
         <FormControl component="fieldset">
           <FormLabel component="legend">Server platform</FormLabel>

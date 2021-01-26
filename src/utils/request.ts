@@ -1,5 +1,3 @@
-import { closestIndexTo } from 'date-fns';
-
 export class ResponseError extends Error {
   public response: Response;
 

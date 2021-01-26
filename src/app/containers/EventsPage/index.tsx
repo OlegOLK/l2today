@@ -1,4 +1,4 @@
-import { Button, Container, List, Typography } from '@material-ui/core';
+import { Button, Container, Typography } from '@material-ui/core';
 import React, { FunctionComponent } from 'react';
 
 export const EventsPage: FunctionComponent = () => {

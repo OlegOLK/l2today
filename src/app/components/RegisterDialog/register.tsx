@@ -7,8 +7,6 @@ import {
   DialogContent,
   DialogTitle,
   Button,
-  FormControlLabel,
-  Checkbox,
   IconButton,
   Fade,
   CircularProgress,
@@ -27,6 +25,7 @@ import {
   selectIsLoading,
   selectError,
 } from './selectors';
+import { useHistory } from 'react-router-dom';
 
 interface RegisterDialogProps {
   open: boolean;
@@ -179,7 +178,7 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const isLoading = useSelector(selectIsLoading);
   const serverErrors = useSelector(selectError);
-  // const email = useSelector(selectEmail);
+  const history = useHistory();
   const googleResponse = response => {
     dispatch(
       actions.loginGoogle({ accessToken: response.getAuthResponse().id_token }),
@@ -197,6 +196,7 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
   useEffectOnAuthenticated(() => {
     if (isAuthenticated) {
       close();
+      history.push('/dashboard');
     }
   });
 
@@ -251,16 +251,6 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
       default:
         return;
     }
-  };
-  const getErrors = () => {
-    serverErrors.map(err => {
-      return (
-        <span>
-          {err}
-          <br />
-        </span>
-      );
-    });
   };
   return (
     <Dialog
@@ -324,7 +314,7 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
                 >
                   <CircularProgress />
                 </Grid>
-              ) : serverErrors.length != 0 ? (
+              ) : serverErrors.length !== 0 ? (
                 serverErrors.map(err => {
                   return (
                     <Grid item xs={12} style={{ marginBottom: '5px' }}>

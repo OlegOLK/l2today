@@ -55,12 +55,13 @@ export const Footer: FunctionComponent = () => {
           backgroundImage: 'url(/assets/cloud-dark.svg)',
           height: '500px',
           width: '100%',
+          zIndex: -1,
         }}
       ></div>
       <div className={classes.edgeMask}>
         <div className={classes.edgeAnimated}></div>
       </div>
-      <Container maxWidth="md">
+      <Container maxWidth="md" style={{ zIndex: 100 }}>
         <Grid
           container
           direction="row"

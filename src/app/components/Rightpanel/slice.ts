@@ -6,7 +6,7 @@ import {
   ServerResponseErrorType,
   Server,
 } from 'types/Server';
-// import { Repo } from 'types/Repo';
+import { LocalPersistor } from 'store/persist';
 
 // The initial state of the GithubRepoForm container
 export const initialState: ServersDataState = {
@@ -16,6 +16,7 @@ export const initialState: ServersDataState = {
   error: null,
   serverFilter: 'all',
   dataWasInitialized: false,
+  rawServerList: LocalPersistor.getInstance().getServers(),
 };
 
 const serversDataSlice = createSlice({
@@ -25,13 +26,17 @@ const serversDataSlice = createSlice({
     changeServerFilters(state, action: PayloadAction<string>) {
       state.serverFilter = action.payload;
     },
-    loadServers(state) {
+    loadServers(state, action: PayloadAction<boolean>) {
       state.loading = true;
       state.error = null;
       state.serversList = [];
     },
     dataLoaded(state, action: PayloadAction<Server[]>) {
       state.jsonData = action.payload;
+    },
+    rawDataLoaded(state, action: PayloadAction<ServersList[]>) {
+      state.rawServerList = action.payload;
+      LocalPersistor.getInstance().setServers(state.rawServerList);
     },
     serversLoaded(state, action: PayloadAction<ServersList[]>) {
       const servers = action.payload;

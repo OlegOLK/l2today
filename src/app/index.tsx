@@ -21,7 +21,6 @@ import { Banner } from './components/Banner/index';
 import { UserDashboardPage } from './containers/UserDashboard/Loadable';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useLocation } from 'react-router-dom';
-import { Dashboard } from '@material-ui/icons';
 import { EventsPage } from './containers/EventsPage/Loadable';
 import { Footer } from './components/Footer';
 

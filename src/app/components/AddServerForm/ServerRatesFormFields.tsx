@@ -8,7 +8,7 @@ import {
   Select,
   TextField,
 } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { Alert } from '@material-ui/lab';
 import React, { FunctionComponent, useState } from 'react';
 import { Rate } from 'types/Server';
 import { CHRONICLES } from '../../mocks/chronicles';
@@ -21,7 +21,7 @@ enum Tristate {
 
 interface Props {}
 
-export const ServerRatesFormFields: FunctionComponent = () => {
+export const ServerRatesFormFields: FunctionComponent<Props> = () => {
   const rr: Rate[] = [];
   rr.push({ amount: 0, type: 'XP' });
   rr.push({ amount: 0, type: 'SP' });
@@ -74,6 +74,9 @@ export const ServerRatesFormFields: FunctionComponent = () => {
   return (
     <Grid container direction="row">
       <Box m={1}>
+        <Alert
+          severity={getSeverity(isChronicleAndRatesValidationError)}
+        ></Alert>
         <FormControl fullWidth variant="outlined">
           <InputLabel id="server-chronicle">Chronicle</InputLabel>
           <Select

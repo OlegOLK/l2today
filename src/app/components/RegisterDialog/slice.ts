@@ -6,14 +6,10 @@ import {
   GoogleAuthResponse,
   PasswordAuth,
 } from 'types/User';
+import { LocalPersistor } from 'store/persist';
 
 export const initialState: UserDataState = {
-  user: {
-    authenticated: false,
-    email: '',
-    name: '',
-    token: '',
-  },
+  user: LocalPersistor.getInstance().getUser(),
   loading: false,
   error: [],
 };
@@ -38,6 +34,7 @@ const userDataSlice = createSlice({
       state.user = action.payload;
       state.user.authenticated = true;
       state.loading = false;
+      LocalPersistor.getInstance().setUser(state.user);
     },
     logout(state, action: PayloadAction) {
       state.user.token = '';
@@ -45,6 +42,7 @@ const userDataSlice = createSlice({
       state.user.email = '';
       state.user.name = '';
       state.loading = false;
+      LocalPersistor.getInstance().setUser(state.user);
     },
     setError(state, action: PayloadAction<string[]>) {
       state.error = action.payload;

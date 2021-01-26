@@ -1,7 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { request } from 'utils/request';
 import { actions } from './slice';
-import { selectFilter, selectJsonData } from './selectors';
+import { selectFilter, selectRawServersList } from './selectors';
 import {
   ServerResponseErrorType,
   Server,
@@ -11,7 +11,6 @@ import {
 } from 'types/Server';
 
 import { ComplexFilter, Rates } from 'types/ComplexFilter';
-
 import * as dfn from 'date-fns';
 
 /**
@@ -25,17 +24,28 @@ export function* getRepos() {
   //'https://raw.githubusercontent.com/OlegOLK/l2today/master/servers.json';
   try {
     // Call our request helper (see 'utils/request')
-    let serversList: Server[] = yield select(selectJsonData);
-    if (serversList.length === 0) {
-      serversList = yield call(request, requestURL);
-      yield put(actions.dataLoaded(serversList));
-    }
+    // let serversList: ServersList[] = yield select(selectRawServersList);
 
-    if (serversList?.length > 0) {
-      yield put(actions.serversLoaded(sort(serversList, filter)));
-    } else {
-      yield put(actions.repoError(ServerResponseErrorType.USER_HAS_NO_REPO));
+    const rawServerList: ServersList[] = yield select(selectRawServersList);
+    let servers: Server[] = [];
+    // if local state is empty
+    if (rawServerList.length === 0) {
+      // fetch full servers list
+      servers = yield call(request, requestURL);
+      yield put(actions.dataLoaded(servers));
+
+      if (servers?.length > 0) {
+        //if fetched list is not empty sort it and store as raw
+        yield put(actions.rawDataLoaded(sort(servers, 'n=n')));
+      } else {
+        // if fetched list is empty put error
+        yield put(actions.repoError(ServerResponseErrorType.USER_HAS_NO_REPO));
+        return;
+      }
     }
+    const raw = yield select(selectRawServersList);
+    // filter raw list to a serversList so that all filters cannot harm original data
+    yield put(actions.serversLoaded(selectFromSorted(raw, filter)));
   } catch (err) {
     if (err.response?.status === 404) {
       yield put(actions.repoError(ServerResponseErrorType.USER_NOT_FOUND));
@@ -76,7 +86,9 @@ function getFilterFromLocalStorage(filterName): ComplexFilter | null {
   }
   filter = JSON.parse(jsonFilter);
   const complexFitlers: ComplexFilter[] = filter.userFilters;
-  const complexFilter = complexFitlers.find(x => x.name === filterName);
+  const complexFilter = complexFitlers.find(
+    x => x.name.toLowerCase() === filterName.toLowerCase(),
+  );
   return complexFilter ? complexFilter : null;
 }
 
@@ -139,6 +151,28 @@ function complex(s: Server, f: ComplexFilter | null) {
   }
 
   return ok;
+}
+
+function selectFromSorted(
+  servers: ServersList[],
+  filter: string,
+): ServersList[] {
+  const type = filter.split('=');
+  const lowerVal = type[1].toLowerCase();
+  const filters = getFilterFromLocalStorage(lowerVal);
+  const filtered = servers.flatMap(s => {
+    const filteredServers = s.servers.filter(x =>
+      complexFilter(x, type[0], lowerVal, filters),
+    );
+    return {
+      label: s.label,
+      panel: s.panel,
+      servers: filteredServers,
+      sortOrder: s.sortOrder,
+    };
+  });
+
+  return filtered;
 }
 
 function sort(servers: Server[], filter: string) {

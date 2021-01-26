@@ -1,21 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-
-import {
-  Grid,
-  Hidden,
-  makeStyles,
-  ThemeProvider,
-  Drawer,
-  Typography,
-  Paper,
-  Divider,
-  Card,
-  CardContent,
-  CardActions,
-  Button,
-} from '@material-ui/core';
-import ListSubheader from '@material-ui/core/ListSubheader';
+import { Grid, makeStyles, Typography, Paper } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -28,9 +13,13 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { sliceKey, reducer } from '../../components/RegisterDialog/slice';
+import {
+  sliceKey,
+  reducer,
+  actions,
+} from '../../components/RegisterDialog/slice';
 import { selectIsAuthenticated } from '../../components/RegisterDialog/selectors';
 import { userFromSaga } from '../../components/RegisterDialog/saga';
 
@@ -38,6 +27,7 @@ import { SimpleCard } from '../../components/UserDashboard/ServerInfo';
 import { ServerViewCharts } from '../../components/UserDashboard/ServerViewCharts';
 import { ServerPremiumStats } from '../../components/UserDashboard/ServerPremiumStats';
 import { CHRONICLES } from 'app/mocks/chronicles';
+
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
   root: {
@@ -82,19 +72,21 @@ const useStyles = makeStyles(theme => ({
 export function UserDashboardPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: userFromSaga });
+  const dispatch = useDispatch();
   const history = useHistory();
+
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
-  // const useEffectOnAuthenticated = (effect: React.EffectCallback) => {
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //     useEffect(effect, [isAuthenticated]);
-  // };
+  const useEffectOnAuthenticated = (effect: React.EffectCallback) => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(effect, [isAuthenticated]);
+  };
 
-  // useEffectOnAuthenticated(() => {
-  //     if (!isAuthenticated) {
-  //         history.push('/');
-  //     }
-  // });
+  useEffectOnAuthenticated(() => {
+    if (!isAuthenticated) {
+      history.push('/');
+    }
+  });
 
   const classes = useStyles();
 
@@ -108,6 +100,11 @@ export function UserDashboardPage() {
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+  };
+
+  const handleLogout = () => {
+    dispatch(actions.logout());
+    history.push('/');
   };
 
   return (
@@ -204,7 +201,7 @@ export function UserDashboardPage() {
             <ListItem
               button
               selected={selectedIndex === 4}
-              onClick={event => handleListItemClick(event, 4)}
+              onClick={handleLogout}
             >
               <ListItemIcon>
                 <DraftsIcon color="primary" />

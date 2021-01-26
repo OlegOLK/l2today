@@ -1,7 +1,5 @@
 import { call, takeLatest, put, select } from 'redux-saga/effects';
-import { Server } from 'types/Server';
 import { request } from 'utils/request';
-import { useSelector, useDispatch } from 'react-redux';
 import { actions } from './slice';
 import { selectToken } from '../RegisterDialog/selectors';
 

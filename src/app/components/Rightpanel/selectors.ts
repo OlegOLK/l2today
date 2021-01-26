@@ -35,3 +35,8 @@ export const selectDataInitialized = createSelector(
   [selectData],
   serversDataState => serversDataState.dataWasInitialized,
 );
+
+export const selectRawServersList = createSelector(
+  [selectData],
+  serversDataState => serversDataState.rawServerList,
+);

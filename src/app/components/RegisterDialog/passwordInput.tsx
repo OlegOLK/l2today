@@ -44,7 +44,7 @@ export const PasswordInput: FunctionComponent<TextInputData> = ({
     <TextField
       fullWidth
       error={isError}
-      label={primaryValue != undefined ? 'Confirm password' : 'Password'}
+      label={primaryValue !== undefined ? 'Confirm password' : 'Password'}
       variant="outlined"
       type="password"
       required
