@@ -18,33 +18,36 @@ enum Tristate {
 
 interface Props {
   server: UserServer;
+  handleDataChange(server: UserServer): void;
 }
 
 export const ServerPlatformAndTypeFormFields: FunctionComponent<Props> = ({
   server,
+  handleDataChange,
 }) => {
-  console.log(server);
   const [
     isPlatformAndTypeValidationError,
     setPlatformAndTypeValidationError,
   ] = useState<Tristate>(Tristate.NotInitialized);
-  const [serverPlaftorm, setServerPlaftorm] = React.useState<string>(
-    server.platform || '',
-  );
+  // const [serverPlaftorm, setServerPlaftorm] = React.useState<string>(
+  //   server.platform || '',
+  // );
   const handlePlatformChange = (event, value) => {
-    setServerPlaftorm(value);
+    handleDataChange({ ...server, platform: value });
+    // setServerPlaftorm(value);
     setPlatformAndTypeValidationError(
-      event.target.value.length === 0 || servertype.length === 0
+      event.target.value.length === 0 || server.type.length === 0
         ? Tristate.Error
         : Tristate.Success,
     );
   };
 
-  const [servertype, setServertype] = React.useState<string>(server.type || '');
+  // const [servertype, setServertype] = React.useState<string>(server.type || '');
   const handleTypeChange = event => {
-    setServertype(event.target.value);
+    handleDataChange({ ...server, type: event.target.value });
+    // setServertype(event.target.value);
     setPlatformAndTypeValidationError(
-      serverPlaftorm.length === 0 || event.target.value.length === 0
+      server.platform.length === 0 || event.target.value.length === 0
         ? Tristate.Error
         : Tristate.Success,
     );
@@ -63,7 +66,7 @@ export const ServerPlatformAndTypeFormFields: FunctionComponent<Props> = ({
           <RadioGroup
             aria-label="server-platform"
             name="server-platform"
-            value={serverPlaftorm}
+            value={server.platform}
             onChange={handlePlatformChange}
           >
             <FormControlLabel value="PTS" control={<Radio />} label="PTS" />
@@ -77,7 +80,7 @@ export const ServerPlatformAndTypeFormFields: FunctionComponent<Props> = ({
           <RadioGroup
             aria-label="server-type"
             name="server-type"
-            value={servertype}
+            value={server.type}
             onChange={handleTypeChange}
           >
             <FormControlLabel

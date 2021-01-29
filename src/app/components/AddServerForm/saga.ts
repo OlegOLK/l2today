@@ -2,6 +2,7 @@ import { call, takeLatest, put, select } from 'redux-saga/effects';
 import { request } from 'utils/request';
 import { actions } from './slice';
 import { selectToken } from '../RegisterDialog/selectors';
+
 import { UserServer } from 'types/Server';
 
 export function* createServer(server) {
@@ -21,9 +22,7 @@ export function* createServer(server) {
       cache: 'default',
       headers: headers,
     });
-    console.log('CREATED');
-    console.log(data);
-    yield actions.setCreatedServerId(data.id);
+    yield put(actions.setCreatedServerId(data.id));
   } catch (err) {
     yield catchError(err);
   } finally {
@@ -40,14 +39,12 @@ export function* getServers() {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', `Bearer ${token}`);
-
     const data: UserServer[] = yield call(request, requestUrl, {
       method: 'GET',
       mode: 'cors',
       cache: 'default',
       headers: headers,
     });
-
     yield put(actions.setServersState(data));
   } catch (err) {
     yield catchError(err);
@@ -56,8 +53,33 @@ export function* getServers() {
   }
 }
 
+export function* updateServerFromState(server) {
+  const requestUrl = `${
+    process.env.REACT_APP_SERVERURL || 'https://l2newfrontserver.herokuapp.com'
+  }/api/server`;
+  try {
+    const token = yield select(selectToken);
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', `Bearer ${token}`);
+
+    const data = yield call(request, requestUrl, {
+      method: 'PUT',
+      body: JSON.stringify(server.payload),
+      mode: 'cors',
+      cache: 'default',
+      headers: headers,
+    });
+
+    yield put(actions.setCreatedServerId(data.id));
+  } catch (err) {
+    yield catchError(err);
+  } finally {
+    yield put(actions.finishLoad());
+  }
+}
+
 export function* catchError(err) {
-  console.log(err);
   if (err.response?.status === 401) {
     yield put(actions.setError(['Bad credentials']));
   } else if (err.message === 'Failed to fetch') {
@@ -77,4 +99,5 @@ export function* serversFromSaga() {
   // It will be cancelled automatically on component unmount
   yield takeLatest(actions.createServer.type, createServer);
   yield takeLatest(actions.getServers.type, getServers);
+  yield takeLatest(actions.updateServerFromState.type, updateServerFromState);
 }

@@ -31,3 +31,8 @@ export const selectServerById = (id: string) =>
   createSelector([selectData], userDataState =>
     userDataState.servers.find(x => x.id === id),
   );
+
+export const selectUserServersLoading = createSelector(
+  [selectData],
+  userDataState => userDataState.userServersLoading,
+);

@@ -6,6 +6,7 @@ import { NewServer, UserServer } from 'types/Server';
 export const initialState: UserServerDataState = {
   createdServerId: '',
   loading: false,
+  userServersLoading: false,
   error: [],
   servers: [],
 };
@@ -17,12 +18,16 @@ const userServerDataSlice = createSlice({
     createServer(state, action: PayloadAction<NewServer>) {
       state.loading = true;
     },
-    getServers(state) {
-      state.loading = true;
+    getServers(state, action: PayloadAction) {
+      state.userServersLoading = true;
     },
     setServersState(state, action: PayloadAction<UserServer[]>) {
-      state.loading = false;
+      state.userServersLoading = false;
       state.servers = action.payload;
+    },
+    updateServerFromState(state, action: PayloadAction<UserServer>) {
+      state.userServersLoading = true;
+      // state.servers = action.payload;
     },
     setCreatedServerId(state, action: PayloadAction<string>) {
       state.createdServerId = action.payload;

@@ -90,6 +90,56 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
     window.gtag('event', 'server_details', { name: server.name });
   };
 
+  const serverDetails = () => (
+    <Grid
+      container
+      direction="row"
+      justify="space-between"
+      alignItems="center"
+      className={classes.root}
+    >
+      {server.rates.map((rate, i) => {
+        return (
+          <Box key={server.name + rate.type + i}>
+            <SvgIcon
+              key={'icon' + rate.type + server.name}
+              component={
+                rate.type.toLowerCase() === 'xp'
+                  ? xp
+                  : rate.type.toLowerCase() === 'sp'
+                  ? sp
+                  : rate.type.toLowerCase() === 'adena'
+                  ? adena
+                  : rate.type.toLowerCase() === 'drop'
+                  ? drop
+                  : xp
+              }
+              viewBox="0 0 512 512"
+            />
+            <strong>{rate.type}</strong> :{rate.amount}
+          </Box>
+        );
+      })}
+      <Box>
+        <ServerFeature
+          key={server.name + '-feature-' + server.chronicles}
+          serverName={server.name}
+          features={server.features}
+          isTextVariant={false}
+        />
+      </Box>
+      <Grid item md={1} xs={1} className={classes.flip}>
+        <IconButton
+          size={'small'}
+          onClick={handleChange}
+          aria-label="hide-server-info"
+        >
+          <CachedIcon />
+        </IconButton>
+      </Grid>
+    </Grid>
+  );
+
   return (
     <>
       <Collapse in={!checked}>
@@ -154,53 +204,7 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
 
       <Collapse in={checked}>
         <ListItem button key={server.name + '-header'}>
-          <Grid
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center"
-            className={classes.root}
-          >
-            {server.rates.map((rate, i) => {
-              return (
-                <Box key={server.name + rate.type + i}>
-                  <SvgIcon
-                    key={'icon' + rate.type + server.name}
-                    component={
-                      rate.type.toLowerCase() === 'xp'
-                        ? xp
-                        : rate.type.toLowerCase() === 'sp'
-                        ? sp
-                        : rate.type.toLowerCase() === 'adena'
-                        ? adena
-                        : rate.type.toLowerCase() === 'drop'
-                        ? drop
-                        : xp
-                    }
-                    viewBox="0 0 512 512"
-                  />
-                  <strong>{rate.type}</strong> :{rate.amount}
-                </Box>
-              );
-            })}
-            <Box>
-              <ServerFeature
-                key={server.name + '-feature-' + server.chronicles}
-                serverName={server.name}
-                features={server.features}
-                isTextVariant={false}
-              />
-            </Box>
-            <Grid item md={1} xs={1} className={classes.flip}>
-              <IconButton
-                size={'small'}
-                onClick={handleChange}
-                aria-label="hide-server-info"
-              >
-                <CachedIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
+          {checked ? serverDetails() : null}
         </ListItem>
       </Collapse>
       <Divider key={'d' + server.name + server.chronicles} />

@@ -1,13 +1,14 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { sliceKey, reducer, actions } from './slice';
-import { selectIsLoading } from './selectors';
+import { selectIsLoading, selectCreatedServerId } from './selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { serversFromSaga } from './saga';
+import { useHistory } from 'react-router-dom';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import * as dfn from 'date-fns';
@@ -49,12 +50,14 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
   const [isServerNameValidationError, setServerNameValidationError] = useState<
     Tristate
   >(Tristate.NotInitialized);
-  const [serverName, setServerName] = useState<string>('hello');
-  const [serverUri, setServerUri] = useState<string>('https://hello.com');
+  const [serverName, setServerName] = useState<string>('');
+  const [serverUri, setServerUri] = useState<string>('');
   const [selectedDate, setSelectedDate] = React.useState(Date.now());
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: serversFromSaga });
   const isLoading = useSelector(selectIsLoading);
+  const newServerId = useSelector(selectCreatedServerId);
+
   const handleServerNameChange = event => {
     setServerName(event.target.value);
   };
@@ -158,11 +161,17 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
     );
   };
   const dispatch = useDispatch();
+  const history = useHistory();
 
+  const [serverAddClick, setServerAddClick] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (newServerId && !isLoading && serverAddClick) {
+      setServerAddClick(false);
+      history.push(`/dashboard/server/${newServerId}`);
+    }
+  }, [newServerId, isLoading, serverAddClick, history]);
   const handleAddServer = () => {
-    //fetch('https://localhost:44362/api/server', { headers})
-
-    console.log(dfn.format(selectedDate, 'MM/dd/yyyy'));
     dispatch(
       actions.createServer({
         Rates: rates,
@@ -174,15 +183,7 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
         OpenDate: dfn.format(selectedDate, 'MM/dd/yyyy'),
       }),
     );
-    // console.log(JSON.stringify({
-    //   rates: rates,
-    //   chronicles: chronicle,
-    //   servertype: servertype,
-    //   serverPlaftorm: serverPlaftorm,
-    //   serverName: serverName,
-    //   serverUri: serverUri,
-    //   selectedDate: selectedDate
-    // }));
+    setServerAddClick(true);
   };
 
   return (

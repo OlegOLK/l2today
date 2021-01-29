@@ -68,7 +68,6 @@ export class LocalPersistor implements ILocalPersistor {
     }
 
     if (!isToday(new Date(LocalPersistor.currentStamp))) {
-      console.log('not today');
       return false;
     }
     return true;

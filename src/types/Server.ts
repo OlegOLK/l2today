@@ -40,6 +40,14 @@ export interface UserServer {
   uri: string;
   premium: number;
   approved: boolean;
+  isDirty: boolean;
+  questions: UserServerQuestion[];
+}
+
+export interface UserServerQuestion {
+  id: string;
+  answer: string;
+  question: string;
 }
 
 export interface NewServer {

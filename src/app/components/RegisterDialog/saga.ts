@@ -104,7 +104,6 @@ export function* register(reg) {
 }
 
 export function* catchError(err) {
-  console.log(err);
   if (err.response?.status === 401) {
     yield put(actions.setError(['Bad credentials']));
   } else if (err.message === 'Failed to fetch') {

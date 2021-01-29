@@ -2,8 +2,55 @@ import { Divider, Grid, Paper, Typography } from '@material-ui/core';
 import React, { FunctionComponent } from 'react';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import EventBusyIcon from '@material-ui/icons/EventBusy';
+import { UserServer } from 'types/Server';
 
-export const ServerPremiumStats: FunctionComponent = () => {
+interface Props {
+  server?: UserServer;
+}
+
+export const ServerPremiumStats: FunctionComponent<Props> = ({ server }) => {
+  const questions = !server
+    ? null
+    : server.questions.map(q => {
+        return (
+          <>
+            <Grid item md={10}>
+              <Typography
+                align="left"
+                component="div"
+                style={{ fontWeight: 600, fontSize: '18px' }}
+              >
+                Question: <em>{q.question}</em>
+              </Typography>
+            </Grid>
+            <Grid item md={10}>
+              <Typography
+                align="left"
+                component="div"
+                style={{ fontWeight: 600, fontSize: '18px' }}
+              >
+                Answer: <em>{q.answer}</em>
+              </Typography>
+            </Grid>
+            <Grid item md={10}>
+              <Typography
+                align="left"
+                component="div"
+                style={{ fontWeight: 600, fontSize: '18px' }}
+              >
+                Status: <em>APPROVED</em>
+              </Typography>
+            </Grid>
+            <Grid item md={12}>
+              <Divider
+                variant="inset"
+                style={{ backgroundColor: 'white', marginBottom: '10px' }}
+              />
+            </Grid>
+          </>
+        );
+      });
+
   return (
     <Paper style={{ height: '483px' }}>
       <Grid item container style={{ padding: '10px' }}>
@@ -112,7 +159,8 @@ export const ServerPremiumStats: FunctionComponent = () => {
                 align="left"
                 style={{ fontWeight: 600, paddingTop: '15px' }}
               >
-                Quiz questions: <span style={{}}>2</span>
+                Quiz questions:{' '}
+                <span> {server ? server.questions.length : 0} </span>
               </Typography>
             </Grid>
             <Grid item md={12}>
@@ -120,39 +168,7 @@ export const ServerPremiumStats: FunctionComponent = () => {
                 style={{ backgroundColor: 'white', marginBottom: '10px' }}
               />
             </Grid>
-            <Grid item md={10}>
-              <Typography
-                align="left"
-                component="div"
-                style={{ fontWeight: 600, fontSize: '18px' }}
-              >
-                Question: <em>When did server first launch?</em>
-              </Typography>
-            </Grid>
-            <Grid item md={10}>
-              <Typography
-                align="left"
-                component="div"
-                style={{ fontWeight: 600, fontSize: '18px' }}
-              >
-                Answer: <em>01/20/2021</em>
-              </Typography>
-            </Grid>
-            <Grid item md={10}>
-              <Typography
-                align="left"
-                component="div"
-                style={{ fontWeight: 600, fontSize: '18px' }}
-              >
-                Status: <em>APPROVED</em>
-              </Typography>
-            </Grid>
-            <Grid item md={12}>
-              <Divider
-                variant="inset"
-                style={{ backgroundColor: 'white', marginBottom: '10px' }}
-              />
-            </Grid>
+            {questions}
             {/* <Grid item md={10}>
               <Typography
                 align="left"

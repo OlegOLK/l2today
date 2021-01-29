@@ -9,7 +9,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import React, { FunctionComponent, useState } from 'react';
-import { Rate, UserServer } from 'types/Server';
+import { UserServer } from 'types/Server';
 import { CHRONICLES } from '../../mocks/chronicles';
 
 enum Tristate {
@@ -20,35 +20,30 @@ enum Tristate {
 
 interface Props {
   server: UserServer;
+  handleDataChange(server: UserServer): void;
 }
 
-export const ServerRatesFormFields: FunctionComponent<Props> = ({ server }) => {
-  const rr: Rate[] = [];
-  rr.push({ amount: 0, type: 'XP' });
-  rr.push({ amount: 0, type: 'SP' });
-  rr.push({ amount: 0, type: 'DROP' });
-  rr.push({ amount: 0, type: 'ADENA' });
-  rr.push({ amount: 0, type: 'SPOIL' });
-  const [chronicle, setChronicle] = useState<string>(server.chronicles || '');
+export const ServerRatesFormFields: FunctionComponent<Props> = ({
+  server,
+  handleDataChange,
+}) => {
   const handleChronicleChange = event => {
-    setChronicle(event.target.value);
+    handleDataChange({ ...server, chronicles: event.target.value });
   };
 
-  const [rates, setRates] = useState<Rate[]>(server.rates || rr);
   const handleRateChange = (event, index: number) => {
     const val = Number.parseInt(event.target.value);
     if (val <= 0) {
       return;
     }
-
-    let tempRates = [...rates];
-    let rate = { ...rates[index] };
+    let tempRates = [...server.rates];
+    let rate = { ...server.rates[index] };
     if (!rate) {
       return;
     }
     rate.amount = val;
     tempRates[index] = rate;
-    setRates(tempRates);
+    handleDataChange({ ...server, rates: tempRates });
   };
 
   const [, setChronicleAndRatesValidationError] = useState<Tristate>(
@@ -56,7 +51,7 @@ export const ServerRatesFormFields: FunctionComponent<Props> = ({ server }) => {
   );
 
   const onChroniclesAndRatesBlur = () => {
-    if (!rates.some(x => x.amount !== 0)) {
+    if (!server.rates.some(x => x.amount !== 0)) {
       setChronicleAndRatesValidationError(Tristate.Error);
       return;
     }
@@ -76,7 +71,7 @@ export const ServerRatesFormFields: FunctionComponent<Props> = ({ server }) => {
             onBlur={onChroniclesAndRatesBlur}
             labelId="server-chronicle"
             id="server-chronicle-select"
-            value={chronicle}
+            value={server.chronicles}
             onChange={handleChronicleChange}
             label="Chronicle"
           >
@@ -90,7 +85,7 @@ export const ServerRatesFormFields: FunctionComponent<Props> = ({ server }) => {
           </Select>
         </FormControl>
         <Grid item container spacing={2} style={{ marginTop: '5px' }}>
-          {rates.map((rt, i) => {
+          {server.rates.map((rt, i) => {
             return (
               <Grid key={'grid' + rt.type} item xs={12} md={6}>
                 <TextField

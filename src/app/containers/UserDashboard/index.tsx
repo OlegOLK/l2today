@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Grid, makeStyles, Paper } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -26,7 +26,10 @@ import {
   sliceKey as serverSliceKey,
   actions as serverActions,
 } from 'app/components/AddServerForm/slice';
-import { selectServers } from 'app/components/AddServerForm/selectors';
+import {
+  selectServers,
+  selectUserServersLoading,
+} from 'app/components/AddServerForm/selectors';
 import { selectIsAuthenticated } from '../../components/RegisterDialog/selectors';
 import { userFromSaga } from '../../components/RegisterDialog/saga';
 import { serversFromSaga } from 'app/components/AddServerForm/saga';
@@ -82,12 +85,13 @@ export function UserDashboardPage() {
   useInjectReducer({ key: serverSliceKey, reducer: serverReducer });
   useInjectSaga({ key: sliceKey, saga: userFromSaga });
   useInjectSaga({ key: sliceKey, saga: serversFromSaga });
+  const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
   let { path } = useRouteMatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const servers = useSelector(selectServers);
-
+  const userServersIsLoading = useSelector(selectUserServersLoading);
   const useEffectOnAuthenticated = (effect: React.EffectCallback) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(effect, [isAuthenticated]);
@@ -108,6 +112,17 @@ export function UserDashboardPage() {
   const handleClick = () => {
     setOpen(!open);
   };
+
+  useEffect(() => {
+    if (location.pathname.includes('/server/') && !userServersIsLoading) {
+      const serverId = location.pathname.substring(
+        location.pathname.indexOf('/server/', 0) + '/server/'.length,
+      );
+      if (serverId && servers.findIndex(x => x.id === serverId) !== -1) {
+        setSelectedIndex(servers.findIndex(x => x.id === serverId) + 50);
+      }
+    }
+  }, [userServersIsLoading, location.pathname, servers]);
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
