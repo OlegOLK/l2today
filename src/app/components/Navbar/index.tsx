@@ -254,8 +254,9 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 // to={`/events`}
                 onClick={e => navigateTo(e, '/events')}
                 startIcon={<AttachMoneyIcon color="primary" />}
+                endIcon={<AttachMoneyIcon color="primary" />}
               >
-                {'Earn money'}
+                {t('nav.earnMoney')}
               </Button>
             </Grid>
             <Grid item>
@@ -285,7 +286,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 startIcon={<GTranslateIcon />}
                 endIcon={<ArrowDropDownIcon />}
               >
-                {i18n.language}
+                {i18n.language === 'ru' ? 'Русский' : 'English'}
               </Button>
               <Menu
                 id="language-selector"
@@ -295,10 +296,10 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 onClose={() => handleSelectLanguageClose('')}
               >
                 <MenuItem onClick={() => handleSelectLanguageClose('en')}>
-                  EN
+                  English
                 </MenuItem>
                 <MenuItem onClick={() => handleSelectLanguageClose('ru')}>
-                  RU
+                  Русский
                 </MenuItem>
               </Menu>
             </Grid>
@@ -328,13 +329,13 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               component="nav"
               aria-label="main mailbox folders"
             >
-              <ListItem button>
+              <ListItem button onClick={e => navigateTo(e, '/')}>
                 <ListItemIcon>
                   <HomeIcon color="primary" />
                 </ListItemIcon>
                 <ListItemText color="primary" primary={t('nav.home')} />
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={e => navigateTo(e, '/addserver')}>
                 <ListItemIcon>
                   <AddToQueueIcon color="primary" />
                 </ListItemIcon>
@@ -346,7 +347,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 </ListItemIcon>
                 <ListItemText color="primary" primary={t('nav.discuss')} />
               </ListItem>
-              <ListItem button>
+              <ListItem button disabled>
                 <ListItemIcon>
                   <InfoIcon color="primary" />
                 </ListItemIcon>
@@ -368,26 +369,47 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               className={classes.list}
               aria-label="secondary mailbox folders"
             >
-              <ListItem button>
-                <ListItemIcon>
-                  <LockOpenIcon color="primary" />
-                </ListItemIcon>
-                <ListItemText color="primary" primary={t('nav.login')} />
-              </ListItem>
+              {isAuthenticaed ? (
+                <ListItem button onClick={e => navigateTo(e, '/dashboard')}>
+                  <ListItemIcon>
+                    <AccountCircleIcon color="primary" />
+                  </ListItemIcon>
+                  <ListItemText color="primary" primary={userName} />
+                </ListItem>
+              ) : (
+                <ListItem button onClick={openDialog}>
+                  <ListItemIcon>
+                    <LockOpenIcon color="primary" />
+                  </ListItemIcon>
+                  <ListItemText color="primary" primary={t('nav.login')} />
+                </ListItem>
+              )}
+
               <ListItem button onClick={toggleSwipeableDrawer}>
                 <ListItemIcon>
                   <GTranslateIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText color="primary" primary={i18n.language} />
+                <ListItemText
+                  color="primary"
+                  primary={i18n.language === 'ru' ? 'Русский' : 'English'}
+                />
                 {open ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                  <ListItem button className={classes.nested}>
-                    <ListItemText primary="EN" />
+                  <ListItem
+                    button
+                    className={classes.nested}
+                    onClick={() => handleSelectLanguageClose('en')}
+                  >
+                    <ListItemText primary="English" />
                   </ListItem>
-                  <ListItem button className={classes.nested}>
-                    <ListItemText primary="RU" />
+                  <ListItem
+                    button
+                    className={classes.nested}
+                    onClick={() => handleSelectLanguageClose('ru')}
+                  >
+                    <ListItemText primary="Русский" />
                   </ListItem>
                 </List>
               </Collapse>

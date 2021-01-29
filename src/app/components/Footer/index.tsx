@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import {
   Container,
+  Divider,
   Grid,
-  Link,
   makeStyles,
   Typography,
 } from '@material-ui/core';
@@ -69,9 +69,9 @@ export const Footer: FunctionComponent = () => {
           alignItems="stretch"
         >
           <Grid item md={12}>
-            <Typography component="div">l2NEW.com 2020-2021</Typography>
+            <Typography component="div">l2NEW.COM 2020-2021</Typography>
           </Grid>
-          <Grid item md={6}>
+          {/* <Grid item md={6}>
             <div>
               <Link>Home</Link>
             </div>
@@ -81,16 +81,55 @@ export const Footer: FunctionComponent = () => {
             <div>
               <Link>Events</Link>
             </div>
-          </Grid>
-          <Grid item md={6}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-            modi quibusdam perferendis eius. Officiis, veritatis corrupti
-            eligendi sapiente alias commodi explicabo ipsam hic, ratione,
-            voluptatibus pariatur vel magni ipsa quaerat.
-            <br />
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
-            obcaecati numquam asperiores, corporis hic ad exercitationem, earum,
-            cumque ipsam eos ipsum ut fugit! Vitae libero vero eum quis ad nemo.
+          </Grid> */}
+          <Grid item md={12}>
+            <Typography variant="caption">
+              FREE AND MOST FULL DATABASE OF LINEAGE 2 SERVERS
+            </Typography>
+            <Divider />
+            <Typography
+              variant="body2"
+              style={{ marginBottom: '10px', marginTop: '10px' }}
+            >
+              &nbsp;На сайте l2new.com вы найдете самый полный список серверов
+              Lineage 2. Мы собираем и дополняем нашу базу серверов каждый день
+              для того что вы бы не упустили открытие любимого сервера. Под
+              каждый сервер собирается детальная информация по хроникам, рейтам,
+              дате открытия а так же особенностях сервера. Больше вам не нужно
+              просматривать миллион анонсов в поисках нужного сервера т.к. наша
+              база позволяет добавлять сервера без оплаты что в свою очередь
+              позволяет собирать самую актуальную информацию по новым или
+              открытым сервера.
+            </Typography>
+            <Divider />
+            <Typography variant="body2" style={{ marginBottom: '10px' }}>
+              &nbsp;Этот сайт создан специально геймерами для геймеров. Мы тоже
+              устали скролить кучу топов в поисках уникальных проэктов, именно
+              для вас мы стараемчя сделать ресурс который позволит забросить
+              парсинг аносов в гугле. Все что нужно собрано в одном месте!
+            </Typography>
+
+            <Typography variant="body2" style={{ marginBottom: '10px' }}>
+              &nbsp;Кроме всего, мы решили что в ожидании открытия сервера было
+              бы круто развлечь наших посетителей и дать им возможность
+              подзаработать немного денег. На сайте l2new.com действуют крутые
+              ивенты и акции которые позволят ТЕБЕ заработать денег на премак
+              или другие ништяки на открытии сервера!
+            </Typography>
+
+            <Typography variant="body2" style={{ marginBottom: '10px' }}>
+              &nbsp;Ну и конечно же ПАТИ. Залетай к нам в{' '}
+              <a
+                href="https://discord.gg/kdsrYj4xj2"
+                target="__blank"
+                rel="noopener noreferrer"
+                style={{ color: 'green' }}
+              >
+                DISCORD
+              </a>
+              . Там ты точно не будешь скучать - ивенты, поиски кп и просто
+              флуд! Все это ждет тебя!
+            </Typography>
           </Grid>
         </Grid>
       </Container>

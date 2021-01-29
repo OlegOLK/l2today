@@ -4,22 +4,27 @@ import React, { FunctionComponent } from 'react';
 export const EventsPage: FunctionComponent = () => {
   return (
     <Container maxWidth="md">
-      <Typography variant="h2">Welcome on l2new events!</Typography>
+      <Typography variant="h2">Ивенты от l2new уже тут!</Typography>
 
       <Typography>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-        commodi illo eos neque exercitationem eum officiis ullam ad? Explicabo
-        fugiat autem, illo animi dignissimos doloremque laborum quos nisi quae
-        non? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        Consectetur eum ipsum in vero laboriosam amet quia perferendis suscipit
-        tenetur optio doloremque voluptate nostrum perspiciatis laborum, sequi
-        expedita quibusdam corrupti soluta?Lorem ipsum dolor sit, amet
-        consectetur adipisicing elit. Ullam, natus velit ratione quis eaque
-        voluptatum soluta explicabo sed ipsam rerum voluptates. Asperiores
-        recusandae laboriosam incidunt enim accusamus, libero ad earum.
+        Привет чемпион! <br /> Ищешь способ развлечься или подзаработать
+        аденки?! Тогда ты попал на правильный анонс. У нас ты сможешь нафармить
+        на ПА и не только, все что нужно сделать залутать дроп с викторины или
+        же залететь на любой другой ивент (список активных ивентов ниже на этой
+        же странице) который сейчас активен на l2new.com!
+      </Typography>
+      <Typography variant="h6" style={{ textAlign: 'center' }}>
+        Викторина
+      </Typography>
+      <Typography
+        style={{ textAlign: 'center' }}
+        component="div"
+        variant="caption"
+      >
+        Статус: <em style={{ color: 'green' }}>активен</em>
       </Typography>
       <Typography>
-        Rules: <br />
+        Правила: <br />
       </Typography>
       <ol>
         <li>You should be logged in to start answer quiz qeustions</li>
@@ -54,10 +59,6 @@ export const EventsPage: FunctionComponent = () => {
         </li>
       </ol>
       <Button>Go to quiz</Button>
-      <div>
-        {process.env.REACT_APP_SERVERURL}
-        {process.env.REACT_APP_SERVERSFILE}
-      </div>
     </Container>
   );
 };

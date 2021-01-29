@@ -7,8 +7,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import FaceIcon from '@material-ui/icons/Face';
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
@@ -145,15 +147,6 @@ export function UserDashboardPage() {
       spacing={1}
       className={classes.root}
     >
-      {/* <Grid item lg={2} xl={1}> */}
-      {/* <Drawer
-                    className={classes.drawer}
-                    variant="permanent"
-                    classes={{
-                        paper: classes.drawerPaper,
-                    }}
-                    anchor="left"
-                > */}
       <Grid item>
         <Paper style={{ flex: '1 1 auto', height: '100%' }}>
           <List component="nav" aria-labelledby="nested-list-subheader">
@@ -163,7 +156,7 @@ export function UserDashboardPage() {
               onClick={event => handleListItemClick(event, 0, '/')}
             >
               <ListItemIcon>
-                <SendIcon color="primary" />
+                <FaceIcon color="primary" />
               </ListItemIcon>
               <ListItemText primary="Account information" />
               {/* login / pass / mail + balance + total servers count etc. */}
@@ -174,7 +167,7 @@ export function UserDashboardPage() {
               onClick={event => handleListItemClick(event, 1, '/donate')}
             >
               <ListItemIcon>
-                <DraftsIcon color="primary" />
+                <AttachMoneyIcon color="primary" />
               </ListItemIcon>
               <ListItemText primary="Buy coins" />
             </ListItem>
@@ -218,7 +211,7 @@ export function UserDashboardPage() {
               onClick={event => handleListItemClick(event, 3, '/notifications')}
             >
               <ListItemIcon>
-                <DraftsIcon color="primary" />
+                <NotificationsActiveIcon color="primary" />
               </ListItemIcon>
               <ListItemText primary="Messages" />
             </ListItem>
@@ -229,15 +222,12 @@ export function UserDashboardPage() {
               onClick={handleLogout}
             >
               <ListItemIcon>
-                <DraftsIcon color="primary" />
+                <ExitToAppIcon color="primary" />
               </ListItemIcon>
               <ListItemText primary="Logout" />
             </ListItem>
           </List>
         </Paper>
-        {/* server list */}
-        {/* </Grid> */}
-        {/* </Drawer> */}
       </Grid>
 
       <Grid
