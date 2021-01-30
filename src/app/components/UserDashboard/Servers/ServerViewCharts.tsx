@@ -83,20 +83,20 @@ export const ServerViewCharts: FunctionComponent = () => {
         >
           <Grid item md={3}>
             <Typography variant="h5" style={{ fontWeight: 600 }}>
-              <TrendingUpIcon /> 189
+              <TrendingUpIcon /> 189 (example)
             </Typography>
             <small style={{ color: 'gray' }}>Server details clicks</small>
           </Grid>
           <Grid item md={3}>
             <Typography variant="h5" style={{ fontWeight: 600 }}>
-              <TrendingUpIcon /> 189
+              <TrendingUpIcon /> 189 (example)
             </Typography>
             <small style={{ color: 'gray' }}>Server details clicks</small>
           </Grid>
 
           <Grid item md={3}>
             <Typography variant="h5" style={{ fontWeight: 600 }}>
-              <TrendingUpIcon /> 189
+              <TrendingUpIcon /> 189 (example)
             </Typography>
             <small style={{ color: 'gray' }}>Server details clicks</small>
           </Grid>

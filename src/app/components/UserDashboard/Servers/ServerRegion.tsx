@@ -85,7 +85,7 @@ export const ServerRegion: FunctionComponent = () => {
               <Typography
                 style={{ fontSize: '14px', fontWeight: 700, color: 'white' }}
               >
-                Server View
+                Server View (example)
               </Typography>
               <Typography
                 style={{ fontSize: '14px', fontWeight: 400, color: 'gray' }}
@@ -124,7 +124,7 @@ export const ServerRegion: FunctionComponent = () => {
               <Typography
                 style={{ fontSize: '14px', fontWeight: 700, color: 'white' }}
               >
-                Server View
+                Server View (example)
               </Typography>
               <Typography
                 style={{ fontSize: '14px', fontWeight: 400, color: 'gray' }}
@@ -163,7 +163,7 @@ export const ServerRegion: FunctionComponent = () => {
               <Typography
                 style={{ fontSize: '14px', fontWeight: 700, color: 'white' }}
               >
-                Server quiz starts
+                Server quiz starts (example)
               </Typography>
               <Typography
                 style={{ fontSize: '14px', fontWeight: 400, color: 'gray' }}

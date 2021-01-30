@@ -86,7 +86,7 @@ export function UserDashboardPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectReducer({ key: serverSliceKey, reducer: serverReducer });
   useInjectSaga({ key: sliceKey, saga: userFromSaga });
-  useInjectSaga({ key: sliceKey, saga: serversFromSaga });
+  useInjectSaga({ key: serverSliceKey, saga: serversFromSaga });
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();

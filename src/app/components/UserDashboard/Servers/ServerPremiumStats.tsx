@@ -97,7 +97,7 @@ export const ServerPremiumStats: FunctionComponent<Props> = ({ server }) => {
                 align="left"
                 style={{ fontWeight: 600, paddingTop: '15px' }}
               >
-                Premium status: <span style={{ color: 'green' }}>ON</span>
+                Premium status: <span style={{ color: 'red' }}>OFF</span>
               </Typography>
             </Grid>
             <Grid item md={12}>
@@ -120,7 +120,7 @@ export const ServerPremiumStats: FunctionComponent<Props> = ({ server }) => {
                 component="div"
                 style={{ fontWeight: 600 }}
               >
-                01/20/2021
+                Unknown
               </Typography>
             </Grid>
             <Grid item md={6}>
@@ -138,7 +138,7 @@ export const ServerPremiumStats: FunctionComponent<Props> = ({ server }) => {
                 component="div"
                 style={{ fontWeight: 600 }}
               >
-                02/20/2021
+                Unknow
               </Typography>
             </Grid>
           </Grid>
