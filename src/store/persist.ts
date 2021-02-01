@@ -1,6 +1,6 @@
 import { ServersList } from 'types/Server';
 import { User } from 'types/User';
-import { isToday, format } from 'date-fns';
+import { format, differenceInMinutes } from 'date-fns';
 
 interface ILocalPersistor {
   setServers(data: ServersList[]);
@@ -16,7 +16,7 @@ export class LocalPersistor implements ILocalPersistor {
   private persistStamp: string = `${this.storagePrefix}stamp`;
   private static currentStamp: string = '';
   private static _instance: LocalPersistor;
-
+  private static form = "yyyy-MM-dd'T'HH:mm";
   public static getInstance(): LocalPersistor {
     if (!LocalPersistor._instance) {
       LocalPersistor._instance = new LocalPersistor();
@@ -50,14 +50,14 @@ export class LocalPersistor implements ILocalPersistor {
     return JSON.parse(serverData);
   }
   private setStamp() {
-    const stamp: string = format(Date.now(), 'MM/dd/yyyy');
+    const stamp: string = format(Date.now(), LocalPersistor.form);
     localStorage.setItem(this.persistStamp, stamp);
     LocalPersistor.currentStamp = stamp;
   }
   private isStateValid() {
     const localStorageStamp = localStorage.getItem(this.persistStamp);
     if (LocalPersistor.currentStamp === '' && localStorageStamp === null) {
-      LocalPersistor.currentStamp = format(Date.now(), 'MM/dd/yyyy');
+      LocalPersistor.currentStamp = format(Date.now(), LocalPersistor.form);
       localStorage.setItem(this.persistStamp, LocalPersistor.currentStamp);
       return true;
     } else if (
@@ -66,10 +66,15 @@ export class LocalPersistor implements ILocalPersistor {
     ) {
       LocalPersistor.currentStamp = localStorageStamp;
     }
-
-    if (!isToday(new Date(LocalPersistor.currentStamp))) {
+    if (
+      differenceInMinutes(Date.now(), new Date(LocalPersistor.currentStamp)) >
+      10
+    ) {
       return false;
     }
+    // if (!isToday(new Date(LocalPersistor.currentStamp))) {
+    //   return false;
+    // }
     return true;
   }
 }
