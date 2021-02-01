@@ -21,9 +21,8 @@ export function* getRepos() {
 
   const requestURL = `${
     process.env.REACT_APP_SERVERSFILE ||
-    'https://raw.githubusercontent.com/OlegOLK/l2today/master/test.json'
+    'https://raw.githubusercontent.com/firebricks/l2new/main/servers.json'
   }`;
-  //'https://raw.githubusercontent.com/OlegOLK/l2today/master/servers.json';
   try {
     // Call our request helper (see 'utils/request')
     // let serversList: ServersList[] = yield select(selectRawServersList);
