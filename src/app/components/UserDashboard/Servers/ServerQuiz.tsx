@@ -37,13 +37,15 @@ export const ServerQuizForm: FunctionComponent<Props> = ({
 
   const questionMaps = server.questions?.map((q, index) => {
     return (
-      <Grid item xs={12}>
+      <Grid item xs={12} key={'q-grid' + index}>
         <form
           noValidate
           autoComplete="off"
           style={{ display: 'flex', width: '100%' }}
+          key={'q-f' + index}
         >
           <TextField
+            key={'q-q' + index}
             id="outlined-full-width"
             label="Quiz question"
             style={{ margin: 8 }}
@@ -65,6 +67,7 @@ export const ServerQuizForm: FunctionComponent<Props> = ({
             placeholder="Quiz answer"
             value={q.answer}
             fullWidth
+            key={'q-a' + index}
             margin="normal"
             InputLabelProps={{
               shrink: true,
@@ -125,11 +128,34 @@ export const ServerQuizForm: FunctionComponent<Props> = ({
     tempQuestions.push({ question: '', answer: '', id: '' });
     handleDataChange({ ...server, questions: tempQuestions });
   };
+
+  const isMaxQuestionsReached = () => {
+    switch (server.premium) {
+      case 0: {
+        return server.questions.length >= 1;
+      }
+      case 1: {
+        return server.questions.length >= 3;
+      }
+      case 2: {
+        return server.questions.length >= 5;
+      }
+      default: {
+        return false;
+      }
+    }
+  };
+
   return (
     <Grid container>
       {questionMaps}
 
-      <Button variant="contained" color="secondary" onClick={addNewQuestion}>
+      <Button
+        variant="contained"
+        disabled={isMaxQuestionsReached()}
+        color="secondary"
+        onClick={addNewQuestion}
+      >
         Add new question
       </Button>
     </Grid>

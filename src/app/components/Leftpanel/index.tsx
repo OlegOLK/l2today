@@ -36,6 +36,7 @@ const useStyles = makeStyles(theme => ({
   normalAlert: {
     backgroundColor: '#D9AFD9',
     backgroundImage: 'linear-gradient(90deg, #8BC6EC 0%, #9599E2 100%)',
+    marginBottom: '15px',
   },
 }));
 

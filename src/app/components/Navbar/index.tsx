@@ -43,6 +43,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { RegisterDialog } from '../RegisterDialog/register';
 import { selectName, selectIsAuthenticated } from '../RegisterDialog/selectors';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -202,7 +203,18 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                   {t('nav.addserver')}
                 </Button>
               )}
-
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                color="primary"
+                startIcon={<TrendingUpIcon color="primary" />}
+                onClick={e => navigateTo(e, '/advertisement')}
+                // onClick={handleClick}
+                // startIcon={<QuestionAnswerIcon color="primary" />}
+                // endIcon={<ArrowDropDownIcon color="primary" />}
+              >
+                {t('nav.advert')}
+              </Button>
               <Button
                 aria-controls="simple-menu"
                 aria-haspopup="true"
@@ -235,9 +247,9 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 </MenuItem>
               </Menu>
 
-              <Button disabled startIcon={<InfoIcon color="primary" />}>
+              {/* <Button disabled startIcon={<InfoIcon color="primary" />}>
                 {t('nav.knowledgebase')}
-              </Button>
+              </Button> */}
               <Button startIcon={<MemoryIcon color="primary" />}>
                 <MaterialLink
                   href="https://discord.gg/GEgCbHkWb4"

@@ -23,7 +23,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { useLocation } from 'react-router-dom';
 import { EventsPage } from './containers/EventsPage/Loadable';
 import { Footer } from './components/Footer';
-
+import { AdvertisementPage } from './containers/AdvertisementPage/index';
 declare global {
   interface Window {
     gtag: any;
@@ -54,6 +54,7 @@ export function App() {
         <Switch>
           <Route path="/addserver" component={AddServerPage} />
           <Route path="/dashboard" component={UserDashboardPage} />
+          <Route path="/advertisement" component={AdvertisementPage} />
           <Route path="/events" component={EventsPage} />
           <Route path="/:filterType/:filterValue" component={HomePage} />
           <Route path="/" component={HomePage} />

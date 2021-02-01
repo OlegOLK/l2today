@@ -26,6 +26,7 @@ import {
   selectError,
 } from './selectors';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface RegisterDialogProps {
   open: boolean;
@@ -34,14 +35,23 @@ interface RegisterDialogProps {
 
 type dialogTypes = 'reset' | 'register' | 'login';
 
-const getDialogActions = (dialogType: dialogTypes, changeDialog: any) => {
+const getDialogActions = (
+  dialogType: dialogTypes,
+  changeDialog: any,
+  t: any,
+) => {
   switch (dialogType) {
     case 'login': {
       return (
         <React.Fragment>
           <Grid item xs={12} style={{ marginTop: '20px' }}>
-            <Button fullWidth onClick={e => changeDialog(e, 'reset')}>
-              Forgot password?
+            <Button
+              fullWidth
+              variant="outlined"
+              color="primary"
+              onClick={e => changeDialog(e, 'reset')}
+            >
+              {t('registerDialog.actions.forgot')}
             </Button>
           </Grid>
           <Grid
@@ -49,8 +59,13 @@ const getDialogActions = (dialogType: dialogTypes, changeDialog: any) => {
             xs={12}
             style={{ marginTop: '20px', marginBottom: '20px' }}
           >
-            <Button fullWidth onClick={e => changeDialog(e, 'register')}>
-              Don't have an account yet? Register
+            <Button
+              fullWidth
+              variant="outlined"
+              color="primary"
+              onClick={e => changeDialog(e, 'register')}
+            >
+              {t('registerDialog.actions.register')}
             </Button>
           </Grid>
         </React.Fragment>
@@ -60,8 +75,13 @@ const getDialogActions = (dialogType: dialogTypes, changeDialog: any) => {
       return (
         <React.Fragment>
           <Grid item xs={12} style={{ marginTop: '20px' }}>
-            <Button fullWidth onClick={e => changeDialog(e, 'reset')}>
-              Forgot password?
+            <Button
+              fullWidth
+              variant="outlined"
+              color="primary"
+              onClick={e => changeDialog(e, 'reset')}
+            >
+              {t('registerDialog.actions.forgot')}
             </Button>
           </Grid>
           <Grid
@@ -69,8 +89,13 @@ const getDialogActions = (dialogType: dialogTypes, changeDialog: any) => {
             xs={12}
             style={{ marginTop: '20px', marginBottom: '20px' }}
           >
-            <Button fullWidth onClick={e => changeDialog(e, 'login')}>
-              Already have an account? <strong>Login</strong>
+            <Button
+              fullWidth
+              variant="outlined"
+              color="primary"
+              onClick={e => changeDialog(e, 'login')}
+            >
+              {t('registerDialog.actions.login')}
             </Button>
           </Grid>
         </React.Fragment>
@@ -80,8 +105,13 @@ const getDialogActions = (dialogType: dialogTypes, changeDialog: any) => {
       return (
         <React.Fragment>
           <Grid item xs={12} style={{ marginTop: '20px' }}>
-            <Button fullWidth onClick={e => changeDialog(e, 'register')}>
-              Don't have an account yet? Register
+            <Button
+              fullWidth
+              variant="outlined"
+              color="primary"
+              onClick={e => changeDialog(e, 'register')}
+            >
+              {t('registerDialog.actions.register')}
             </Button>
           </Grid>
           <Grid
@@ -89,8 +119,13 @@ const getDialogActions = (dialogType: dialogTypes, changeDialog: any) => {
             xs={12}
             style={{ marginTop: '20px', marginBottom: '20px' }}
           >
-            <Button fullWidth onClick={e => changeDialog(e, 'login')}>
-              Already have an account? <strong>Login</strong>
+            <Button
+              fullWidth
+              variant="outlined"
+              color="primary"
+              onClick={e => changeDialog(e, 'login')}
+            >
+              {t('registerDialog.actions.login')}
             </Button>
           </Grid>
         </React.Fragment>
@@ -174,6 +209,7 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
 }) => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: userFromSaga });
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const isLoading = useSelector(selectIsLoading);
@@ -186,7 +222,7 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
   };
 
   const [grow, setGrow] = React.useState(true);
-  const [dialogType, setDialogType] = React.useState<dialogTypes>('register');
+  const [dialogType, setDialogType] = React.useState<dialogTypes>('login');
 
   const useEffectOnAuthenticated = (effect: React.EffectCallback) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -285,11 +321,10 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
               }}
               gutterBottom
             >
-              {dialogType}
+              {t(`registerDialog.dialogHeader.${dialogType}`)}
             </Typography>
             <Typography color="textSecondary" gutterBottom>
-              You can use your l2new account to add servers and participate in
-              events
+              {t('registerDialog.dialogSubheader')}
             </Typography>
           </DialogTitle>
 
@@ -353,7 +388,7 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
                 </Grid>
               ) : null}
 
-              {getDialogActions(dialogType, changeDialog)}
+              {getDialogActions(dialogType, changeDialog, t)}
             </Grid>
           </DialogContent>
         </div>

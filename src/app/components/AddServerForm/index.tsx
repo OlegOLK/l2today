@@ -519,7 +519,12 @@ export const AddServerForm: FunctionComponent<AddServerFormProps> = () => {
             justifyContent: 'center',
           }}
         >
-          <FormControl required error={true} component="fieldset">
+          <FormControl
+            required
+            error={true}
+            component="fieldset"
+            style={{ minWidth: '100px' }}
+          >
             <FormGroup>
               <FormControlLabel
                 control={

@@ -11,10 +11,10 @@ interface Props {
 export const ServerPremiumStats: FunctionComponent<Props> = ({ server }) => {
   const questions = !server
     ? null
-    : server.questions.map(q => {
+    : server.questions.map((q, i) => {
         return (
-          <>
-            <Grid item md={10}>
+          <React.Fragment key={'p-f' + i}>
+            <Grid item md={10} key={'p-g-q' + i}>
               <Typography
                 align="left"
                 component="div"
@@ -23,7 +23,7 @@ export const ServerPremiumStats: FunctionComponent<Props> = ({ server }) => {
                 Question: <em>{q.question}</em>
               </Typography>
             </Grid>
-            <Grid item md={10}>
+            <Grid item md={10} key={'p-g-a' + i}>
               <Typography
                 align="left"
                 component="div"
@@ -32,7 +32,7 @@ export const ServerPremiumStats: FunctionComponent<Props> = ({ server }) => {
                 Answer: <em>{q.answer}</em>
               </Typography>
             </Grid>
-            <Grid item md={10}>
+            <Grid item md={10} key={'p-g-s' + i}>
               <Typography
                 align="left"
                 component="div"
@@ -41,13 +41,13 @@ export const ServerPremiumStats: FunctionComponent<Props> = ({ server }) => {
                 Status: <em>APPROVED</em>
               </Typography>
             </Grid>
-            <Grid item md={12}>
+            <Grid item md={12} key={'p-g-d' + i}>
               <Divider
                 variant="inset"
                 style={{ backgroundColor: 'white', marginBottom: '10px' }}
               />
             </Grid>
-          </>
+          </React.Fragment>
         );
       });
 
@@ -62,15 +62,7 @@ export const ServerPremiumStats: FunctionComponent<Props> = ({ server }) => {
         <Grid item md={12}>
           <Divider />
         </Grid>
-        {/* <Grid item md={12} container direction="row"
-                    justify="space-around"
-                    alignItems="stretch"
-                    alignContent="center"  style={{ padding: '10px', height: '365px' }}>
-                    <CircularProgressWithLabel value={60} />
-                </Grid>
-                <Grid item md={12}>
-                    <Divider />
-                </Grid> */}
+
         <Grid
           item
           container
@@ -169,33 +161,6 @@ export const ServerPremiumStats: FunctionComponent<Props> = ({ server }) => {
               />
             </Grid>
             {questions}
-            {/* <Grid item md={10}>
-              <Typography
-                align="left"
-                component="div"
-                style={{ fontWeight: 600, fontSize: '18px' }}
-              >
-                Question: <em>When did server first launch?</em>
-              </Typography>
-            </Grid>
-            <Grid item md={10}>
-              <Typography
-                align="left"
-                component="div"
-                style={{ fontWeight: 600, fontSize: '18px' }}
-              >
-                Answer: <em>01/20/2021</em>
-              </Typography>
-            </Grid>
-            <Grid item md={10}>
-              <Typography
-                align="left"
-                component="div"
-                style={{ fontWeight: 600, fontSize: '18px' }}
-              >
-                Status: <em>UNDER MODERATION</em>
-              </Typography>
-            </Grid> */}
           </Grid>
         </Grid>
       </Grid>

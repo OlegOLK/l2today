@@ -1,18 +1,33 @@
-import { Typography, Grid, Paper } from '@material-ui/core';
+import { Typography, Grid, Paper, Button, Link } from '@material-ui/core';
 import React, { FunctionComponent } from 'react';
-
+import { useTranslation } from 'react-i18next';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import { ReactComponent as Discord } from './svg/Discord-Logo-White.svg';
 export const Donate: FunctionComponent = () => {
+  const { t } = useTranslation();
+
   return (
     <Grid item md={12}>
       <Paper elevation={3} style={{ height: '40em' }}>
-        {/* <Container maxWidth="lg"> */}
         <Typography style={{ textAlign: 'center' }} variant="h4">
-          To buy premium at this momen you need to contact admin in the discrod
+          {t('advert.header')}
+          <Link
+            href="https://discord.gg/kdsrYj4xj2"
+            target="__blank"
+            rel="noreferrer noopener"
+            style={{ textDecoration: 'none' }}
+          >
+            <Button
+              style={{ backgroundColor: '#7289DA', margin: '5px' }}
+              startIcon={<SvgIcon component={Discord} viewBox="0 0 245 240" />}
+            >
+              Discord
+            </Button>
+          </Link>
         </Typography>
         <Typography style={{ textAlign: 'center' }} variant="h5">
-          Prices for all types of premium is under discussion
+          {t('advert.sub')}
         </Typography>
-        {/* </Container> */}
       </Paper>
     </Grid>
   );

@@ -8,10 +8,11 @@
     "forum": "forum",
     "knowledgebase": "knowledge base",
     "addfeature": "add feature",
-    "earnMoney": "earn money"
+    "earnMoney": "earn money",
+    "advert": "advertisement"
   },
   "leftPanel": {
-    "complexsearch": "create facets",
+    "complexsearch": "create filter (click)",
     "chronicles": " lineage 2 chronicles:",
     "types": "server types:",
     "rates": "server rates:",
@@ -47,5 +48,22 @@
   },
   "banner": {
     "description": "Here you can set full server description with rates, online etc."
+  },
+  "registerDialog": {
+    "dialogHeader": {
+      "reset": "reset",
+      "register": "register",
+      "login": "login"
+    },
+    "dialogSubheader": "You can use your l2new account to add servers and participate in events",
+    "actions": {
+      "forgot": "Forgot password?",
+      "register": "Don't have an account yet? Register",
+      "login": "Already have an account? Login"
+    }
+  },
+  "advert": {
+    "header": "To buy premium at this momen you need to contact admin in the discrod",
+    "sub": "Prices for all types of premium is under discussion"
   }
 }
