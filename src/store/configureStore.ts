@@ -14,7 +14,11 @@ export function configureAppStore() {
   const { run: runSaga } = sagaMiddleware;
 
   // Create the store with saga middleware
-  const middlewares = [sagaMiddleware, logger];
+  const middlewares: Array<any> = [];
+  middlewares.push(sagaMiddleware);
+  if (process.env.NODE_ENV !== 'production') {
+    middlewares.push(logger);
+  }
 
   const enhancers = [
     createInjectorsEnhancer({
