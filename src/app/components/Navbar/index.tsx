@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { sliceKey, reducer } from '../RegisterDialog/slice';
 import { userFromSaga } from '../RegisterDialog/saga';
@@ -32,19 +32,21 @@ import { LeftSlider } from '../Leftpanel/LeftSlider';
 import React from 'react';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import HomeIcon from '@material-ui/icons/Home';
-import AddToQueueIcon from '@material-ui/icons/AddToQueue';
+// import AddToQueueIcon from '@material-ui/icons/AddToQueue';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import InfoIcon from '@material-ui/icons/Info';
 import GTranslateIcon from '@material-ui/icons/GTranslate';
-import MemoryIcon from '@material-ui/icons/Memory';
+// import MemoryIcon from '@material-ui/icons/Memory';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { RegisterDialog } from '../RegisterDialog/register';
 import { selectName, selectIsAuthenticated } from '../RegisterDialog/selectors';
-// import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-// import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import { actions } from '../RegisterDialog/slice';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import { RatesFilterComponent } from 'app/components/Filter/rates.filter';
 import { ChroniclesFilterComponent } from 'app/components/Filter/chronicles.fiter';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -181,6 +183,13 @@ export const NavBar: FunctionComponent<CardProps> = () => {
     history.push(route);
   };
 
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(actions.logout());
+    history.push('/');
+  };
+
   const classes = useStyles();
   return (
     <AppBar position="static" color="transparent">
@@ -299,16 +308,19 @@ export const NavBar: FunctionComponent<CardProps> = () => {
             <Grid item>
               {isAuthenticaed ? (
                 <Button
-                  color="primary"
-                  startIcon={<AccountCircleIcon color="primary" />}
-                  onClick={e => navigateTo(e, '/dashboard')}
+                  // color="primary"
+                  className={classes.button}
+                  startIcon={<AccountCircleIcon color="inherit" />}
+                  onClick={handleLogout}
+                  // onClick={e => navigateTo(e, '/dashboard')}
                 >
                   {userName}
                 </Button>
               ) : (
                 <Button
-                  color="primary"
-                  startIcon={<LockOpenIcon color="primary" />}
+                  // color="primary"
+                  className={classes.button}
+                  startIcon={<LockOpenIcon color="inherit" />}
                   onClick={openDialog}
                 >
                   {t('nav.login')}
@@ -318,7 +330,8 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               <Button
                 aria-controls="language-selector"
                 aria-haspopup="true"
-                color="primary"
+                // color="primary"
+                className={classes.button}
                 onClick={handleSelectLanguage}
                 startIcon={<GTranslateIcon />}
                 endIcon={<ArrowDropDownIcon />}
@@ -350,7 +363,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
 
           <Button
             onClick={toggleFiltersDrawer(true)}
-            className={classes.filterButton}
+            className={clsx(classes.filterButton, classes.button)}
           >
             Фильтр
           </Button>
@@ -378,11 +391,17 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 </ListItemIcon>
                 <ListItemText color="primary" primary={t('nav.home')} />
               </ListItem>
-              <ListItem button onClick={e => navigateTo(e, '/addserver')}>
+              {/* <ListItem button onClick={e => navigateTo(e, '/addserver')}>
                 <ListItemIcon>
                   <AddToQueueIcon color="primary" />
                 </ListItemIcon>
                 <ListItemText color="primary" primary={t('nav.addserver')} />
+              </ListItem> */}
+              <ListItem button onClick={e => navigateTo(e, '/advertisement')}>
+                <ListItemIcon>
+                  <TrendingUpIcon color="primary" />
+                </ListItemIcon>
+                <ListItemText color="primary" primary={t('nav.advert')} />
               </ListItem>
               <ListItem button>
                 <ListItemIcon>
@@ -399,11 +418,18 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                   primary={t('nav.knowledgebase')}
                 />
               </ListItem>
-              <ListItem button>
+              {/* <ListItem button>
                 <ListItemIcon>
                   <MemoryIcon color="primary" />
                 </ListItemIcon>
                 <ListItemText color="primary" primary={t('nav.addfeature')} />
+              </ListItem> */}
+
+              <ListItem button onClick={e => navigateTo(e, '/events')}>
+                <ListItemIcon>
+                  <AttachMoneyIcon color="primary" />
+                </ListItemIcon>
+                <ListItemText color="primary" primary={t('nav.earnMoney')} />
               </ListItem>
             </List>
             <Divider />
@@ -413,7 +439,11 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               aria-label="secondary mailbox folders"
             >
               {isAuthenticaed ? (
-                <ListItem button onClick={e => navigateTo(e, '/dashboard')}>
+                <ListItem
+                  button
+                  // onClick={e => navigateTo(e, '/dashboard')}
+                  onClick={handleLogout}
+                >
                   <ListItemIcon>
                     <AccountCircleIcon color="primary" />
                   </ListItemIcon>

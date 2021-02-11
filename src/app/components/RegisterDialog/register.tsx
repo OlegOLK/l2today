@@ -214,7 +214,7 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const isLoading = useSelector(selectIsLoading);
   const serverErrors = useSelector(selectError);
-  const history = useHistory();
+  // const history = useHistory();
   const googleResponse = response => {
     dispatch(
       actions.loginGoogle({ accessToken: response.getAuthResponse().id_token }),
@@ -232,7 +232,7 @@ export const RegisterDialog: FunctionComponent<RegisterDialogProps> = ({
   useEffectOnAuthenticated(() => {
     if (isAuthenticated && open) {
       close();
-      history.push('/dashboard');
+      // history.push('/dashboard');
     }
   });
 
