@@ -1,15 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { Paper, Typography, List } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 
-import { ServerRowComponent } from '../ServerRow/index';
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
-import StarsIcon from '@material-ui/icons/Stars';
+import { ServerRowComponent } from '../ServerRow/Server.Row';
 import { ServersList } from 'types/Server';
 import { useTranslation } from 'react-i18next';
-function Alert(props: AlertProps) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,6 +31,14 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#D9AFD9',
       backgroundImage: 'linear-gradient(90deg, #8BC6EC 0%, #9599E2 100%)',
     },
+    boxShadow: {
+      boxShadow:
+        'rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px',
+      boxSizing: 'border-box',
+    },
+    vip: {
+      backgroundColor: '#ff9d2f',
+    },
   }),
 );
 
@@ -56,17 +59,49 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
   const classes = useStyles();
   const { t } = useTranslation();
   return (
-    <Paper>
-      <Typography component="div">
-        <Alert
-          severity="success"
-          className={isPremiumPanel() ? classes.vipAlert : classes.normalAlert}
-          icon={<StarsIcon fontSize="inherit" />}
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      style={{ width: '100%', fontFamily: "'Google Sans', sans-serif" }}
+    >
+      <Grid item container xs={12}>
+        <Grid
+          item
+          xs={1}
+          style={{
+            height: '100%',
+            padding: 0,
+            color: 'white',
+            borderRadius: '15% 15% 0 0',
+          }}
+          className={isPremiumPanel() ? classes.vip : ''}
         >
-          {t(`serverPanel.${groupped.label}`)}
-        </Alert>
-      </Typography>
-      <List component="nav" aria-label={'list-' + groupped.sortOrder}>
+          {isPremiumPanel() ? (
+            <Typography
+              style={{
+                fontSize: '20px',
+                textAlign: 'center',
+                fontFamily: "'Google Sans', sans-serif",
+              }}
+            >
+              vip
+            </Typography>
+          ) : null}
+        </Grid>
+        <Grid item style={{ flexGrow: 1 }}>
+          <Typography
+            style={{
+              fontSize: '20px',
+              textAlign: 'center',
+              fontFamily: "'Google Sans', sans-serif",
+            }}
+          >
+            {t(`serverPanel.${groupped.label}`)}
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid item container xs={12}>
         {groupped.servers.map((server, i) => {
           return (
             <ServerRowComponent
@@ -75,7 +110,54 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
             />
           );
         })}
-      </List>
-    </Paper>
+      </Grid>
+    </Grid>
+    //     <div class="col mb-5  rounded shadow-sm me-3 server-list">
+    //     <div class="row border-bottom" style="align-items: center; text-align: center;">
+    //         <div class="col col-1 rounded-top">
+    //             <!-- vip -->
+    //         </div>
+    //         <div class="col">
+    //             Open Soon
+    //         </div>
+    //     </div>
+    //     <div class="server-list-root-soon">
+    //     </div>
+    // </div>
+
+    // <Paper>
+    //   <Typography component="div">
+    //     <Alert
+    //       severity="success"
+    //       className={isPremiumPanel() ? classes.vipAlert : classes.normalAlert}
+    //       icon={<StarsIcon fontSize="inherit" />}
+    //     >
+    //       {t(`serverPanel.${groupped.label}`)}
+    //     </Alert>
+    //   </Typography>
+    //   <List component="nav" aria-label={'list-' + groupped.sortOrder}>
+    //     {groupped.servers.map((server, i) => {
+    //       return (
+    //         <ServerRowComponent
+    //           key={'row-' + server.name + i}
+    //           server={server}
+    //         />
+    //       );
+    //     })}
+    //   </List>
+    // </Paper>
+    // <Grid item md={5}></Grid>
+    // <div class="col mb-5  rounded shadow-sm me-3 server-list">
+    //   <div class="row border-bottom" style="align-items: center; text-align: center;">
+    //     <div class="col col-1 rounded-top">
+    //       {/* <!-- vip --> */}
+    //     </div>
+    //     <div class="col">
+    //       Open Soon
+    //     </div>
+    //   </div>
+    //   <div class="server-list-root-soon">
+    //   </div>
+    // </div>
   );
 };

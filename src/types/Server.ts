@@ -25,6 +25,7 @@ export interface Server {
   openDate: string;
   features: string[];
   premium: Premium;
+  type: string;
   uri: string;
   id: string;
 }

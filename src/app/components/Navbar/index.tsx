@@ -42,8 +42,8 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { RegisterDialog } from '../RegisterDialog/register';
 import { selectName, selectIsAuthenticated } from '../RegisterDialog/selectors';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+// import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+// import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -71,6 +71,21 @@ const useStyles = makeStyles(theme => ({
   },
   list: {
     textTransform: 'uppercase',
+  },
+  button: {
+    fontFamily: "'Google Sans', sans-serif",
+    fontSize: '20px',
+    textTransform: 'none',
+    fontWeight: 400,
+    color: 'black',
+    textDecoration: 'none',
+    '& > span > a': {
+      fontFamily: "'Google Sans', sans-serif",
+      fontSize: '20px',
+      textTransform: 'none',
+      fontWeight: 400,
+      textDecoration: 'none',
+    },
   },
 }));
 
@@ -174,31 +189,35 @@ export const NavBar: FunctionComponent<CardProps> = () => {
             alignItems="center"
             className={classes.root}
           >
-            <Grid item></Grid>
             <Grid item>
               <Button
-                color="primary"
+                className={classes.button}
+                // color="primary"
                 // component={Link}
                 onClick={e => navigateTo(e, '/')}
-                startIcon={<HomeIcon color="primary" />}
+                // startIcon={<HomeIcon color="inherit" />}
               >
                 {t('nav.home')}
               </Button>
+            </Grid>
+            <Grid item>
               {isAuthenticaed ? (
                 <Button
-                  color="primary"
+                  // color="primary"
                   // component={Link}
                   // to={'/addserver'}
+                  className={classes.button}
                   onClick={e => navigateTo(e, '/addserver')}
-                  startIcon={<AddToQueueIcon color="primary" />}
+                  // startIcon={<AddToQueueIcon color="inherit" />}
                 >
                   {t('nav.addserver')}
                 </Button>
               ) : (
                 <Button
-                  color="primary"
+                  // color="primary"
                   onClick={openDialog}
-                  startIcon={<AddToQueueIcon color="primary" />}
+                  className={classes.button}
+                  // startIcon={<AddToQueueIcon color="inherit" />}
                 >
                   {t('nav.addserver')}
                 </Button>
@@ -206,21 +225,20 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               <Button
                 aria-controls="simple-menu"
                 aria-haspopup="true"
-                color="primary"
-                startIcon={<TrendingUpIcon color="primary" />}
+                // color="primary"
+                className={classes.button}
+                // startIcon={<TrendingUpIcon color="inherit" />}
                 onClick={e => navigateTo(e, '/advertisement')}
-                // onClick={handleClick}
-                // startIcon={<QuestionAnswerIcon color="primary" />}
-                // endIcon={<ArrowDropDownIcon color="primary" />}
               >
                 {t('nav.advert')}
               </Button>
               <Button
                 aria-controls="simple-menu"
                 aria-haspopup="true"
-                color="primary"
+                // color="primary"
                 onClick={handleClick}
-                startIcon={<QuestionAnswerIcon color="primary" />}
+                className={classes.button}
+                // startIcon={<QuestionAnswerIcon color="inherit" />}
                 endIcon={<ArrowDropDownIcon color="primary" />}
               >
                 {t('nav.discuss')}
@@ -250,23 +268,28 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               {/* <Button disabled startIcon={<InfoIcon color="primary" />}>
                 {t('nav.knowledgebase')}
               </Button> */}
-              <Button startIcon={<MemoryIcon color="primary" />}>
+              <Button
+                className={classes.button}
+                // startIcon={<MemoryIcon color="primary" />}
+              >
                 <MaterialLink
                   href="https://discord.gg/GEgCbHkWb4"
                   target="__blank"
                   rel="noreferrer noopener"
-                  color="primary"
+                  className={classes.button}
+                  // color="primary"
                 >
                   {t('nav.addfeature')}
                 </MaterialLink>
               </Button>
               <Button
-                color="primary"
+                // color="primary"
                 // component={Link}
                 // to={`/events`}
+                className={classes.button}
                 onClick={e => navigateTo(e, '/events')}
-                startIcon={<AttachMoneyIcon color="primary" />}
-                endIcon={<AttachMoneyIcon color="primary" />}
+                // startIcon={<AttachMoneyIcon color="primary" />}
+                // endIcon={<AttachMoneyIcon color="primary" />}
               >
                 {t('nav.earnMoney')}
               </Button>

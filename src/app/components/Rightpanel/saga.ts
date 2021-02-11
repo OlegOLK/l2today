@@ -21,7 +21,7 @@ export function* getRepos() {
 
   const requestURL = `${
     process.env.REACT_APP_SERVERSFILE ||
-    'https://raw.githubusercontent.com/firebricks/l2new/main/servers.json'
+    'https://raw.githubusercontent.com/firebricks/tempdata/main/l2new.json'
   }`;
   try {
     // Call our request helper (see 'utils/request')
@@ -245,9 +245,19 @@ function sort(servers: Server[], filter: string) {
   groupped.push({
     servers: soon.filter(x => {
       var open = dfn.parseISO(x.openDate);
-      return dfn.compareAsc(open, sevenPlus) === -1;
+      return dfn.isTomorrow(open);
     }),
     sortOrder: 4,
+    label: 'ЗАВТРА',
+    panel: 0,
+  });
+
+  groupped.push({
+    servers: soon.filter(x => {
+      var open = dfn.parseISO(x.openDate);
+      return dfn.compareAsc(open, sevenPlus) === -1;
+    }),
+    sortOrder: 5,
     label: 'БЛИЖАЙШИЕ 7 ДНЕЙ',
     panel: 0,
   });
@@ -260,7 +270,7 @@ function sort(servers: Server[], filter: string) {
       //   return x;
       // }
     }),
-    sortOrder: 5,
+    sortOrder: 6,
     label: 'ПРЕДЫДУЩИЕ 7 ДНЕЙ',
     panel: 1,
   });
@@ -273,7 +283,7 @@ function sort(servers: Server[], filter: string) {
       //   return x;
       // }
     }),
-    sortOrder: 7,
+    sortOrder: 8,
     label: 'НЕДЕЛЮ НАЗАД И БОЛЕЕ',
     panel: 1,
   });
@@ -287,7 +297,7 @@ function sort(servers: Server[], filter: string) {
       //   return x;
       // }
     }),
-    sortOrder: 6,
+    sortOrder: 7,
     label: 'ЧЕРЕЗ НЕДЕЛЮ И БОЛЕЕ',
     panel: 0,
   });

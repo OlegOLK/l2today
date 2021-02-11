@@ -49,7 +49,7 @@ export const i18n = i18next
   .init(
     {
       resources: translationsJson,
-      fallbackLng: 'en',
+      fallbackLng: 'ru',
       debug:
         process.env.NODE_ENV !== 'production' &&
         process.env.NODE_ENV !== 'test',
@@ -59,6 +59,6 @@ export const i18n = i18next
       },
     },
     () => {
-      convertLanguageJsonToObject({ en, ru }, translations);
+      convertLanguageJsonToObject({ ru, en }, translations);
     },
   );

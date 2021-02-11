@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Container, Typography } from '@material-ui/core';
 import { ServerList } from '../ServerList/index';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
@@ -58,79 +58,87 @@ export const RightPanel: FunctionComponent<RightPanelProps> = () => {
   };
 
   return (
-    <Grid container alignItems="flex-start" item lg={10} xl={10} spacing={2}>
-      {isLoading ? (
-        <>
-          <Grid container item lg={6} xl={6} spacing={2}>
-            <Grid item lg={12} md={12} sm={12} xs={12}>
-              <Skeleton width="100%" variant="text" height={50} />
-              <Skeleton width="100%" height="50%" variant="rect" />
-              <Skeleton width="100%" variant="text" height={50} />
-              <Skeleton width="100%" height="50%" variant="rect" />
+    <Container maxWidth="lg">
+      <Grid
+        container
+        alignItems="flex-start"
+        justify="center"
+        spacing={2}
+        style={{ marginTop: '15px' }}
+      >
+        {isLoading ? (
+          <>
+            <Grid container item lg={6} xl={6} spacing={2}>
+              <Grid item lg={12} md={12} sm={12} xs={12}>
+                <Skeleton width="100%" variant="text" height={50} />
+                <Skeleton width="100%" height="50%" variant="rect" />
+                <Skeleton width="100%" variant="text" height={50} />
+                <Skeleton width="100%" height="50%" variant="rect" />
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid container item lg={6} xl={6} spacing={2}>
-            <Grid item lg={12} md={12} sm={12} xs={12}>
-              <Skeleton width="100%" variant="text" height={50} />
-              <Skeleton width="100%" height="50%" variant="rect" />
-              <Skeleton width="100%" variant="text" height={50} />
-              <Skeleton width="100%" height="50%" variant="rect" />
+            <Grid container item lg={6} xl={6} spacing={2}>
+              <Grid item lg={12} md={12} sm={12} xs={12}>
+                <Skeleton width="100%" variant="text" height={50} />
+                <Skeleton width="100%" height="50%" variant="rect" />
+                <Skeleton width="100%" variant="text" height={50} />
+                <Skeleton width="100%" height="50%" variant="rect" />
+              </Grid>
             </Grid>
+          </>
+        ) : !any() ? (
+          <Grid container item lg={12} xl={12} spacing={2} justify="center">
+            <Typography align="center" display="block" variant="h2">
+              4
+              <span role="img" aria-label="Crying Face">
+                😢
+              </span>
+              4
+            </Typography>
           </Grid>
-        </>
-      ) : !any() ? (
-        <Grid container item lg={12} xl={12} spacing={2} justify="center">
-          <Typography align="center" display="block" variant="h2">
-            4
-            <span role="img" aria-label="Crying Face">
-              😢
-            </span>
-            4
-          </Typography>
-        </Grid>
-      ) : (
-        <>
-          <Grid
-            item
-            container
-            alignItems="flex-start"
-            lg={6}
-            xl={6}
-            spacing={2}
-          >
-            {soon().map(server => {
-              return (
-                <Grid key={'grid' + server.sortOrder} item xs={12}>
-                  <ServerList
-                    key={'serverlist' + server.sortOrder}
-                    groupped={server}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
+        ) : (
+          <>
+            <Grid
+              item
+              container
+              alignItems="flex-start"
+              lg={6}
+              xl={6}
+              spacing={2}
+            >
+              {soon().map(server => {
+                return (
+                  <Grid key={'grid' + server.sortOrder} item xs={12}>
+                    <ServerList
+                      key={'serverlist' + server.sortOrder}
+                      groupped={server}
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
 
-          <Grid
-            item
-            container
-            alignItems="flex-start"
-            lg={6}
-            xl={6}
-            spacing={2}
-          >
-            {already().map(server => {
-              return (
-                <Grid key={'grid' + server.sortOrder} item xs={12}>
-                  <ServerList
-                    key={'serverlist' + server.sortOrder}
-                    groupped={server}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </>
-      )}
-    </Grid>
+            <Grid
+              item
+              container
+              alignItems="flex-start"
+              lg={6}
+              xl={6}
+              spacing={2}
+            >
+              {already().map(server => {
+                return (
+                  <Grid key={'grid' + server.sortOrder} item xs={12}>
+                    <ServerList
+                      key={'serverlist' + server.sortOrder}
+                      groupped={server}
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </>
+        )}
+      </Grid>
+    </Container>
   );
 };

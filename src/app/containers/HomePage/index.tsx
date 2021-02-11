@@ -1,15 +1,15 @@
 import React from 'react';
-import { Grid, Hidden } from '@material-ui/core';
-import { LeftPanel } from '../../components/Leftpanel/index';
+import { Grid } from '@material-ui/core';
 import { RightPanel } from '../../components/Rightpanel/index';
 
 export function HomePage() {
   return (
     <Grid container direction="row" justify="space-between" spacing={2}>
-      <Hidden mdDown>
+      {/* <Hidden mdDown>
         <LeftPanel />
-      </Hidden>
+      </Hidden> */}
       <RightPanel />
+      {/* <RightPanel /> */}
     </Grid>
   );
 }

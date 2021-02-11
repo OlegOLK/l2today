@@ -15,9 +15,10 @@ import { HomePage } from './containers/HomePage/index';
 import { AddServerPage } from './containers/AddServerPage/index';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 
-import { Container, Box, Hidden } from '@material-ui/core';
+import { Container, Box } from '@material-ui/core';
 import { NavBar } from './components/Navbar/index';
-import { Banner } from './components/Banner/index';
+import { HeaderComponent } from './components/Header/header';
+import { FilterComponent } from './components/Filter/filter';
 import { UserDashboardPage } from './containers/UserDashboard/Loadable';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useLocation } from 'react-router-dom';
@@ -44,12 +45,17 @@ export function App() {
   return (
     <>
       <CssBaseline />
-      <Hidden mdDown>
-        <Banner />
-      </Hidden>
-      <Box mb={1}>
+      <Box>
         <NavBar />
       </Box>
+      <Box mb={1}>
+        <HeaderComponent />
+        <FilterComponent />
+      </Box>
+      {/* <Hidden mdDown>
+        <Banner />
+      </Hidden> */}
+
       <Container maxWidth="xl">
         <Switch>
           <Route path="/addserver" component={AddServerPage} />
