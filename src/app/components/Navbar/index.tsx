@@ -74,14 +74,12 @@ const useStyles = makeStyles(theme => ({
     textTransform: 'uppercase',
   },
   button: {
-    fontFamily: "'Google Sans', sans-serif",
     fontSize: '20px',
     textTransform: 'none',
     fontWeight: 400,
     color: 'black',
     textDecoration: 'none',
     '& > span > a': {
-      fontFamily: "'Google Sans', sans-serif",
       fontSize: '20px',
       textTransform: 'none',
       fontWeight: 400,
@@ -89,7 +87,6 @@ const useStyles = makeStyles(theme => ({
     },
   },
   filterButton: {
-    fontFamily: "'Google Sans', sans-serif",
     fontSize: '20px',
     textTransform: 'none',
     fontWeight: 400,
@@ -208,7 +205,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
               </Button>
             </Grid>
             <Grid item>
-              {isAuthenticaed ? (
+              {/* {isAuthenticaed ? (
                 <Button
                   // color="primary"
                   // component={Link}
@@ -221,14 +218,12 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 </Button>
               ) : (
                 <Button
-                  // color="primary"
                   onClick={openDialog}
                   className={classes.button}
-                  // startIcon={<AddToQueueIcon color="inherit" />}
                 >
                   {t('nav.addserver')}
                 </Button>
-              )}
+              )} */}
               <Button
                 aria-controls="simple-menu"
                 aria-haspopup="true"

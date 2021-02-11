@@ -10,7 +10,6 @@ import { PremiumRow } from './rows/premium.row';
 const useStyles = makeStyles(theme =>
   createStyles({
     serverRow: {
-      fontFamily: "'Google Sans', sans-serif",
       color: 'white',
       position: 'relative',
       transition: 'all .2s ease-in-out',

@@ -18,13 +18,13 @@ import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { Container, Box, Hidden } from '@material-ui/core';
 import { NavBar } from './components/Navbar/index';
 import { HeaderComponent } from './components/Header/header';
-import { FilterComponent } from './components/Filter/filter';
 import { UserDashboardPage } from './containers/UserDashboard/Loadable';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useLocation } from 'react-router-dom';
 import { EventsPage } from './containers/EventsPage/Loadable';
 import { Footer } from './components/Footer';
 import { AdvertisementPage } from './containers/AdvertisementPage/index';
+
 declare global {
   interface Window {
     gtag: any;
@@ -51,7 +51,6 @@ export function App() {
       <Hidden mdDown>
         <Box mb={1}>
           <HeaderComponent />
-          <FilterComponent />
         </Box>
       </Hidden>
       {/* <Hidden mdDown>

@@ -9,7 +9,6 @@ import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles(() =>
   createStyles({
     button: {
-      fontFamily: "'Google Sans', sans-serif",
       fontSize: '20px',
       textTransform: 'none',
       fontWeight: 400,

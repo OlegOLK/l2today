@@ -59,12 +59,7 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
   const classes = useStyles();
   const { t } = useTranslation();
   return (
-    <Grid
-      container
-      direction="row"
-      justify="center"
-      style={{ width: '100%', fontFamily: "'Google Sans', sans-serif" }}
-    >
+    <Grid container direction="row" justify="center" style={{ width: '100%' }}>
       <Grid item container xs={12}>
         <Grid
           item
@@ -84,7 +79,6 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
               style={{
                 fontSize: '20px',
                 textAlign: 'center',
-                fontFamily: "'Google Sans', sans-serif",
               }}
             >
               vip
@@ -96,7 +90,6 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
             style={{
               fontSize: '20px',
               textAlign: 'center',
-              fontFamily: "'Google Sans', sans-serif",
             }}
           >
             {t(`serverPanel.${groupped.label}`)}

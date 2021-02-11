@@ -24,6 +24,35 @@ import { BrowserRouter } from 'react-router-dom';
 // Initialize languages
 import './locales/i18n';
 
+import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Google Sans',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
+  // overrides: {
+  //   MuiCssBaseline: {
+  //     '@global': {
+  //       body: {
+  //         fontFamily: "'Google Sans', sans-serif"
+  //       },
+  //     },
+  //   },
+  // },
+});
+
 const store = configureAppStore();
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
@@ -33,11 +62,13 @@ interface Props {
 const ConnectedApp = ({ Component }: Props) => (
   <Provider store={store}>
     <HelmetProvider>
-      <React.StrictMode>
-        <BrowserRouter>
-          <Component />
-        </BrowserRouter>
-      </React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <React.StrictMode>
+          <BrowserRouter>
+            <Component />
+          </BrowserRouter>
+        </React.StrictMode>
+      </ThemeProvider>
     </HelmetProvider>
   </Provider>
 );

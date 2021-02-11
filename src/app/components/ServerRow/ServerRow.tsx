@@ -9,7 +9,6 @@ import clsx from 'clsx';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     serverRow: {
-      fontFamily: "'Google Sans', sans-serif",
       color: 'white',
       position: 'relative',
       transition: 'all .2s ease-in-out',

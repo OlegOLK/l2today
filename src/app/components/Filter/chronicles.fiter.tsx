@@ -13,7 +13,6 @@ import { CHRONICLES } from 'app/mocks/chronicles';
 const useStyles = makeStyles(() =>
   createStyles({
     button: {
-      fontFamily: "'Google Sans', sans-serif",
       fontSize: '20px',
       textTransform: 'none',
       fontWeight: 400,

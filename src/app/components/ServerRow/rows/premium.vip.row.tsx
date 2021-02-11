@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
         content: '""',
         position: 'absolute',
         left: '-30%',
-        width: '100%',
+        width: '130%',
         height: '100%',
         opacity: 0,
         transform: 'rotate(30deg)',

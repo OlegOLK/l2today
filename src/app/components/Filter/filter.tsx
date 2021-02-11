@@ -1,20 +1,24 @@
 import React from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Divider } from '@material-ui/core';
-import { RatesFilterComponent } from './rates.filter';
-import { ChroniclesFilterComponent } from './chronicles.fiter';
-import { TypesFilterComponent } from './types.filter';
-import { CustomFilterComponent } from './custom.filter';
+import { Grid, Paper } from '@material-ui/core';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles(theme =>
   createStyles({
     section: {
       width: '100%',
-      marginTop: '-5vw',
+
+      [theme.breakpoints.up('lg')]: {
+        marginTop: '-5vw',
+      },
+      [theme.breakpoints.down('md')]: {
+        marginTop: '3vw',
+      },
+      [theme.breakpoints.down('sm')]: {
+        marginTop: '5vw',
+      },
     },
     root: {
       zIndex: 100,
-      fontFamily: "'Google Sans', sans-serif",
       fontSize: '20px',
     },
     wrapper: {
@@ -22,7 +26,6 @@ const useStyles = makeStyles(() =>
       zIndex: 100,
     },
     button: {
-      fontFamily: "'Google Sans', sans-serif",
       fontSize: '20px',
       textTransform: 'none',
       fontWeight: 400,
@@ -30,7 +33,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-export function FilterComponent() {
+export function FilterComponent(props) {
   const classes = useStyles();
 
   return (
@@ -49,24 +52,7 @@ export function FilterComponent() {
               alignItems="center"
               className={classes.wrapper}
             >
-              <Grid item>
-                <RatesFilterComponent />
-              </Grid>
-              <Divider orientation="vertical" flexItem />
-              <Grid item>
-                <ChroniclesFilterComponent />
-              </Grid>
-              <Divider orientation="vertical" flexItem />
-              <Grid item>
-                <TypesFilterComponent />
-              </Grid>
-              <Divider orientation="vertical" flexItem />
-              <Grid item>Дата</Grid>
-              <Divider orientation="vertical" flexItem />
-              <CustomFilterComponent />
-              {/* <Grid item>
-                                <CustomFilterComponent />
-                            </Grid> */}
+              {props.children}
             </Grid>
           </Paper>
         </Grid>
