@@ -76,7 +76,7 @@ export function ChroniclesFilterComponent() {
         anchorEl={anchorRef.current}
         role={undefined}
         transition
-        disablePortal
+        style={{ zIndex: 1919191 }}
       >
         {({ TransitionProps, placement }) => (
           <Grow

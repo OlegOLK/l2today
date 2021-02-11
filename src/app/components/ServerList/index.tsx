@@ -68,9 +68,11 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
       <Grid item container xs={12}>
         <Grid
           item
-          xs={1}
+          xs={2}
+          sm={2}
+          md={1}
           style={{
-            height: '100%',
+            height: '',
             padding: 0,
             color: 'white',
             borderRadius: '15% 15% 0 0',
@@ -89,7 +91,7 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
             </Typography>
           ) : null}
         </Grid>
-        <Grid item style={{ flexGrow: 1 }}>
+        <Grid item xs={10} sm={10} md={11}>
           <Typography
             style={{
               fontSize: '20px',

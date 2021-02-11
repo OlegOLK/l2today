@@ -30,7 +30,6 @@ import { useTranslation } from 'react-i18next';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { LeftSlider } from '../Leftpanel/LeftSlider';
 import React from 'react';
-import BuildIcon from '@material-ui/icons/Build';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import HomeIcon from '@material-ui/icons/Home';
 import AddToQueueIcon from '@material-ui/icons/AddToQueue';
@@ -44,6 +43,8 @@ import { RegisterDialog } from '../RegisterDialog/register';
 import { selectName, selectIsAuthenticated } from '../RegisterDialog/selectors';
 // import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 // import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import { RatesFilterComponent } from 'app/components/Filter/rates.filter';
+import { ChroniclesFilterComponent } from 'app/components/Filter/chronicles.fiter';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -86,6 +87,12 @@ const useStyles = makeStyles(theme => ({
       fontWeight: 400,
       textDecoration: 'none',
     },
+  },
+  filterButton: {
+    fontFamily: "'Google Sans', sans-serif",
+    fontSize: '20px',
+    textTransform: 'none',
+    fontWeight: 400,
   },
 }));
 
@@ -346,9 +353,15 @@ export const NavBar: FunctionComponent<CardProps> = () => {
           </IconButton>
           <Divider orientation="vertical" flexItem />
 
-          <Button startIcon={<BuildIcon />} onClick={toggleFiltersDrawer(true)}>
-            Filters
+          <Button
+            onClick={toggleFiltersDrawer(true)}
+            className={classes.filterButton}
+          >
+            Фильтр
           </Button>
+
+          <RatesFilterComponent />
+          <ChroniclesFilterComponent />
           <LeftSlider
             openned={filtersOpen}
             toggleDrawer={toggleFiltersDrawer}

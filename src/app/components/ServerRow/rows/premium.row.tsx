@@ -31,12 +31,12 @@ export function PremiumRow(props) {
   const classes = useStyles();
   return (
     <Grid item xs={12} container className={classes.regularServerRow}>
-      <Grid item md={1} className={classes.regularVipStart}>
+      <Grid item sm={1} xs={1} md={1} className={classes.regularVipStart}>
         <div className={classes.starWrapper}>
           <SvgIcon key={'icon'} component={star} viewBox="0 0 16 16" />
         </div>
       </Grid>
-      <Grid item md={11}>
+      <Grid item md={11} sm={11} xs={11}>
         <Grid
           item
           container

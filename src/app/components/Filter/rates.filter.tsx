@@ -73,11 +73,14 @@ export function RatesFilterComponent() {
         {/* Rates */}
       </Button>
       <Popper
+        id="rates-popper"
         open={open}
         anchorEl={anchorRef.current}
         role={undefined}
         transition
-        disablePortal
+        // disablePortal
+        // className={classes.Popper}
+        style={{ zIndex: 191919 }}
       >
         {({ TransitionProps, placement }) => (
           <Grow

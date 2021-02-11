@@ -2,11 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { Server } from 'types/Server';
 import { Typography, Grid } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 import { RegularRow } from './rows/regular.row';
 import { PremiumVipRow } from './rows/premium.vip.row';
 import { PremiumRow } from './rows/premium.row';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles(theme =>
   createStyles({
     serverRow: {
       fontFamily: "'Google Sans', sans-serif",
@@ -34,6 +35,14 @@ const useStyles = makeStyles(() =>
       fontSize: '20px',
       textOverflow: 'elipsis',
       wordBreak: 'keep-all',
+    },
+    textAligment: {
+      [theme.breakpoints.down('sm')]: {
+        textAlign: 'center',
+      },
+      [theme.breakpoints.up('md')]: {
+        textAlign: 'left',
+      },
     },
   }),
 );
@@ -95,9 +104,12 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
       <>
         <Grid
           item
+          md={3}
+          sm={5}
+          xs={5}
           zeroMinWidth
-          style={{ textAlign: 'left', marginLeft: '10px', flexGrow: 1 }}
-          className={classes.regularText}
+          style={{ marginLeft: '10px', flexGrow: 1 }}
+          className={clsx(classes.regularText, classes.textAligment)}
         >
           <Typography noWrap variant={'button'}>
             {server.name.toUpperCase()}
@@ -105,28 +117,32 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
         </Grid>
         <Grid
           item
-          xs={2}
+          md={2}
+          sm={6}
+          xs={6}
           zeroMinWidth
-          className={classes.regularText}
-          style={{ textAlign: 'left' }}
+          className={clsx(classes.regularText, classes.textAligment)}
         >
           <Typography noWrap>{getMainRate()}</Typography>
         </Grid>
         <Grid
           item
-          xs={2}
+          md={3}
+          sm={5}
+          xs={5}
           zeroMinWidth
-          className={classes.regularText}
-          style={{ textAlign: 'left' }}
+          className={clsx(classes.regularText, classes.textAligment)}
         >
           <Typography noWrap>{server.chronicles}</Typography>
         </Grid>
         <Grid
           item
-          xs={3}
+          md={3}
+          sm={5}
+          xs={5}
           zeroMinWidth
-          style={{ textAlign: 'right', paddingRight: '5px' }}
-          className={classes.regularText}
+          style={{ paddingRight: '5px' }}
+          className={clsx(classes.regularText, classes.textAligment)}
         >
           <Typography noWrap align="right">
             {server.openDate}

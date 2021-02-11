@@ -76,7 +76,8 @@ export function TypesFilterComponent() {
         anchorEl={anchorRef.current}
         role={undefined}
         transition
-        disablePortal
+        // disablePortal
+        style={{ zIndex: 1919191 }}
       >
         {({ TransitionProps, placement }) => (
           <Grow

@@ -15,7 +15,7 @@ import { HomePage } from './containers/HomePage/index';
 import { AddServerPage } from './containers/AddServerPage/index';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 
-import { Container, Box } from '@material-ui/core';
+import { Container, Box, Hidden } from '@material-ui/core';
 import { NavBar } from './components/Navbar/index';
 import { HeaderComponent } from './components/Header/header';
 import { FilterComponent } from './components/Filter/filter';
@@ -48,15 +48,17 @@ export function App() {
       <Box>
         <NavBar />
       </Box>
-      <Box mb={1}>
-        <HeaderComponent />
-        <FilterComponent />
-      </Box>
+      <Hidden mdDown>
+        <Box mb={1}>
+          <HeaderComponent />
+          <FilterComponent />
+        </Box>
+      </Hidden>
       {/* <Hidden mdDown>
         <Banner />
       </Hidden> */}
 
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" style={{ minHeight: '500px' }}>
         <Switch>
           <Route path="/addserver" component={AddServerPage} />
           <Route path="/dashboard" component={UserDashboardPage} />
@@ -67,9 +69,11 @@ export function App() {
           <Route component={NotFoundPage} />
         </Switch>
       </Container>
-      <Box mb={1}>
-        <Footer />
-      </Box>
+      <Hidden xsDown>
+        <Box mb={1}>
+          <Footer />
+        </Box>
+      </Hidden>
     </>
   );
 }

@@ -6,7 +6,7 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   edgeMask: {
     height: '200px',
     marginBottom: '-90px',
@@ -27,11 +27,28 @@ const useStyles = makeStyles(() => ({
     backgroundImage: 'url(/assets/valley-white.svg)',
   },
   footer: {
-    height: '500px',
+    minHeight: '500px',
     width: '100%',
     bottom: '0',
+    marginTop: '50px',
     backgroundImage: 'linear-gradient(#ff9d2f, #ff6126)',
-    clipPath: 'polygon(0 calc(100% - 18vw), 100% 0, 100% 100%, 0% 100%)',
+    [theme.breakpoints.down('xs')]: {
+      minHeight: '950px',
+      // clipPath: 'polygon(0 calc(100% - 50vw), 100% 0, 100% 100%, 0% 100%)',
+    },
+    [theme.breakpoints.down('sm')]: {
+      // minHeight: '800px',
+      // clipPath: 'polygon(0 calc(100% - 50vw), 100% 0, 100% 100%, 0% 100%)',
+    },
+    [theme.breakpoints.up('md')]: {
+      clipPath: 'polygon(0 calc(100% - 35vw), 100% 0, 100% 100%, 0% 100%)',
+    },
+    [theme.breakpoints.up('lg')]: {
+      clipPath: 'polygon(0 calc(100% - 26vw), 100% 0, 100% 100%, 0% 100%)',
+    },
+    [theme.breakpoints.up('xl')]: {
+      clipPath: 'polygon(0 calc(100% - 18vw), 100% 0, 100% 100%, 0% 100%)',
+    },
     position: 'relative',
   },
 }));
@@ -71,12 +88,13 @@ export const Footer: FunctionComponent = () => {
     //   </div>
     <footer className={classes.footer}>
       <div style={{ bottom: 0, position: 'absolute', width: '100%' }}>
-        <Container maxWidth="md" style={{ width: '100%' }}>
+        <Container maxWidth="md" style={{ width: '100%', bottom: 0 }}>
           <Grid
             container
             direction="row"
             justify="space-between"
-            alignItems="stretch"
+            // alignItems="stretch"
+            style={{ height: '100%' }}
           >
             <Grid item md={12}>
               <Typography component="div">l2NEW.COM 2020-2021</Typography>

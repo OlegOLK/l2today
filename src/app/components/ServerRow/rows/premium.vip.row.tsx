@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
         content: '""',
         position: 'absolute',
         left: '-30%',
-        width: '50%',
+        width: '100%',
         height: '100%',
         opacity: 0,
         transform: 'rotate(30deg)',
@@ -77,7 +77,7 @@ export function PremiumVipRow(props) {
           <SvgIcon key={'icon'} component={star} viewBox="0 0 16 16" />
         </div>
       </Grid>
-      <Grid item md={11}>
+      <Grid item md={11} sm={11} xs={11}>
         <Grid
           item
           container
