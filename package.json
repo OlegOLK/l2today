@@ -26,7 +26,7 @@
     "@types/styled-components": "5.0.1",
     "@types/testing-library__jest-dom": "5.0.2",
     "@types/webpack-env": "1.15.1",
-    "apexcharts": "3.23.1",
+    "apexcharts": "3.24.0",
     "cross-env": "7.0.2",
     "date-fns": "2.16.1",
     "eslint-config-prettier": "6.10.1",
