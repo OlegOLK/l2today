@@ -25,7 +25,7 @@ import {
   selectIsLoading,
   selectError,
 } from './selectors';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 interface RegisterDialogProps {
