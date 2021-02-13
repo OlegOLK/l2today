@@ -21,7 +21,7 @@ export function* getRepos() {
 
   const requestURL = `${
     process.env.REACT_APP_SERVERSFILE ||
-    'https://raw.githubusercontent.com/firebricks/tempdata/main/l2new.json'
+    'https://raw.githubusercontent.com/firebricks/tempdata/main/l2new.dat.json'
   }`;
   try {
     // Call our request helper (see 'utils/request')
