@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme =>
   createStyles({
     section: {
       width: '100%',
-
+      marginBottom: '2vw',
       [theme.breakpoints.up('lg')]: {
         marginTop: '-5vw',
       },

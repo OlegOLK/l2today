@@ -50,6 +50,28 @@ export type ServerItemProps = {
   server: Server;
 };
 
+function mapRatesWithType(server: Server) {
+  const elements: JSX.Element[] = [];
+  if (server.type !== 'Normal') {
+    elements.push(
+      <Grid item key={'type-' + server.name}>
+        {server.type}
+      </Grid>,
+    );
+  }
+
+  server.rates.forEach(rate => {
+    if (rate.amount > 0) {
+      elements.push(
+        <Grid item key={`server-rate-${server.name}-${rate.type}`}>
+          {rate.type.toUpperCase()}: x{rate.amount}
+        </Grid>,
+      );
+    }
+  });
+  return elements;
+}
+
 export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
   server,
 }) => {
@@ -78,13 +100,7 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
           alignItems="center"
           style={{ height: '100%', paddingBottom: 0 }}
         >
-          {server.rates.map(rate => {
-            return rate.amount > 0 ? (
-              <Grid item key={`server-rate-${server.name}-${rate.type}`}>
-                {rate.type.toUpperCase()}: x{rate.amount}
-              </Grid>
-            ) : null;
-          })}
+          {mapRatesWithType(server)}
         </Grid>
       </Grid>
     );
@@ -98,16 +114,16 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
     return `x${xp.amount}`;
   };
 
-  const getInfo = () => {
+  const getInfo = (isRegular: boolean) => {
     return (
       <>
         <Grid
           item
-          md={3}
+          md={isRegular ? 4 : 3}
           sm={5}
           xs={5}
           zeroMinWidth
-          style={{ marginLeft: '10px', flexGrow: 1 }}
+          style={{ paddingLeft: '1px' }}
           className={clsx(classes.regularText, classes.textAligment)}
         >
           <Typography noWrap variant={'button'}>
@@ -164,15 +180,17 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
       {server.premium === 2 ? (
         <PremiumVipRow key={'vip-row-' + server.name}>
           {' '}
-          {getInfo()}{' '}
+          {getInfo(false)}{' '}
         </PremiumVipRow>
       ) : server.premium === 1 ? (
         <PremiumRow key={'premium-row-' + server.name}>
           {' '}
-          {getInfo()}{' '}
+          {getInfo(false)}{' '}
         </PremiumRow>
       ) : (
-        <RegularRow key={'regular-row-' + server.name}>{getInfo()} </RegularRow>
+        <RegularRow key={'regular-row-' + server.name}>
+          {getInfo(true)}{' '}
+        </RegularRow>
       )}
     </Grid>
   );

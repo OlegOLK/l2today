@@ -45,7 +45,8 @@
     "ПРЕДЫДУЩИЕ 7 ДНЕЙ": "PREVIOUS 7 DAYS",
     "НЕДЕЛЮ НАЗАД И БОЛЕЕ": "WEEK AGO AND MORE",
     "СЕГОДНЯ": "TODAY",
-    "ЗАВТРА": "TOMORROW"
+    "ЗАВТРА": "TOMORROW",
+    "ЧЕРЕЗ НЕДЕЛЮ И БОЛЕЕ": "OVER A WEEK"
   },
   "banner": {
     "description": "Here you can set full server description with rates, online etc."

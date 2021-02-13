@@ -19,7 +19,14 @@ export type ServerItemProps = {
 export function RegularRow(props) {
   const classes = useStyles();
   return (
-    <Grid item xs={12} container className={classes.regularServerRow}>
+    <Grid
+      item
+      xs={12}
+      container
+      className={classes.regularServerRow}
+      justify="space-around"
+      alignItems="center"
+    >
       {props.children}
     </Grid>
   );

@@ -21,7 +21,7 @@ export function* getRepos() {
 
   const requestURL = `${
     process.env.REACT_APP_SERVERSFILE ||
-    'https://raw.githubusercontent.com/firebricks/tempdata/main/l2new.dat.json'
+    'https://raw.githubusercontent.com/firebricks/tempdata/main/data/l2new.json'
   }`;
   try {
     // Call our request helper (see 'utils/request')
@@ -103,7 +103,10 @@ function complexFilter(
     case 'chronicles':
       return s.chronicles.toLowerCase() === lowerVal;
     case 'types': {
-      return s.features.some(x => x.toLowerCase() === lowerVal);
+      return (
+        s.features.some(x => x.toLowerCase() === lowerVal) ||
+        s.type.toLowerCase() === lowerVal.toLowerCase()
+      );
     }
     case 'rates': {
       return s.rates.some(
@@ -187,9 +190,28 @@ function sort(servers: Server[], filter: string) {
   const type = filter.split('='); //${filterType}=${value}
   const lowerVal = type[1].toLowerCase();
   const filters = getFilterFromLocalStorage(lowerVal);
+  let sortedServers = [...servers];
+  // sortedServers = sortedServers.sort((first, second) => {
+  //   try {
+  //     let a = dfn.compareDesc(dfn.parseISO(first.openDate), dfn.parseISO(second.openDate));
+  //     return a;
+  //   } catch (err) {
+  //     console.log(first, second);
+  //     throw new Error("pizdec");
+  //   }
+  //   // if(a == NaN){
+  //   // console.log(first.openDate, second.openDate);
+  //   // }
+  //   // console.log(a);
 
-  servers = servers.filter(x => complexFilter(x, type[0], lowerVal, filters));
-  servers.map(s => {
+  // });
+
+  if (filter !== 'n=n') {
+    sortedServers = sortedServers.filter(x =>
+      complexFilter(x, type[0], lowerVal, filters),
+    );
+  }
+  sortedServers.map(s => {
     let res = dfn.compareAsc(dfn.parseISO(s.openDate), todayDate);
     switch (res) {
       case 0: {
@@ -206,6 +228,19 @@ function sort(servers: Server[], filter: string) {
       }
     }
     return s;
+  });
+
+  soon = soon.sort((first, second) => {
+    return dfn.compareAsc(
+      dfn.parseISO(first.openDate),
+      dfn.parseISO(second.openDate),
+    );
+  });
+  already = already.sort((first, second) => {
+    return dfn.compareDesc(
+      dfn.parseISO(first.openDate),
+      dfn.parseISO(second.openDate),
+    );
   });
 
   groupped.push({
@@ -229,34 +264,46 @@ function sort(servers: Server[], filter: string) {
     panel: 0,
   });
 
+  var yesterday = already.filter(x => {
+    var open = dfn.parseISO(x.openDate);
+    return dfn.isYesterday(open);
+  });
+
+  const tomorrow = soon.filter(x => {
+    var open = dfn.parseISO(x.openDate);
+    return dfn.isTomorrow(open);
+  });
+
+  const soon7Days: Server[] = [];
+  const soonMore7Days: Server[] = [];
+  soon.forEach(x => {
+    if (tomorrow.some(s => s.name === x.name)) {
+      return;
+    }
+    var compare = dfn.compareAsc(dfn.parseISO(x.openDate), sevenPlus);
+    if (compare === -1 || compare === 0) {
+      soon7Days.push(x);
+    } else {
+      soonMore7Days.push(x);
+    }
+  });
+
   groupped.push({
-    servers: already.filter(x => {
-      var open = dfn.parseISO(x.openDate);
-      return dfn.isYesterday(open);
-      // if (dfn.compareAsc(open, dfn.addDays(todayDate, -1)) == 0) {
-      //   return x;
-      // }
-    }),
+    servers: yesterday,
     sortOrder: 3,
     label: 'ВЧЕРА',
     panel: 1,
   });
 
   groupped.push({
-    servers: soon.filter(x => {
-      var open = dfn.parseISO(x.openDate);
-      return dfn.isTomorrow(open);
-    }),
+    servers: tomorrow,
     sortOrder: 4,
     label: 'ЗАВТРА',
     panel: 0,
   });
 
   groupped.push({
-    servers: soon.filter(x => {
-      var open = dfn.parseISO(x.openDate);
-      return dfn.compareAsc(open, sevenPlus) === -1;
-    }),
+    servers: soon7Days,
     sortOrder: 5,
     label: 'БЛИЖАЙШИЕ 7 ДНЕЙ',
     panel: 0,
@@ -264,8 +311,12 @@ function sort(servers: Server[], filter: string) {
 
   groupped.push({
     servers: already.filter(x => {
+      if (yesterday.some(s => s.id === x.id)) {
+        return false;
+      }
       var open = dfn.parseISO(x.openDate);
-      return dfn.compareAsc(open, sevenMinus) === -1;
+      const compare = dfn.compareAsc(open, sevenMinus);
+      return compare === 1 || compare === 0;
       // if (dfn.compareAsc(open, sevenMinus) === -1) {
       //   return x;
       // }
@@ -278,7 +329,7 @@ function sort(servers: Server[], filter: string) {
   groupped.push({
     servers: already.filter(x => {
       var open = dfn.parseISO(x.openDate);
-      return dfn.compareAsc(open, sevenMinus) === 1;
+      return dfn.compareAsc(open, sevenMinus) === -1;
       // if (dfn.compareAsc(open, sevenMinus) === 1) {
       //   return x;
       // }
@@ -289,14 +340,15 @@ function sort(servers: Server[], filter: string) {
   });
 
   groupped.push({
-    servers: already.filter(x => {
-      var open = dfn.parseISO(x.openDate);
-      return dfn.compareAsc(open, sevenPlus) === 1;
+    servers: soonMore7Days,
+    // already.filter(x => {
+    //   var open = dfn.parseISO(x.openDate);
+    //   return dfn.compareAsc(open, sevenPlus) === 1;
 
-      // if (dfn.compareAsc(open, sevenPlus) === 1) {
-      //   return x;
-      // }
-    }),
+    //   // if (dfn.compareAsc(open, sevenPlus) === 1) {
+    //   //   return x;
+    //   // }
+    // }),
     sortOrder: 7,
     label: 'ЧЕРЕЗ НЕДЕЛЮ И БОЛЕЕ',
     panel: 0,

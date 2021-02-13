@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Button, Paper } from '@material-ui/core';
+import { Button, Paper, TextField } from '@material-ui/core';
 
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -22,6 +22,11 @@ const useStyles = makeStyles(() =>
 export function RatesFilterComponent() {
   const classes = useStyles();
 
+  const [customXp, setCustomXP] = React.useState<number>(1);
+  const handleChangeCustomXP = e => {
+    e.stopPropagation();
+    setCustomXP(e.target.value);
+  };
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<any>({});
 
@@ -102,11 +107,32 @@ export function RatesFilterComponent() {
                         component={Link}
                         to={`/rates/${rate}`}
                         onClick={handleClose}
+                        key={'rate-menu-item' + rate}
                       >
                         x{rate}
                       </MenuItem>
                     );
                   })}
+                  <MenuItem>
+                    <TextField
+                      id="custom-xp"
+                      label="XP"
+                      style={{ maxWidth: '80px' }}
+                      variant="outlined"
+                      type="number"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      InputProps={{
+                        inputProps: { min: 1 },
+                      }}
+                      value={customXp}
+                      onChange={handleChangeCustomXP}
+                    />
+                    <Button component={Link} to={`/rates/${customXp}`}>
+                      OK
+                    </Button>
+                  </MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
