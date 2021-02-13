@@ -5,28 +5,29 @@ export type Chronicles = {
 };
 
 export const CHRONICLES = [
-  'Gracia',
   'Interlude',
   'Interlude+',
-  'High Five',
-  'Freya',
   'Epilogue',
+  'Gracia',
+  'Freya',
+  'High Five',
+  'Lindvior',
   'G.Crusade',
   'Helios',
-  'Lindvior',
   'Fafurion',
-  'Classic',
   'Prelude',
+  'Classic',
   'Essenсe',
 ];
 
 export const TYPES = [
-  'PvP',
   'Multiproff',
   'Multicraft',
   'GvE',
-  'Custom',
   'Lowrate',
+  'CraftPvP',
+  'PvP',
+  'Custom',
 ];
 
 export const RATES = ['XP', 'SP', 'Adena', 'Drop'];

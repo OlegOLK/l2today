@@ -82,7 +82,7 @@ export function CustomFilterComponent() {
     <>
       <Grid item>
         <Button onClick={handleClickOpen} className={classes.button}>
-          Фильр
+          Фильтр
         </Button>
         <ComplexSearchDialog
           close={handleClose}
