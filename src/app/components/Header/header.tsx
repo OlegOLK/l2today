@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) =>
     header: {
       position: 'relative',
       // backgroundImage: 'linear-gradient(#ff9d2f, #ff6126)',
-      backgroundImage: 'url(/assets/banner.jpg)',
+      backgroundImage: 'url(/assets/banner.webp)',
       backgroundRepeat: 'no-repeat',
       display: 'flex',
       justifyContent: 'start',
