@@ -178,7 +178,7 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
           zeroMinWidth
           className={clsx(classes.regularText, classes.textAligment)}
         >
-          <Typography noWrap style={{ fontWeight: 600 }}>
+          <Typography noWrap style={{ fontWeight: 500 }}>
             {server.chronicles}
           </Typography>
         </Grid>

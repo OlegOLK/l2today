@@ -17,7 +17,7 @@ export const CHRONICLES = [
   'Fafurion',
   'Prelude',
   'Classic',
-  'Essenсe',
+  'Essence',
 ];
 
 export const TYPES = [
