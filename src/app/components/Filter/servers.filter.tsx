@@ -1,10 +1,10 @@
 import React from 'react';
-import { Grid, Divider, Button } from '@material-ui/core';
+import { Grid, Divider } from '@material-ui/core';
 import { RatesFilterComponent } from './rates.filter';
 import { ChroniclesFilterComponent } from './chronicles.fiter';
 import { TypesFilterComponent } from './types.filter';
 import { CustomFilterComponent } from './custom.filter';
-
+import { DateFilter } from './date.filter';
 export function ServersFilterComponent() {
   return (
     <>
@@ -21,7 +21,8 @@ export function ServersFilterComponent() {
       </Grid>
       <Divider orientation="vertical" flexItem />
       <Grid item>
-        <Button
+        <DateFilter />
+        {/* <Button
           disabled
           style={{
             fontSize: '20px',
@@ -30,7 +31,7 @@ export function ServersFilterComponent() {
           }}
         >
           Дата
-        </Button>
+        </Button> */}
       </Grid>
       <Divider orientation="vertical" flexItem />
       <CustomFilterComponent />

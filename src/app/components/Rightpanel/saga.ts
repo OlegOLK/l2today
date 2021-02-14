@@ -59,15 +59,6 @@ export function* getRepos() {
   }
 }
 
-export function test() {
-  fetch('/data/servers.json', {
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-  }).then(x => x.json());
-}
-
 /**
  * Root saga manages watcher lifecycle
  */
@@ -113,6 +104,14 @@ function complexFilter(
         x =>
           x.type.toLowerCase() === 'xp' &&
           x.amount === Number.parseInt(lowerVal),
+      );
+    }
+    case 'date': {
+      return (
+        dfn.compareAsc(
+          dfn.parseISO(s.openDate),
+          dfn.parse(lowerVal, 'dd.MM.yyyy', new Date()),
+        ) === 0
       );
     }
     case 'custom': {
