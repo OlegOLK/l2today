@@ -5,7 +5,9 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
       position: 'relative',
-      backgroundImage: 'linear-gradient(#ff9d2f, #ff6126)',
+      // backgroundImage: 'linear-gradient(#ff9d2f, #ff6126)',
+      backgroundImage: 'url(/assets/banner.jpg)',
+      backgroundRepeat: 'no-repeat',
       display: 'flex',
       justifyContent: 'start',
       alignItems: 'center',
@@ -20,5 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export function HeaderComponent() {
   const classes = useStyles();
-  return <header className={classes.header}> </header>;
+  return (
+    <header className={classes.header}>
+      {/* <img src="/assets/banner.jpg" alt="banner" height="auto" width="100%" /> */}
+    </header>
+  );
 }

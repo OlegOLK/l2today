@@ -158,6 +158,20 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
     return `x${xp.amount}`;
   };
 
+  const mapRatesWithType = (server: Server) => {
+    var elements = server.rates.map(rate => {
+      return rate.amount > 0 ? (
+        <Grid item>
+          {rate.type.toUpperCase()}: x{rate.amount}
+        </Grid>
+      ) : null;
+    });
+    console.log(elements.length);
+    elements.push(<Grid item>{server.type}</Grid>);
+    console.log(elements.length);
+    return elements;
+  };
+
   const getServerRates = () => {
     const hasAnyRates = server.rates.some(x => x.amount !== 0);
     if (!hasAnyRates) {
@@ -172,13 +186,7 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
           justify="space-around"
           alignItems="center"
         >
-          {server.rates.map(rate => {
-            return rate.amount > 0 ? (
-              <Grid item>
-                {rate.type.toUpperCase()}: x{rate.amount}
-              </Grid>
-            ) : null;
-          })}
+          {mapRatesWithType}
         </Grid>
       </Grid>
     );

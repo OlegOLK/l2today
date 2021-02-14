@@ -14,7 +14,13 @@ const useStyles = makeStyles(theme =>
       position: 'relative',
       transition: 'all .2s ease-in-out',
       paddingTop: '1px',
+      marginBottom: '5px',
+      //   backgroundColor: 'white',
+      boxShadow:
+        '0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)',
       borderBottom: '1px solid rgb(222, 226, 230)',
+
+      // border: '1px solid #faebd7',
       '&:hover': {
         transform: 'scale(1.05)',
         zIndex: 100,
@@ -27,8 +33,11 @@ const useStyles = makeStyles(theme =>
       paddingTop: '5px',
     },
     regularServerDetails: {
-      backgroundColor: 'antiquewhite',
-      bottom: 0,
+      borderTop: '3px solid #ff9d2f',
+      // borderBottom: '3px solid #ff9d2f',
+      backgroundColor: '#ffdbb4', //'antiquewhite',
+      marginBottom: '-4px !important',
+      // color: 'white'
     },
     regularText: {
       fontSize: '20px',
@@ -42,6 +51,9 @@ const useStyles = makeStyles(theme =>
       [theme.breakpoints.up('md')]: {
         textAlign: 'left',
       },
+    },
+    regularPadding: {
+      paddingLeft: '15px',
     },
   }),
 );
@@ -76,6 +88,16 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
   server,
 }) => {
   const classes = useStyles();
+  const handleNavigateToServer = () => {
+    if (window.gtag) {
+      window.gtag('event', 'server_navigation', { name: server.name });
+    }
+    let uri = server.uri;
+    if (!server.uri.toLowerCase().startsWith('http')) {
+      uri = `https://${server.uri}`;
+    }
+    window.open(uri, '__blank', 'noopener noreferrer');
+  };
 
   const getServerRates = () => {
     const hasAnyRates = server.rates.some(x => x.amount !== 0);
@@ -123,10 +145,18 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
           sm={5}
           xs={5}
           zeroMinWidth
-          style={{ paddingLeft: '1px' }}
-          className={clsx(classes.regularText, classes.textAligment)}
+          className={clsx(
+            classes.regularText,
+            classes.textAligment,
+            isRegular ? classes.regularPadding : '',
+          )}
         >
-          <Typography noWrap variant={'button'}>
+          <Typography
+            noWrap
+            variant={'button'}
+            onClick={handleNavigateToServer}
+            style={{ textDecoration: 'underline', cursor: 'pointer' }}
+          >
             {server.name.toUpperCase()}
           </Typography>
         </Grid>
@@ -148,7 +178,9 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
           zeroMinWidth
           className={clsx(classes.regularText, classes.textAligment)}
         >
-          <Typography noWrap>{server.chronicles}</Typography>
+          <Typography noWrap style={{ fontWeight: 600 }}>
+            {server.chronicles}
+          </Typography>
         </Grid>
         <Grid
           item
@@ -156,7 +188,12 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
           sm={5}
           xs={5}
           zeroMinWidth
-          style={{ paddingRight: '5px' }}
+          style={{
+            paddingRight: '5px',
+            backgroundColor: '#333a7b',
+            color: 'white',
+            clipPath: 'polygon(15% 0, 100% 0%, 100% 100%, 0% 100%)',
+          }}
           className={clsx(classes.regularText, classes.textAligment)}
         >
           <Typography noWrap align="right">

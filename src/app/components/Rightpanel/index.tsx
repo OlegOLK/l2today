@@ -63,9 +63,11 @@ export const RightPanel: FunctionComponent<RightPanelProps> = () => {
         container
         alignItems="flex-start"
         justify="center"
-        spacing={2}
+        spacing={5}
         style={{ marginTop: '15px' }}
       >
+        {/* <Paper elevation={3} style={{ height: '100%', width: '100%' }}> */}
+
         {isLoading ? (
           <>
             <Grid container item lg={6} xl={6} spacing={2}>
@@ -138,6 +140,7 @@ export const RightPanel: FunctionComponent<RightPanelProps> = () => {
             </Grid>
           </>
         )}
+        {/* </Paper> */}
       </Grid>
     </Container>
   );

@@ -190,6 +190,14 @@ export const NavBar: FunctionComponent<CardProps> = () => {
     history.push('/');
   };
 
+  const goToDiscord = () => {
+    window.open(
+      'https://discord.gg/kdsrYj4xj2',
+      '__blank',
+      'noopener noreferrer',
+    );
+  };
+
   const classes = useStyles();
   return (
     <AppBar position="static" color="transparent">
@@ -403,7 +411,7 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 </ListItemIcon>
                 <ListItemText color="primary" primary={t('nav.advert')} />
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={goToDiscord}>
                 <ListItemIcon>
                   <QuestionAnswerIcon color="primary" />
                 </ListItemIcon>
