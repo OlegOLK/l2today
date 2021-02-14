@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { RegularRow } from './rows/regular.row';
 import { PremiumVipRow } from './rows/premium.vip.row';
 import { PremiumRow } from './rows/premium.row';
-
+import { format, parseISO } from 'date-fns';
 const useStyles = makeStyles(theme =>
   createStyles({
     serverRow: {
@@ -197,7 +197,7 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
           className={clsx(classes.regularText, classes.textAligment)}
         >
           <Typography noWrap align="right">
-            {server.openDate}
+            {format(parseISO(server.openDate), 'dd.MM.yyyy')}
           </Typography>
         </Grid>
         {getServerRates()}
