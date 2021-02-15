@@ -5,6 +5,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import { ReactComponent as Discord } from './svg/Discord-Logo-White.svg';
 import { ServerRowComponent } from 'app/components/ServerRow/Server.Row';
 import { Server } from 'types/Server';
+import * as dfn from 'date-fns';
 
 function ComposeServer(premium: number): Server {
   return {
@@ -12,7 +13,7 @@ function ComposeServer(premium: number): Server {
     features: ['GVE'],
     name: 'Server',
     premium: premium,
-    openDate: 'Today',
+    openDate: dfn.formatISO(new Date()),
     type: 'Multiprof',
     uri: '#',
     rates: [
