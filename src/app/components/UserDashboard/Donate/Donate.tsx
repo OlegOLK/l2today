@@ -108,6 +108,33 @@ export const Donate: FunctionComponent = () => {
           зависеть от сторонних факторов, например: "Дата первого поста
           администрации на форуме, в разделе НОВОСТИ")
         </li>
+
+        <li>
+          Так же администрация анонса l2new была бы очень благодарна за
+          размещение у себя на сайте нашей кнопки Код
+          <br />
+          <textarea
+            rows={8}
+            cols={40}
+            value={
+              '<a href="https://l2new.com/" style="z-index:99999;" target="_blank"><img src="https://l2new.com/assets/l2new.png" width="122" height="31" alt="Бесплатный анонс серверов л2" title="Бесплатный анонс серверов л2 | заработай реальные деьги в конкурсах!" border="0"></a>'
+            }
+          ></textarea>
+          <br />
+          <a
+            href="https://l2new.com/"
+            style={{ zIndex: 99999 }}
+            target="_blank"
+          >
+            <img
+              src="https://l2new.com/assets/l2new.png"
+              width="122"
+              height="31"
+              alt="Бесплатный анонс серверов л2"
+              title="Бесплатный анонс серверов л2 | заработай реальные деьги в конкурсах!"
+            />
+          </a>
+        </li>
       </ol>
 
       <Typography variant="h6">Платные услуги</Typography>

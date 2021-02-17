@@ -12,7 +12,7 @@ export function QuizDescription() {
         component="div"
         variant="caption"
       >
-        Статус: <em style={{ color: 'green' }}>активен</em>
+        Статус: <em style={{ color: 'orange' }}>СТАРТ В МАРТЕ</em>
       </Typography>
       <Typography>
         Правила: <br />
@@ -53,10 +53,12 @@ export function QuizDescription() {
         </li>
         <li>
           В конце каждого месяца результаты викторины будут опубликованны у нас
-          на сайте <Button>ТУТ</Button>, а так же в Discord.
+          на сайте <Button disabled>ТУТ</Button>, а так же в Discord.
         </li>
       </ol>
-      <Button>ПОГНАЛИ!</Button>
+      <Button disabled title={'Старт в МАРТЕ'}>
+        ПОГНАЛИ!
+      </Button>
     </div>
   );
 }
