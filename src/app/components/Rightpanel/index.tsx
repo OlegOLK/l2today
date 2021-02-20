@@ -8,6 +8,8 @@ import { serversListFormSaga } from './saga';
 import { selectServersData, selectLoading } from './selectors';
 import { useParams } from 'react-router-dom';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { trackFilterChange } from 'services/google-analytics';
+
 type RightPanelProps = {};
 type RouteParams = {
   filterType: string;
@@ -31,6 +33,7 @@ export const RightPanel: FunctionComponent<RightPanelProps> = () => {
     let value = filterValue;
     dispatch(actions.changeServerFilters(`${filterType}=${value}`));
     dispatch(actions.loadServers(true));
+    trackFilterChange(filterType, value);
   });
 
   const useEffectOnMount = (effect: React.EffectCallback) => {

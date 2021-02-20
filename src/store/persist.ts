@@ -1,7 +1,7 @@
 import { ServersList } from 'types/Server';
 import { User } from 'types/User';
 import { format, differenceInMinutes } from 'date-fns';
-
+import { trackCacheUpdated } from 'services/google-analytics';
 interface ILocalPersistor {
   setServers(data: ServersList[]);
   setUser(user: User);
@@ -49,11 +49,14 @@ export class LocalPersistor implements ILocalPersistor {
     }
     return JSON.parse(serverData);
   }
+
   private setStamp() {
     const stamp: string = format(Date.now(), LocalPersistor.form);
+    trackCacheUpdated(localStorage.getItem(this.persistStamp), stamp);
     localStorage.setItem(this.persistStamp, stamp);
     LocalPersistor.currentStamp = stamp;
   }
+
   private isStateValid() {
     const localStorageStamp = localStorage.getItem(this.persistStamp);
     if (LocalPersistor.currentStamp === '' && localStorageStamp === null) {

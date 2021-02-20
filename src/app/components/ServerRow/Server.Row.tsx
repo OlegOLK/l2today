@@ -7,6 +7,8 @@ import { RegularRow } from './rows/regular.row';
 import { PremiumVipRow } from './rows/premium.vip.row';
 import { PremiumRow } from './rows/premium.row';
 import { format, parseISO } from 'date-fns';
+import { trackServerNavigation } from 'services/google-analytics';
+
 const useStyles = makeStyles(theme =>
   createStyles({
     serverRow: {
@@ -89,14 +91,15 @@ export const ServerRowComponent: FunctionComponent<ServerItemProps> = ({
 }) => {
   const classes = useStyles();
   const handleNavigateToServer = () => {
-    if (window.gtag) {
-      window.gtag('event', 'server_navigation', { name: server.name });
-    }
+    // if (window.gtag) {
+    //   window.gtag('event', 'server_navigation', { name: server.name });
+    // }
     let uri = server.uri;
     if (!server.uri.toLowerCase().startsWith('http')) {
       uri = `https://${server.uri}`;
     }
     window.open(uri, '__blank', 'noopener noreferrer');
+    trackServerNavigation(server);
   };
 
   const getServerRates = () => {
