@@ -183,7 +183,7 @@ function sort(servers: Server[], filter: string) {
   let already: Server[] = [];
   let today: Server[] = [];
   let groupped: ServersList[] = [];
-  const todayDate = new Date();
+  const todayDate = dfn.parseISO(new Date().toISOString());
   const sevenMinus = dfn.addDays(todayDate, -7);
   const sevenPlus = dfn.addDays(todayDate, 7);
   const type = filter.split('='); //${filterType}=${value}
@@ -204,19 +204,19 @@ function sort(servers: Server[], filter: string) {
   //   // console.log(a);
 
   // });
-
   if (filter !== 'n=n') {
     sortedServers = sortedServers.filter(x =>
       complexFilter(x, type[0], lowerVal, filters),
     );
   }
   sortedServers.map(s => {
+    if (dfn.isToday(dfn.parseISO(s.openDate))) {
+      today.push(s);
+      return s;
+    }
     let res = dfn.compareAsc(dfn.parseISO(s.openDate), todayDate);
+
     switch (res) {
-      case 0: {
-        today.push(s);
-        break;
-      }
       case 1: {
         soon.push(s);
         break;
