@@ -1,15 +1,22 @@
 {
   "title": "welcome",
   "nav": {
-    "login": "login",
+    "login": "Login",
     "home": "l2new",
-    "addserver": "add server",
-    "discuss": "discuss",
-    "forum": "forum",
-    "knowledgebase": "knowledge base",
-    "addfeature": "add feature",
-    "earnMoney": "earn money",
-    "advert": "advertisement"
+    "addserver": "Add server",
+    "discuss": "Discuss",
+    "forum": "Forum",
+    "knowledgebase": "Knowledge base",
+    "addfeature": "Add feature",
+    "earnMoney": "Earn money",
+    "advert": "Advertisement"
+  },
+  "sort": {
+    "Рейты": "Rates",
+    "Хроники": "Chronicles",
+    "Типы": "Types",
+    "Дата": "Date",
+    "Фильтр": "Filter"
   },
   "leftPanel": {
     "complexsearch": "create filter (click)",
@@ -45,6 +52,7 @@
     "ПРЕДЫДУЩИЕ 7 ДНЕЙ": "PREVIOUS 7 DAYS",
     "НЕДЕЛЮ НАЗАД И БОЛЕЕ": "WEEK AGO AND MORE",
     "СЕГОДНЯ": "TODAY",
+    "ОТКРЫТИЕ СЕГОДНЯ": "TODAY",
     "ЗАВТРА": "TOMORROW",
     "ЧЕРЕЗ НЕДЕЛЮ И БОЛЕЕ": "OVER A WEEK"
   },

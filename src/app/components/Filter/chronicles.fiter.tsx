@@ -9,7 +9,7 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { CHRONICLES } from 'app/mocks/chronicles';
-
+import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles(() =>
   createStyles({
     button: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles(() =>
 
 export function ChroniclesFilterComponent() {
   const classes = useStyles();
-
+  const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<any>({});
 
@@ -67,7 +67,7 @@ export function ChroniclesFilterComponent() {
         onClick={handleToggle}
         className={classes.button}
       >
-        Хроники
+        {t('sort.Хроники')}
         {/* Chronicles */}
       </Button>
       <Popper

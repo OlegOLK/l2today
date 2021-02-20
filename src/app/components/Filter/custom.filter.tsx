@@ -5,6 +5,7 @@ import { Grid, Button, Box, Chip } from '@material-ui/core';
 import { ComplexSearchDialog } from '../Leftpanel/ComplexSearchDialog';
 import { ComplexFilter } from 'types/ComplexFilter';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -26,6 +27,7 @@ function getCustomFilters() {
 
 export function CustomFilterComponent() {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const [customFilters, setCustomFilters] = React.useState(getCustomFilters());
   const [dialogKey, setDialogKey] = React.useState(0);
@@ -82,7 +84,7 @@ export function CustomFilterComponent() {
     <>
       <Grid item>
         <Button onClick={handleClickOpen} className={classes.button}>
-          Фильтр
+          {t('sort.Фильтр')}
         </Button>
         <ComplexSearchDialog
           close={handleClose}

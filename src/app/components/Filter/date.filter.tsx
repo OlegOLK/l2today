@@ -10,6 +10,7 @@ import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as dfn from 'date-fns';
+
 const useStyles = makeStyles(() =>
   createStyles({
     button: {
@@ -27,7 +28,7 @@ const localeMap = {
 
 export function DateFilter() {
   const classes = useStyles();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [locale, setLocale] = React.useState(i18n.language);
   const history = useHistory();
   const [selectedDate, handleDateChange] = React.useState<
@@ -62,7 +63,7 @@ export function DateFilter() {
           onClick={handleToggle}
           className={classes.button}
         >
-          Дата
+          {t('sort.Дата')}
         </Button>
         <div style={{ visibility: 'hidden', width: 0, height: 0 }}>
           <DatePicker

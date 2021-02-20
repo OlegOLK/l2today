@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { TYPES } from 'app/mocks/chronicles';
 import { Link } from 'react-router-dom';
-
+import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles(() =>
   createStyles({
     button: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles(() =>
 
 export function TypesFilterComponent() {
   const classes = useStyles();
-
+  const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<any>({});
 
@@ -67,7 +67,7 @@ export function TypesFilterComponent() {
         onClick={handleToggle}
         className={classes.button}
       >
-        Типы
+        {t('sort.Типы')}
         {/* Types */}
       </Button>
       <Popper
