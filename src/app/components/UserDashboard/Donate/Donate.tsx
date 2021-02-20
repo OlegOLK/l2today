@@ -117,13 +117,14 @@ export const Donate: FunctionComponent = () => {
             rows={8}
             cols={40}
             value={
-              '<a href="https://l2new.com/" style="z-index:99999;" target="_blank"><img src="https://l2new.com/assets/l2new.png" width="122" height="31" alt="Бесплатный анонс серверов л2" title="Бесплатный анонс серверов л2 | заработай реальные деьги в конкурсах!" border="0"></a>'
+              '<a href="https://l2new.com/" style="z-index:99999;" target="_blank" rel="noreferrer"><img src="https://l2new.com/assets/l2new.png" width="122" height="31" alt="Бесплатный анонс серверов л2" title="Бесплатный анонс серверов л2 | заработай реальные деьги в конкурсах!" border="0"></a>'
             }
           ></textarea>
           <br />
           <a
             href="https://l2new.com/"
             style={{ zIndex: 99999 }}
+            rel="noreferrer"
             target="_blank"
           >
             <img
