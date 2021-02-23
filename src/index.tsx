@@ -25,11 +25,11 @@ import { BrowserRouter } from 'react-router-dom';
 import './locales/i18n';
 
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
-
+import './index.css';
 const theme = createMuiTheme({
   typography: {
     fontFamily: [
-      'Google Sans',
+      'l2new',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',

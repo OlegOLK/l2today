@@ -54,7 +54,8 @@
     "СЕГОДНЯ": "TODAY",
     "ОТКРЫТИЕ СЕГОДНЯ": "TODAY",
     "ЗАВТРА": "TOMORROW",
-    "ЧЕРЕЗ НЕДЕЛЮ И БОЛЕЕ": "OVER A WEEK"
+    "ЧЕРЕЗ НЕДЕЛЮ И БОЛЕЕ": "OVER A WEEK",
+    "LoadMore": "Load more"
   },
   "banner": {
     "description": "Here you can set full server description with rates, online etc."

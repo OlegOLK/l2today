@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
-import { Typography, Grid } from '@material-ui/core';
+import React, { FunctionComponent, useState } from 'react';
+import { Typography, Grid, Button } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-
+import RefreshIcon from '@material-ui/icons/Refresh';
 import { ServerRowComponent } from '../ServerRow/Server.Row';
-import { ServersList } from 'types/Server';
+import { Server, ServersList } from 'types/Server';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -58,6 +58,18 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
   };
   const classes = useStyles();
   const { t } = useTranslation();
+  const [visibleServers, setVisibleServers] = useState<Server[]>(
+    groupped.sortOrder >= 5 ? groupped.servers.slice(0, 5) : groupped.servers,
+  );
+
+  const renderAll = () => {
+    setVisibleServers([...groupped.servers]);
+  };
+
+  const hasMore = () => {
+    return groupped.servers.length > visibleServers.length;
+  };
+
   return (
     <Grid container direction="row" justify="center" style={{ width: '100%' }}>
       <Grid item container xs={12}>
@@ -96,8 +108,9 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
           </Typography>
         </Grid>
       </Grid>
+
       <Grid item container xs={12}>
-        {groupped.servers.map((server, i) => {
+        {visibleServers.map((server, i) => {
           return (
             <ServerRowComponent
               key={'row-' + server.name + i}
@@ -105,54 +118,18 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
             />
           );
         })}
+        {hasMore() ? (
+          <Button
+            variant="outlined"
+            onClick={renderAll}
+            endIcon={<RefreshIcon />}
+          >
+            {t('serverPanel.LoadMore')}
+          </Button>
+        ) : (
+          <></>
+        )}
       </Grid>
     </Grid>
-    //     <div class="col mb-5  rounded shadow-sm me-3 server-list">
-    //     <div class="row border-bottom" style="align-items: center; text-align: center;">
-    //         <div class="col col-1 rounded-top">
-    //             <!-- vip -->
-    //         </div>
-    //         <div class="col">
-    //             Open Soon
-    //         </div>
-    //     </div>
-    //     <div class="server-list-root-soon">
-    //     </div>
-    // </div>
-
-    // <Paper>
-    //   <Typography component="div">
-    //     <Alert
-    //       severity="success"
-    //       className={isPremiumPanel() ? classes.vipAlert : classes.normalAlert}
-    //       icon={<StarsIcon fontSize="inherit" />}
-    //     >
-    //       {t(`serverPanel.${groupped.label}`)}
-    //     </Alert>
-    //   </Typography>
-    //   <List component="nav" aria-label={'list-' + groupped.sortOrder}>
-    //     {groupped.servers.map((server, i) => {
-    //       return (
-    //         <ServerRowComponent
-    //           key={'row-' + server.name + i}
-    //           server={server}
-    //         />
-    //       );
-    //     })}
-    //   </List>
-    // </Paper>
-    // <Grid item md={5}></Grid>
-    // <div class="col mb-5  rounded shadow-sm me-3 server-list">
-    //   <div class="row border-bottom" style="align-items: center; text-align: center;">
-    //     <div class="col col-1 rounded-top">
-    //       {/* <!-- vip --> */}
-    //     </div>
-    //     <div class="col">
-    //       Open Soon
-    //     </div>
-    //   </div>
-    //   <div class="server-list-root-soon">
-    //   </div>
-    // </div>
   );
 };

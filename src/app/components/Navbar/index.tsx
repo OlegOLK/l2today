@@ -218,7 +218,12 @@ export const NavBar: FunctionComponent<CardProps> = () => {
                 onClick={e => navigateTo(e, '/')}
                 // startIcon={<HomeIcon color="inherit" />}
               >
-                <img src="/logo192.png" alt="" height="40px" width="auto" />{' '}
+                <img
+                  src="/logo192.png"
+                  alt="l2new logo"
+                  height="40px"
+                  width="40px"
+                />{' '}
                 &nbsp;
                 {t('nav.home')}
               </Button>
