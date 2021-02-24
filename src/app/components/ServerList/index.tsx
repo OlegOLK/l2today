@@ -110,7 +110,7 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
       </Grid>
 
       <Grid item container xs={12}>
-        {visibleServers.map((server, i) => {
+        {groupped.servers.map((server, i) => {
           return (
             <ServerRowComponent
               key={'row-' + server.name + i}
@@ -118,7 +118,7 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
             />
           );
         })}
-        {hasMore() ? (
+        {/* {hasMore() ? (
           <Button
             variant="outlined"
             onClick={renderAll}
@@ -128,7 +128,7 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
           </Button>
         ) : (
           <></>
-        )}
+        )} */}
       </Grid>
     </Grid>
   );
