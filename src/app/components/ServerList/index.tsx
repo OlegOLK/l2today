@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useState } from 'react';
-import { Typography, Grid, Button } from '@material-ui/core';
+import React, { FunctionComponent } from 'react';
+import { Typography, Grid } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import RefreshIcon from '@material-ui/icons/Refresh';
+// import RefreshIcon from '@material-ui/icons/Refresh';
 import { ServerRowComponent } from '../ServerRow/Server.Row';
-import { Server, ServersList } from 'types/Server';
+import { ServersList } from 'types/Server';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -58,17 +58,17 @@ export const ServerList: FunctionComponent<ServerListProps> = ({
   };
   const classes = useStyles();
   const { t } = useTranslation();
-  const [visibleServers, setVisibleServers] = useState<Server[]>(
-    groupped.sortOrder >= 5 ? groupped.servers.slice(0, 5) : groupped.servers,
-  );
+  // const [visibleServers, setVisibleServers] = useState<Server[]>(
+  //   groupped.sortOrder >= 5 ? groupped.servers.slice(0, 5) : groupped.servers,
+  // );
 
-  const renderAll = () => {
-    setVisibleServers([...groupped.servers]);
-  };
+  // const renderAll = () => {
+  //   setVisibleServers([...groupped.servers]);
+  // };
 
-  const hasMore = () => {
-    return groupped.servers.length > visibleServers.length;
-  };
+  // const hasMore = () => {
+  //   return groupped.servers.length > visibleServers.length;
+  // };
 
   return (
     <Grid container direction="row" justify="center" style={{ width: '100%' }}>
